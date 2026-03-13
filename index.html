@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Portfolio | 김보현</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0a0a0c',
+                        lightBg: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Color Variants for Cards */
+        .card-blue { --accent: 59, 130, 246; --bg-soft: 239, 246, 255; --bg-dark: 30, 58, 138; }
+        .card-purple { --accent: 147, 51, 234; --bg-soft: 250, 245, 255; --bg-dark: 88, 28, 135; }
+        .card-emerald { --accent: 16, 185, 129; --bg-soft: 236, 253, 245; --bg-dark: 6, 78, 59; }
+        .card-rose { --accent: 244, 63, 94; --bg-soft: 255, 241, 242; --bg-dark: 136, 19, 55; }
+        .card-amber { --accent: 245, 158, 11; --bg-soft: 255, 251, 235; --bg-dark: 120, 53, 15; }
+
+        .project-card:hover {
+            box-shadow: 0 20px 40px -10px rgba(var(--accent), 0.2);
+            border-color: rgba(var(--accent), 0.4);
+        }
+
+        /* Page Transitions */
+        .view-section {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease;
+        }
+        .view-hidden {
+            display: none;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        .view-active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.2); border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-lightBg text-slate-800 dark:bg-darkBg dark:text-slate-200 selection:bg-blue-500/30">
+
+    <!-- Header / Navbar -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 px-6 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <button id="back-btn" class="hidden w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent tracking-tighter">
+                    AI LITERACY
+                </div>
+            </div>
+            <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-600 dark:text-yellow-400 hover:scale-110 transition-all">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main List View -->
+    <main id="list-view" class="view-section view-active pt-32 pb-20 px-6">
+        <!-- Hero Section -->
+        <header class="max-w-5xl mx-auto text-center mb-20 relative">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full border border-blue-500/30 bg-blue-500/5 text-blue-600 dark:text-blue-400 text-xs font-bold tracking-widest uppercase">
+                Portfolio 2024
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white">
+                AI 리터러시 결과 보고서
+            </h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                생성형 AI의 이해부터 데이터 분석, 최종 솔루션 제안까지 15주간 진행된 AI 융합 학습의 여정을 소개합니다.
+            </p>
+        </header>
+
+        <!-- Projects Grid -->
+        <section class="max-w-7xl mx-auto">
+            <div id="project-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards Injected by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail View Section -->
+    <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Hero Header -->
+            <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500">
+                <div id="detail-accent-bg" class="absolute inset-0 z-0"></div>
+                <div class="relative z-10">
+                    <div id="detail-task-id" class="inline-block px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-[10px] font-black uppercase mb-4 tracking-widest">TASK 01</div>
+                    <h2 id="detail-title" class="text-4xl md:text-5xl font-black leading-tight mb-6">프로젝트 제목</h2>
+                    <div id="detail-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="md:col-span-2 space-y-12">
+                    <section>
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-blue-500"></i> 과제 개요
+                        </h3>
+                        <p id="detail-description" class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg"></p>
+                    </section>
+
+                    <section>
+                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-star text-emerald-500"></i> 주요 학습 및 성과
+                        </h3>
+                        <div id="detail-achievements" class="grid gap-4">
+                            <!-- Injected -->
+                        </div>
+                    </section>
+
+                    <section id="detail-link-section" class="hidden">
+                        <div class="p-8 rounded-3xl bg-blue-600 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-500/20">
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">실시간 결과물 확인</h4>
+                                <p class="text-blue-100 text-sm">해당 과제의 상세 페이지(./02/index.html)로 즉시 이동합니다.</p>
+                            </div>
+                            <!-- Updated external link logic -->
+                            <a id="detail-external-link" href="#" class="px-8 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors flex items-center gap-2">
+                                결과물 보기 <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">사용 도구</h4>
+                        <div id="detail-tools" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">과제 유형</h4>
+                        <p id="detail-category" class="font-bold text-slate-800 dark:text-slate-200"></p>
+                    </div>
+
+                    <div class="p-8 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-white/10">
+                        <h4 class="text-sm font-bold mb-4">학습 코멘트</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed italic">
+                            "이 과제를 통해 AI 기술을 단순 도구로 사용하는 것을 넘어, 우리 사회의 문제를 해결할 수 있는 데이터 기반의 통찰력을 얻을 수 있었습니다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const projects = [
+            { 
+                id: 1, 
+                title: "AI의 이해: 역사와 생성형 AI 탐구", 
+                tags: ["NotebookLM", "AI역사", "LLM기초"], 
+                icon: "fa-book-open-reader", 
+                color: "card-blue",
+                link: "./02/index.html", // Targeted link path
+                description: "구글 NotebookLM을 활용해 AI의 정의와 역사, 최신 생성형 AI 트렌드를 체계적으로 정리하고 학습했습니다. 튜링 테스트부터 최신 트랜스포머 모델까지의 변천사를 분석했습니다.",
+                achievements: [
+                    { title: "AI 역사 변곡점 분석", desc: "기호주의와 연결주의의 갈등과 발전을 시기별로 정리함" },
+                    { title: "NotebookLM 활용", desc: "방대한 텍스트 소스를 업로드하여 핵심 인사이트를 추출하는 워크플로우 숙달" },
+                    { title: "생성 AI 생태계 이해", desc: "텍스트, 이미지, 비디오 등 멀티모달 AI의 현재 위치를 파악함" }
+                ],
+                tools: ["Google NotebookLM", "ChatGPT", "Claude"],
+                category: "기초 이론 및 도구 실습"
+            },
+            { 
+                id: 2, 
+                title: "프롬프트 엔지니어링: 질문의 기술", 
+                tags: ["LLM", "프롬프트", "CoT"], 
+                icon: "fa-comment-dots", 
+                color: "card-blue",
+                description: "효과적인 AI 협업을 위해 페르소나 설정, 제로샷/퓨샷 러닝 등 전문적인 프롬프트 설계 전략을 실습했습니다. 질문의 질이 결과의 질을 결정한다는 원리를 체험했습니다.",
+                achievements: [
+                    { title: "페르소나 기법 적용", desc: "AI에게 특정 전문가 역할을 부여하여 출력 품질을 40% 이상 개선" },
+                    { title: "Chain-of-Thought 설계", desc: "복잡한 수학 및 논리 문제를 해결하기 위한 단계별 사고 유도 프롬프트 작성" },
+                    { title: "프롬프트 템플릿화", desc: "반복적인 업무를 위한 최적의 질문 템플릿 제작" }
+                ],
+                tools: ["ChatGPT-4o", "Prompt Guide", "Notion"],
+                category: "AI 소통 전략"
+            },
+            { 
+                id: 3, 
+                title: "공공 데이터를 활용한 문제 정의", 
+                tags: ["데이터분석", "사회문제", "KOSIS"], 
+                icon: "fa-magnifying-glass-chart", 
+                color: "card-emerald",
+                description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 수치로 정의했습니다. 고령화 및 복지 사각지대 문제를 중점적으로 다뤘습니다.",
+                achievements: [
+                    { title: "문제 정의 역량", desc: "추상적인 사회 문제를 데이터 기반의 구체적인 문제로 치환" },
+                    { title: "공공 데이터 수집", desc: "KOSIS 및 공공데이터포털에서 API 및 CSV 데이터를 추출하여 가공" },
+                    { title: "현황 분석 리포트", desc: "통계 지표를 시각화하여 문제의 심각성을 객관적으로 입증" }
+                ],
+                tools: ["KOSIS", "Data.go.kr", "Excel"],
+                category: "데이터 분석 기초"
+            },
+            { 
+                id: 4, 
+                title: "생성형 AI 이미지 스토리텔링", 
+                tags: ["Midjourney", "DALL-E", "창의력"], 
+                icon: "fa-palette", 
+                color: "card-rose",
+                description: "Midjourney와 DALL-E를 활용하여 텍스트만으로 일관성 있는 캐릭터와 서사를 담은 이미지를 생성했습니다. AI가 예술 영역에서 갖는 가능성을 실험했습니다.",
+                achievements: [
+                    { title: "캐릭터 일관성 유지", desc: "동일 인물이나 스타일을 여러 장면에서 유지하는 고급 프롬프트 기법 습득" },
+                    { title: "스타일 엔지니어링", desc: "특정 화풍이나 조명, 구도를 정교하게 제어하는 시각적 문법 이해" },
+                    { title: "윤리적 AI 생성", desc: "저작권 및 딥페이크 윤리를 준수하며 결과물 제작" }
+                ],
+                tools: ["Midjourney", "DALL-E 3", "Adobe Firefly"],
+                category: "멀티모달 생성 실습"
+            },
+            { 
+                id: 5, 
+                title: "데이터 클리닝과 기초 통계 해석", 
+                tags: ["Pandas", "데이터정제", "EDA"], 
+                icon: "fa-broom", 
+                color: "card-emerald",
+                description: "가공되지 않은 원시 데이터를 분석 가능한 형태로 정제하고, 기초적인 상관관계를 도출했습니다. 결측치와 이상치가 분석 결과에 미치는 영향을 탐구했습니다.",
+                achievements: [
+                    { title: "데이터 전처리 완수", desc: "결측치 처리, 중복 제거, 데이터 타입 변환 등의 클리닝 프로세스 수행" },
+                    { title: "기술 통계 분석", desc: "평균, 중앙값, 표준편차 등을 통한 데이터의 분포 파악" },
+                    { title: "상관성 분석", desc: "변수 간의 밀접한 관계를 파악하여 유의미한 상관계수 도출" }
+                ],
+                tools: ["Python", "Google Sheets", "Power BI"],
+                category: "데이터 리터러시"
+            }
+        ];
+
+        // State Management
+        let currentView = 'list';
+
+        // Elements
+        const listView = document.getElementById('list-view');
+        const detailView = document.getElementById('detail-view');
+        const backBtn = document.getElementById('back-btn');
+        const projectContainer = document.getElementById('project-container');
+
+        // Navigation Functions
+        function showDetail(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Update DOM with project info
+            document.getElementById('detail-task-id').innerText = `TASK ${String(project.id).padStart(2, '0')}`;
+            document.getElementById('detail-title').innerText = project.title;
+            document.getElementById('detail-description').innerText = project.description;
+            document.getElementById('detail-category').innerText = project.category;
+
+            // Get project accent color dynamically from the CSS variables of the card
+            const dummy = document.createElement('div');
+            dummy.className = project.color;
+            document.body.appendChild(dummy);
+            const projectAccent = getComputedStyle(dummy).getPropertyValue('--accent');
+            document.body.removeChild(dummy);
+            
+            document.getElementById('detail-header').style.backgroundColor = `rgb(${projectAccent})`;
+            document.getElementById('detail-accent-bg').style.background = `linear-gradient(45deg, rgba(0,0,0,0.4), transparent)`;
+
+            // Tags
+            const tagsCont = document.getElementById('detail-tags');
+            tagsCont.innerHTML = project.tags.map(t => `<span class="px-2 py-1 rounded bg-white/20 text-[9px] font-bold uppercase">#${t}</span>`).join('');
+
+            // Achievements
+            const achCont = document.getElementById('detail-achievements');
+            achCont.innerHTML = project.achievements.map(a => `
+                <div class="p-5 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex gap-4 hover:border-emerald-500/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-check text-xs"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm mb-1">${a.title}</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">${a.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Tools
+            const toolsCont = document.getElementById('detail-tools');
+            toolsCont.innerHTML = project.tools.map(t => `
+                <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5">${t}</span>
+            `).join('');
+
+            // Link Section Logic
+            const linkSection = document.getElementById('detail-link-section');
+            const externalLink = document.getElementById('detail-external-link');
+            if (project.link && project.link.trim() !== "") {
+                linkSection.classList.remove('hidden');
+                externalLink.href = project.link;
+            } else {
+                linkSection.classList.add('hidden');
+            }
+
+            // UI Switch
+            listView.classList.remove('view-active');
+            listView.classList.add('view-hidden');
+            detailView.classList.remove('view-hidden');
+            detailView.classList.add('view-active');
+            backBtn.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showList() {
+            detailView.classList.remove('view-active');
+            detailView.classList.add('view-hidden');
+            listView.classList.remove('view-hidden');
+            listView.classList.add('view-active');
+            backBtn.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Cards
+        function renderCards() {
+            projectContainer.innerHTML = '';
+            projects.forEach(p => {
+                const card = document.createElement('div');
+                card.className = `project-card ${p.color} bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-4 cursor-pointer group`;
+                
+                card.innerHTML = `
+                    <div class="h-48 rounded-[2rem] bg-slate-100 dark:bg-white/5 mb-6 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-[radial-gradient(circle_at_center,_rgba(var(--accent),0.4)_0%,_transparent_70%)]"></div>
+                        <i class="fa-solid ${p.icon} text-5xl text-slate-300 dark:text-slate-800 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" style="color: rgba(var(--accent), 0.3)"></i>
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md text-[9px] font-black text-slate-500 dark:text-slate-400">TASK ${p.id}</div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            ${p.tags.slice(0, 2).map(t => `<span class="text-[9px] font-bold text-slate-400 uppercase tracking-tight">#${t}</span>`).join('')}
+                        </div>
+                        <h3 class="text-xl font-black mb-3 text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors leading-tight">${p.title}</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-6 leading-relaxed">${p.description}</p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-blue-500/20 text-blue-500 flex items-center justify-center text-[10px] font-bold"><i class="fa-solid fa-brain"></i></div>
+                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-[10px] font-bold"><i class="fa-solid fa-chart-simple"></i></div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                card.onclick = () => showDetail(p.id);
+                projectContainer.appendChild(card);
+            });
+        }
+
+        // Init
+        renderCards();
+        backBtn.onclick = showList;
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+
+        function updateTheme(isDark) {
+            html.classList.toggle('dark', isDark);
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeToggle.addEventListener('click', () => updateTheme(!html.classList.contains('dark')));
+        updateTheme(localStorage.getItem('theme') !== 'light');
+    </script>
+</body>
+</html>
