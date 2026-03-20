@@ -414,18 +414,18 @@
                 <p class="hero-p">복잡한 기술 용어 대신 직관적인 비유로 풀어낸 인공지능 마스터클래스. 이제 AI의 심장을 들여다보세요.</p>
                 <div class="btn-group">
                     <a href="#hierarchy" class="btn">시작하기</a>
-                    <!-- 슬라이드 다운로드 -->
-                    <a href="인공지능의 연대기_ 실패와 성공으로 배운 기술 진화의 필연성.pdf" download class="btn btn-secondary">
+                    <!-- 슬라이드 다운로드 버튼 (AI_Masterclass_수정본.pdf) -->
+                    <a href="AI_Masterclass_수정본.pdf" download class="btn btn-secondary">
                         <i class="fa-solid fa-file-pdf"></i> 슬라이드 다운로드
                     </a>
-                    <!-- 동영상 보기 버튼 추가 -->
+                    <!-- 동영상 보기 버튼 (AI__03.mp4 실행) -->
                     <button id="open-video" class="btn btn-video">
                         <i class="fa-solid fa-play-circle"></i> 동영상 보기
                     </button>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="AI Abstract" class="main-img">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="인공지능 추상 이미지" class="main-img">
             </div>
         </div>
     </header>
@@ -453,7 +453,7 @@
         </div>
     </section>
 
-    <!-- History Tabs -->
+    <!-- History Section -->
     <section style="background-color: rgba(255, 215, 0, 0.05);">
         <div class="container">
             <div class="section-title">
@@ -487,10 +487,10 @@
         </div>
     </section>
 
-    <!-- Video Modal -->
+    <!-- Video Modal (AI__03.mp4 전용) -->
     <div id="video-modal" class="modal">
         <div class="modal-content">
-            <button class="close-modal" id="close-video"><i class="fa-solid fa-xmark"></i></button>
+            <button class="close-modal" id="close-video" title="닫기"><i class="fa-solid fa-xmark"></i></button>
             <video id="ai-video" class="modal-video" controls>
                 <source src="AI__03.mp4" type="video/mp4">
                 브라우저가 비디오 태그를 지원하지 않습니다.
@@ -498,11 +498,11 @@
         </div>
     </div>
 
-    <!-- Infographic Modal -->
+    <!-- Infographic Modal (AI HISTORY.jpg 전용) -->
     <div id="infographic-modal" class="modal">
         <div class="modal-content image-mode" style="padding:15px;">
             <button class="close-modal" id="close-infographic" style="top:10px; right:10px; color:#333;"><i class="fa-solid fa-xmark"></i></button>
-            <img src="AI HISTORY.jpg" alt="AI HISTORY" class="modal-img" style="border-radius:10px;">
+            <img src="AI HISTORY.jpg" alt="AI 역사 인포그래픽" class="modal-img" style="border-radius:10px;">
         </div>
     </div>
 
@@ -518,7 +518,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             
-            // 1. Dark Mode
+            // 1. 다크 모드 토글
             const modeToggle = document.getElementById('mode-toggle');
             const modeIcon = document.getElementById('mode-icon');
             
@@ -527,7 +527,7 @@
                 modeIcon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
             });
 
-            // 2. Tabs
+            // 2. 히스토리 탭 전환
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
 
@@ -541,19 +541,19 @@
                 });
             });
 
-            // 3. Modals (Video & Infographic)
+            // 3. 모달 제어 (비디오 및 인포그래픽)
             const videoModal = document.getElementById('video-modal');
             const infoModal = document.getElementById('infographic-modal');
             const aiVideo = document.getElementById('ai-video');
 
-            // Open Video
+            // 비디오 열기 (AI__03.mp4)
             document.getElementById('open-video').addEventListener('click', () => {
                 videoModal.classList.add('active');
                 aiVideo.play();
-                body.style.overflow = 'hidden';
+                body.style.overflow = 'hidden'; // 배경 스크롤 방지
             });
 
-            // Close Video
+            // 비디오 닫기
             document.getElementById('close-video').addEventListener('click', () => {
                 videoModal.classList.remove('active');
                 aiVideo.pause();
@@ -561,19 +561,19 @@
                 body.style.overflow = '';
             });
 
-            // Open Infographic
+            // 인포그래픽 열기
             document.getElementById('open-infographic').addEventListener('click', () => {
                 infoModal.classList.add('active');
                 body.style.overflow = 'hidden';
             });
 
-            // Close Infographic
+            // 인포그래픽 닫기
             document.getElementById('close-infographic').addEventListener('click', () => {
                 infoModal.classList.remove('active');
                 body.style.overflow = '';
             });
 
-            // Close on background click
+            // 배경 클릭 시 닫기
             window.addEventListener('click', (e) => {
                 if (e.target === videoModal) {
                     videoModal.classList.remove('active');
