@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 이해: 제로에서 AGI까지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+
+        :root {
+            /* Sunflower Theme Colors */
+            --sunflower-main: #FFD700;
+            --sunflower-light: #FFEC8B;
+            --sunflower-dark: #B8860B;
+            --sunflower-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+            
+            /* Light Mode Variables */
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.8);
+            --text-main: #1A1A1A;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --modal-bg: rgba(0, 0, 0, 0.85);
+        }
+
+        .dark-mode {
+            --bg-body: #121212;
+            --bg-card: #1E1E1E;
+            --bg-nav: rgba(18, 18, 18, 0.8);
+            --text-main: #F5F5F5;
+            --text-muted: #9CA3AF;
+            --border-color: #374151;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --modal-bg: rgba(0, 0, 0, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-nav);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--sunflower-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+
+        .mode-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Hero Section */
+        header {
+            padding: 100px 0;
+            background: radial-gradient(circle at top right, var(--sunflower-light), transparent 40%);
+        }
+
+        .dark-mode header {
+            background: radial-gradient(circle at top right, rgba(184, 134, 11, 0.1), transparent 40%);
+        }
+
+        .hero-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-flex { flex-direction: row; align-items: center; }
+        }
+
+        .hero-text { flex: 1; }
+        .hero-image { flex: 1; position: relative; }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--sunflower-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h1 span { color: var(--sunflower-dark); }
+
+        .hero-p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--sunflower-gradient);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px -5px rgba(255, 215, 0, 0.5);
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -5px rgba(255, 215, 0, 0.6); }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--sunflower-main);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-video {
+            background: #1A1A1A;
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .btn-video {
+            background: #f5f5f5;
+            color: #1A1A1A;
+        }
+
+        .btn-video:hover {
+            background: #333;
+            box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--bg-card);
+        }
+
+        /* Section Commons */
+        section { padding: 80px 0; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; }
+
+        /* Hierarchy Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+
+        .card:hover { border-color: var(--sunflower-main); }
+
+        /* Modal / Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-bg);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            background: #000;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .modal-content.image-mode {
+            background: var(--bg-card);
+            line-height: 1.6;
+        }
+
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+        }
+
+        .modal-img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .close-modal {
+                top: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.5);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* History Tabs */
+        .tabs-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: 2px solid transparent;
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            border-color: var(--sunflower-main);
+            color: var(--sunflower-dark);
+        }
+
+        .tab-content {
+            display: none;
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            background: var(--sunflower-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 0 auto 20px;
+        }
+
+        .text-yellow { color: var(--sunflower-dark); }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="light-mode">
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-sun"></i></div>
+                <span>AI UNDERSTANDING</span>
+            </div>
+            <button id="mode-toggle" class="mode-toggle" title="모드 전환">
+                <i id="mode-icon" class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header>
+        <div class="container hero-flex">
+            <div class="hero-text">
+                <span class="badge">인류의 새로운 동반자</span>
+                <h1>지능의 심연,<br><span>AI</span>를 이해하다</h1>
+                <p class="hero-p">복잡한 기술 용어 대신 직관적인 비유로 풀어낸 인공지능 마스터클래스. 이제 AI의 심장을 들여다보세요.</p>
+                <div class="btn-group">
+                    <a href="#hierarchy" class="btn">시작하기</a>
+                    <!-- 슬라이드 다운로드 -->
+                    <a href="인공지능의 연대기_ 실패와 성공으로 배운 기술 진화의 필연성.pdf" download class="btn btn-secondary">
+                        <i class="fa-solid fa-file-pdf"></i> 슬라이드 다운로드
+                    </a>
+                    <!-- 동영상 보기 버튼 추가 -->
+                    <button id="open-video" class="btn btn-video">
+                        <i class="fa-solid fa-play-circle"></i> 동영상 보기
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="AI Abstract" class="main-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- Hierarchy Section -->
+    <section id="hierarchy" class="container">
+        <div class="section-title">
+            <h2>AI의 3단계 계층 구조</h2>
+            <p>모든 요리 과정이 같지 않듯, AI도 깊이에 따라 나뉩니다.</p>
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3>AI (인공지능)</h3>
+                <p>기계가 지능적 행동을 하도록 만드는 가장 큰 범주입니다.</p>
+            </div>
+            <div class="card">
+                <h3>머신러닝 (ML)</h3>
+                <p>데이터에서 스스로 규칙을 배웁니다.</p>
+            </div>
+            <div class="card">
+                <h3>딥러닝 (DL)</h3>
+                <p>인간 뇌의 신경망을 흉내 낸 '인공 신경망' 구조입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Tabs -->
+    <section style="background-color: rgba(255, 215, 0, 0.05);">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI 연대기</h2>
+                <p>실패와 성공으로 배운 기술 진화의 필연성</p>
+                <button id="open-infographic" class="btn btn-secondary" style="margin-top:20px;">
+                    <i class="fa-solid fa-image"></i> 히스토리 인포그래픽
+                </button>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="hist1">1950-60s</button>
+                    <button class="tab-btn" data-tab="hist2">1970-80s</button>
+                    <button class="tab-btn" data-tab="hist3">2010s-Now</button>
+                </div>
+
+                <div id="hist1" class="tab-content active">
+                    <h3 class="mb-4 text-yellow">태동기: 장밋빛 미래</h3>
+                    <p>튜링 테스트가 제안되고 최초의 신경망 '퍼셉트론'이 탄생했습니다.</p>
+                </div>
+                <div id="hist2" class="tab-content">
+                    <h3 class="mb-4 text-yellow">겨울: 환멸의 시기</h3>
+                    <p>하드웨어의 한계와 데이터 부족으로 인한 투자의 정체기입니다.</p>
+                </div>
+                <div id="hist3" class="tab-content">
+                    <h3 class="mb-4 text-yellow">부활: 딥러닝 혁명</h3>
+                    <p>GPU의 발전과 빅데이터가 만나 AI의 폭발적 성장을 이끌었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-video"><i class="fa-solid fa-xmark"></i></button>
+            <video id="ai-video" class="modal-video" controls>
+                <source src="AI__03.mp4" type="video/mp4">
+                브라우저가 비디오 태그를 지원하지 않습니다.
+            </video>
+        </div>
+    </div>
+
+    <!-- Infographic Modal -->
+    <div id="infographic-modal" class="modal">
+        <div class="modal-content image-mode" style="padding:15px;">
+            <button class="close-modal" id="close-infographic" style="top:10px; right:10px; color:#333;"><i class="fa-solid fa-xmark"></i></button>
+            <img src="AI HISTORY.jpg" alt="AI HISTORY" class="modal-img" style="border-radius:10px;">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><i class="fa-solid fa-seedling"></i></div>
+            <p>© 2024 AI Understanding Guide. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            
+            // 1. Dark Mode
+            const modeToggle = document.getElementById('mode-toggle');
+            const modeIcon = document.getElementById('mode-icon');
+            
+            modeToggle.addEventListener('click', () => {
+                const isDark = body.classList.toggle('dark-mode');
+                modeIcon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+            });
+
+            // 2. Tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const target = button.getAttribute('data-tab');
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    button.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+
+            // 3. Modals (Video & Infographic)
+            const videoModal = document.getElementById('video-modal');
+            const infoModal = document.getElementById('infographic-modal');
+            const aiVideo = document.getElementById('ai-video');
+
+            // Open Video
+            document.getElementById('open-video').addEventListener('click', () => {
+                videoModal.classList.add('active');
+                aiVideo.play();
+                body.style.overflow = 'hidden';
+            });
+
+            // Close Video
+            document.getElementById('close-video').addEventListener('click', () => {
+                videoModal.classList.remove('active');
+                aiVideo.pause();
+                aiVideo.currentTime = 0;
+                body.style.overflow = '';
+            });
+
+            // Open Infographic
+            document.getElementById('open-infographic').addEventListener('click', () => {
+                infoModal.classList.add('active');
+                body.style.overflow = 'hidden';
+            });
+
+            // Close Infographic
+            document.getElementById('close-infographic').addEventListener('click', () => {
+                infoModal.classList.remove('active');
+                body.style.overflow = '';
+            });
+
+            // Close on background click
+            window.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    videoModal.classList.remove('active');
+                    aiVideo.pause();
+                    body.style.overflow = '';
+                }
+                if (e.target === infoModal) {
+                    infoModal.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
