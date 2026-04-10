@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹 기술의 이해: 변천사와 미래 전략</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Modal Styles */
+        #infographic-modal {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #infographic-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 w-full glass-card border-b">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-extrabold tracking-tight gradient-text">WEB STRATEGY 2026</h1>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-20">
+            <span class="px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold mb-4 inline-block">기술 전략 가이드</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">웹 표준의 변천사와<br>지속 가능성을 위한 분석</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+                1989년의 정보 시스템에서 2026년 AI 기반 웹까지, 우리가 알고 있는 웹 기술의 본질을 탐구합니다.
+            </p>
+            
+            <!-- Download Button Added Here -->
+            <div class="flex justify-center">
+                <a href="PPT.04" download="웹_기술의_이해_발표자료.pptx" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold hover:scale-105 transition-transform shadow-xl hover:shadow-2xl active:scale-95 group">
+                    <i class="fa-solid fa-file-powerpoint text-xl group-hover:rotate-12 transition-transform"></i>
+                    슬라이드 다운로드
+                </a>
+            </div>
+        </section>
+
+        <!-- 1. 아키텍처 이해 -->
+        <section class="mb-24">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-blue-500 flex items-center justify-center text-white font-bold">1</div>
+                    <h3 class="text-2xl font-bold">웹의 근간: 3계층 아키텍처</h3>
+                </div>
+                <button onclick="openModal()" class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all shadow-lg shadow-blue-500/20 text-sm font-semibold">
+                    <i class="fa-solid fa-circle-info"></i>
+                    인포그래픽으로 보기
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl card-hover border-t-4 border-t-blue-500">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-desktop text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">프레젠테이션 계층</h4>
+                    <p class="text-sm text-slate-500 mb-4">Front-end</p>
+                    <p class="text-slate-600 dark:text-slate-400">웹 브라우저에서 실행되며 HTML, CSS, JavaScript를 사용해 사용자 화면을 관리합니다.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl card-hover border-t-4 border-t-purple-500">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-gears text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">애플리케이션 계층</h4>
+                    <p class="text-sm text-slate-500 mb-4">WAS / Middleware</p>
+                    <p class="text-slate-600 dark:text-slate-400">비즈니스 규칙을 처리합니다. Java, Python 등을 사용하여 정보 처리 로직을 실행합니다.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl card-hover border-t-4 border-t-emerald-500">
+                    <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-database text-emerald-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">데이터 계층</h4>
+                    <p class="text-sm text-slate-500 mb-4">Back-end / DB</p>
+                    <p class="text-slate-600 dark:text-slate-400">데이터를 물리적으로 저장하고 관리합니다. MySQL, Oracle 등의 DBMS가 담당합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 브라우저 전쟁 & 표준화 -->
+        <section class="mb-24 bg-slate-100 dark:bg-slate-900/50 p-8 rounded-3xl">
+            <div class="flex items-center gap-2 mb-8">
+                <div class="w-8 h-8 rounded bg-red-500 flex items-center justify-center text-white font-bold">2</div>
+                <h3 class="text-2xl font-bold">표준의 승리: W3C vs WHATWG</h3>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <div class="relative pl-8 border-l-2 border-red-500 space-y-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-red-500">W3C의 실패 (XHTML)</h4>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2">엄격한 구조화를 위해 하위 호환성을 무시하여 현장의 외면을 받았습니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-green-500">WHATWG의 부상 (HTML5)</h4>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2">'작동하는 코드' 중심의 실용주의로 현대 웹 표준(Living Standard)을 쟁취했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 glass-card p-6 rounded-2xl w-full">
+                    <h4 class="font-bold mb-4 text-center">Living Standard의 3대 가치</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span><strong>하위 호환성:</strong> 기존 웹 자산을 파괴하지 않음</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span><strong>구현 중심:</strong> 실제 브라우저 반영 가능성 우선</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-blue-500 mt-1"></i>
+                            <span><strong>지속적 업데이트:</strong> 버전 번호 없는 유연한 대응</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 기술 스택 비교 섹션 -->
+        <section class="mb-24">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-purple-500 flex items-center justify-center text-white font-bold">3</div>
+                    <h3 class="text-2xl font-bold">현대 프론트엔드 생태계</h3>
+                </div>
+            </div>
+            
+            <div class="flex border-b border-slate-200 dark:border-slate-800 mb-6 overflow-x-auto">
+                <button onclick="showTab('react')" class="tab-btn px-6 py-3 font-bold border-b-2 border-purple-500 text-purple-500 whitespace-nowrap" data-tab="react">React</button>
+                <button onclick="showTab('vue')" class="tab-btn px-6 py-3 font-bold border-transparent text-slate-500 whitespace-nowrap" data-tab="vue">Vue</button>
+                <button onclick="showTab('angular')" class="tab-btn px-6 py-3 font-bold border-transparent text-slate-500 whitespace-nowrap" data-tab="angular">Angular</button>
+            </div>
+
+            <div id="react" class="tab-content active glass-card p-8 rounded-2xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="text-6xl text-blue-400"><i class="fa-brands fa-react"></i></div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-2">React: UI 아키텍처의 중심</h4>
+                        <p class="text-slate-600 dark:text-slate-400">가상 DOM을 통해 최적화된 런타임을 제공하며, 컴포넌트 기반 설계를 통해 UI 재사용성을 극대화합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vue" class="tab-content glass-card p-8 rounded-2xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="text-6xl text-emerald-400"><i class="fa-brands fa-vuejs"></i></div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-2">Vue: 점진적 프레임워크</h4>
+                        <p class="text-slate-600 dark:text-slate-400">유연성과 낮은 학습 곡선이 강점이며, 실용적인 데이터 바인딩을 통해 빠른 개발을 지원합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="angular" class="tab-content glass-card p-8 rounded-2xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="text-6xl text-red-500"><i class="fa-brands fa-angular"></i></div>
+                    <div>
+                        <h4 class="text-2xl font-bold mb-2">Angular: 엔터프라이즈 환경</h4>
+                        <p class="text-slate-600 dark:text-slate-400">TypeScript 기반의 엄격한 구조를 제공하며, 대규모 프로젝트의 유지보수성을 보장하는 통합 환경을 지향합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 2026 미래 전망 -->
+        <section class="mb-24">
+            <div class="flex items-center gap-2 mb-12">
+                <div class="w-8 h-8 rounded bg-yellow-500 flex items-center justify-center text-white font-bold">4</div>
+                <h3 class="text-2xl font-bold">2026년 웹의 미래 트렌드</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                    <i class="fa-solid fa-robot text-yellow-500 mb-3 text-xl"></i>
+                    <h5 class="font-bold mb-2">AI-First 개발</h5>
+                    <p class="text-xs text-slate-500">AI가 기능을 스캐폴딩하고 개발자는 아키텍처에 집중합니다.</p>
+                </div>
+                <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                    <i class="fa-solid fa-bolt text-yellow-500 mb-3 text-xl"></i>
+                    <h5 class="font-bold mb-2">엣지 컴퓨팅</h5>
+                    <p class="text-xs text-slate-500">전 세계 사용자에게 밀리초 단위 응답을 제공하는 분산 배포.</p>
+                </div>
+                <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                    <i class="fa-solid fa-code text-yellow-500 mb-3 text-xl"></i>
+                    <h5 class="font-bold mb-2">CSS 르네상스</h5>
+                    <p class="text-xs text-slate-500">복잡한 UI 로직을 JS에서 브라우저 엔진(CSS)으로 이관.</p>
+                </div>
+                <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                    <i class="fa-solid fa-shield-halved text-yellow-500 mb-3 text-xl"></i>
+                    <h5 class="font-bold mb-2">보안의 내재화</h5>
+                    <p class="text-xs text-slate-500">서버 컴포넌트를 통한 데이터 노출 최소화 및 자동화 정책.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="text-center p-12 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+            <h3 class="text-2xl font-bold mb-4">지속 가능한 웹을 위한 전략</h3>
+            <p class="mb-8 opacity-90 max-w-xl mx-auto">
+                웹의 역사는 개방성을 향한 투쟁이었습니다. 앞으로의 개발은 브라우저의 순정 기능을 극한으로 활용하여 기술 부채를 줄이는 것에 달려 있습니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="bg-white/20 px-4 py-2 rounded-lg backdrop-blur-sm text-sm">#NativeFirst</span>
+                <span class="bg-white/20 px-4 py-2 rounded-lg backdrop-blur-sm text-sm">#INP_Optimization</span>
+                <span class="bg-white/20 px-4 py-2 rounded-lg backdrop-blur-sm text-sm">#Web_Standards</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Infographic Modal -->
+    <div id="infographic-modal" class="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="relative max-w-5xl w-full max-h-[90vh] glass-card rounded-2xl overflow-hidden flex flex-col bg-white dark:bg-slate-900 shadow-2xl">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
+                <h4 class="font-bold">웹 3계층 아키텍처 인포그래픽</h4>
+                <button onclick="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Modal Content (Image Area) -->
+            <div class="flex-1 overflow-auto p-4 flex items-center justify-center bg-slate-100 dark:bg-slate-950">
+                <img src="img.04" alt="웹 3계층 아키텍처 인포그래픽" class="max-w-full h-auto rounded shadow-lg" onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x800?text=Web+3-Tier+Architecture+Infographic+Not+Found';">
+            </div>
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-50 dark:bg-slate-900 text-center text-xs text-slate-500">
+                화면의 빈 공간이나 닫기 버튼을 누르면 돌아갑니다.
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500 text-sm">
+        <p>&copy; 2024 기술 전략 분석 보고서 인터랙티브 페이지. 모든 권리 보유.</p>
+    </footer>
+
+    <script>
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Tab Switching Logic
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-purple-500', 'text-purple-500');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+            activeBtn.classList.add('border-purple-500', 'text-purple-500');
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('infographic-modal');
+        
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+</body>
+</html>
