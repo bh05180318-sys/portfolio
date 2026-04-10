@@ -110,45 +110,27 @@
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
             
-            <!-- 신규 버튼: 실습 페이지 이동 (./04/index.html) -->
-            <div id="action-button-container" class="mb-8 hidden">
-                <a id="external-link" href="./04/index.html" class="flex items-center justify-between w-full p-5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl group-hover:rotate-6 transition-transform">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <div class="text-left">
-                            <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-70">Interactive Demo</p>
-                            <h4 class="text-lg font-bold">실습3 결과 페이지 바로가기</h4>
-                        </div>
-                    </div>
-                    <div class="mr-2 opacity-50 group-hover:translate-x-1 transition-transform">
-                        <i class="fa-solid fa-chevron-right text-xl"></i>
-                    </div>
-                </a>
-            </div>
-
             <!-- 헤더 영역 -->
             <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500 shadow-2xl">
                 <div id="detail-accent-bg" class="absolute inset-0 z-0 opacity-80"></div>
                 <div class="relative z-10">
-                    <div id="detail-task-id" class="inline-block px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-[10px] font-black uppercase mb-4 tracking-widest">TASK 03</div>
+                    <div id="detail-task-id" class="inline-block px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-[10px] font-black uppercase mb-4 tracking-widest">TASK 01</div>
                     <h2 id="detail-title" class="text-4xl md:text-5xl font-black leading-tight mb-6">프로젝트 제목</h2>
                     <div id="detail-tags" class="flex flex-wrap gap-2"></div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div class="md:col-span-2 space-y-12">
                     <section>
-                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
                             <i class="fa-solid fa-circle-info text-blue-500"></i> 과제 개요
                         </h3>
                         <p id="detail-description" class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg"></p>
                     </section>
 
                     <section>
-                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <h3 class="text-xl font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
                             <i class="fa-solid fa-star text-emerald-500"></i> 주요 학습 및 성과
                         </h3>
                         <div id="detail-achievements" class="grid gap-4"></div>
@@ -167,6 +149,15 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 하단 결과물 보기 버튼 영역 -->
+            <div id="bottom-action-container" class="hidden border-t border-slate-200 dark:border-white/10 pt-10">
+                <a id="external-link-bottom" href="#" class="flex items-center justify-center gap-3 w-full py-5 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transform hover:scale-[1.01] active:scale-[0.99] transition-all group">
+                    <span>결과물 보기</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                </a>
+                <p class="text-center mt-4 text-sm text-slate-400">실습 결과 페이지가 새로운 환경에서 열립니다.</p>
+            </div>
         </div>
     </main>
 
@@ -178,6 +169,7 @@
                 tags: ["NotebookLM", "AI역사", "LLM기초"], 
                 icon: "fa-book-open-reader", 
                 color: "card-blue",
+                externalLink: "./02/index.html",
                 description: "구글 NotebookLM을 활용해 AI의 정의와 역사, 최신 생성형 AI 트렌드를 체계적으로 정리하고 학습했습니다.",
                 achievements: [
                     { title: "AI 역사 분석", desc: "기호주의와 연결주의의 발전을 시기별로 정리" },
@@ -192,6 +184,7 @@
                 tags: ["데이터분석", "사회문제", "KOSIS"], 
                 icon: "fa-magnifying-glass-chart", 
                 color: "card-emerald",
+                externalLink: "./03/index.html",
                 description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 수치로 정의했습니다.",
                 achievements: [
                     { title: "문제 정의 역량", desc: "사회 문제를 데이터 기반의 구체적인 문제로 치환" },
@@ -202,12 +195,12 @@
             },
             { 
                 id: 3, 
-                title: "실습3", // 요청사항 반영: 프롬포트 엔지니어링 -> 실습3
+                title: "실습 3", 
                 tags: ["HTML", "CSS", "Prompt"], 
                 icon: "fa-terminal", 
                 color: "card-purple",
-                hasExternalLink: true, 
-                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다. 특히 AI와 협력하여 웹 페이지를 구축하는 과정을 경험했습니다.",
+                externalLink: "./04/index.html",
+                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다. AI와의 상호작용을 통해 웹 구조를 설계하고 구현하는 기술을 익혔습니다.",
                 achievements: [
                     { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
                     { title: "웹 기초 역량 확보", desc: "HTML/CSS 실습을 통한 웹 서비스 구조에 대한 이해" }
@@ -235,17 +228,19 @@
         const detailView = document.getElementById('detail-view');
         const backBtn = document.getElementById('back-btn');
         const projectContainer = document.getElementById('project-container');
-        const actionButtonContainer = document.getElementById('action-button-container');
+        const bottomActionContainer = document.getElementById('bottom-action-container');
+        const externalLinkBtn = document.getElementById('external-link-bottom');
 
         function showDetail(projectId) {
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
 
-            // 특정 프로젝트(실습3)일 때만 외부 링크 버튼 표시
-            if (project.hasExternalLink) {
-                actionButtonContainer.classList.remove('hidden');
+            // 외부 링크가 있는 프로젝트일 경우 하단 버튼 보이기
+            if (project.externalLink) {
+                bottomActionContainer.classList.remove('hidden');
+                externalLinkBtn.href = project.externalLink;
             } else {
-                actionButtonContainer.classList.add('hidden');
+                bottomActionContainer.classList.add('hidden');
             }
 
             document.getElementById('detail-task-id').innerText = `TASK ${String(project.id).padStart(2, '0')}`;
