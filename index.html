@@ -110,12 +110,18 @@
     <!-- 상세 보기 섹션 -->
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
-            <!-- 이동 버튼 상단 배치 -->
-            <div id="top-action-button" class="hidden mb-8">
-                <a id="top-external-link" href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-2xl font-bold transition-all shadow-xl shadow-blue-500/25 active:scale-95 group">
-                    <i class="fa-solid fa-laptop-code text-xl group-hover:rotate-12 transition-transform"></i>
-                    <span>웹 기술 실습 결과물 확인하기</span>
-                    <i class="fa-solid fa-chevron-right text-xs ml-2 opacity-70"></i>
+            
+            <!-- 상단 이동 버튼 (이동 경로 연결) -->
+            <div id="top-action-container" class="hidden mb-8">
+                <a id="top-action-link" href="#" class="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl font-bold transition-all shadow-xl shadow-blue-500/25 active:scale-95 group border border-white/10">
+                    <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
+                        <i class="fa-solid fa-rocket text-xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-[10px] opacity-70 uppercase font-black tracking-widest">실습 결과물 보러가기</span>
+                        <span class="block text-lg">웹 기술 실습 페이지로 이동</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-sm ml-4 opacity-50 group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
@@ -190,7 +196,6 @@
                 tags: ["데이터분석", "사회문제", "KOSIS"], 
                 icon: "fa-magnifying-glass-chart", 
                 color: "card-emerald",
-                directLink: "./03/index.html", 
                 description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 수치로 정의했습니다.",
                 achievements: [
                     { title: "문제 정의 역량", desc: "사회 문제를 데이터 기반의 구체적인 문제로 치환" },
@@ -201,18 +206,18 @@
             },
             { 
                 id: 3, 
-                title: "실습3", 
-                tags: ["HTML", "CSS", "웹기술"], 
-                icon: "fa-code", 
+                title: "프롬포트 엔지니어링: 질문의 기술", 
+                tags: ["HTML", "CSS", "Prompt"], 
+                icon: "fa-terminal", 
                 color: "card-purple",
-                directLink: "./04/index.html", // 요청하신 이동 경로 추가
-                description: "웹기술의 이해에 대한 실습을 실행하였습니다",
+                directLink: "./04/index.html", 
+                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다.",
                 achievements: [
-                    { title: "웹 구조 설계", desc: "HTML5를 활용한 웹 콘텐츠의 논리적 구조화 실습" },
-                    { title: "레이아웃 디자인", desc: "CSS3를 통한 반응형 디자인 및 스타일링 기법 적용" }
+                    { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 AI 명령어 생성" },
+                    { title: "웹 기초 역량 확보", desc: "HTML/CSS 실습을 통한 웹 서비스 구조에 대한 이해" }
                 ],
-                tools: ["VS Code", "Web Browser"],
-                category: "웹 기술 실습"
+                tools: ["VS Code", "Claude 3", "ChatGPT"],
+                category: "웹 기술 및 프롬프트"
             },
             { 
                 id: 4, 
@@ -258,15 +263,14 @@
             document.getElementById('detail-description').innerText = project.description;
             document.getElementById('detail-category').innerText = project.category;
 
-            const topActionButton = document.getElementById('top-action-button');
-            const topExternalLink = document.getElementById('top-external-link');
-            
-            // 상단 이동 버튼 활성화 로직
+            // 상단 이동 버튼 노출 여부 결정
+            const actionContainer = document.getElementById('top-action-container');
+            const actionLink = document.getElementById('top-action-link');
             if (project.directLink) {
-                topActionButton.classList.remove('hidden');
-                topExternalLink.href = project.directLink;
+                actionContainer.classList.remove('hidden');
+                actionLink.href = project.directLink;
             } else {
-                topActionButton.classList.add('hidden');
+                actionContainer.classList.add('hidden');
             }
 
             const dummy = document.createElement('div');
