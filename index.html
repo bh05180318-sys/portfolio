@@ -36,7 +36,6 @@
             transform: translateY(-8px);
         }
 
-        /* 카드별 강조 색상 변수 */
         .card-blue { --accent: 59, 130, 246; --bg-soft: 239, 246, 255; --bg-dark: 30, 58, 138; }
         .card-purple { --accent: 147, 51, 234; --bg-soft: 250, 245, 255; --bg-dark: 88, 28, 135; }
         .card-emerald { --accent: 16, 185, 129; --bg-soft: 236, 253, 245; --bg-dark: 6, 78, 59; }
@@ -116,11 +115,11 @@
                 <a id="external-link" href="./04/index.html" class="flex items-center justify-between w-full p-5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] group">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl group-hover:rotate-6 transition-transform">
-                            <i class="fa-solid fa-paper-plane"></i>
+                            <i class="fa-solid fa-laptop-code"></i>
                         </div>
                         <div class="text-left">
-                            <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-70">실습 결과물 확인하기</p>
-                            <h4 class="text-lg font-bold">프롬프트 엔지니어링 실습 페이지로 이동</h4>
+                            <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-70">Interactive Demo</p>
+                            <h4 class="text-lg font-bold">실습3 결과 페이지 바로가기</h4>
                         </div>
                     </div>
                     <div class="mr-2 opacity-50 group-hover:translate-x-1 transition-transform">
@@ -203,11 +202,11 @@
             },
             { 
                 id: 3, 
-                title: "프롬포트 엔지니어링: 질문의 기술", 
+                title: "실습3", // 요청사항 반영: 프롬포트 엔지니어링 -> 실습3
                 tags: ["HTML", "CSS", "Prompt"], 
                 icon: "fa-terminal", 
                 color: "card-purple",
-                hasExternalLink: true, // 링크 여부 플래그
+                hasExternalLink: true, 
                 description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다. 특히 AI와 협력하여 웹 페이지를 구축하는 과정을 경험했습니다.",
                 achievements: [
                     { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
@@ -242,7 +241,7 @@
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
 
-            // 특정 프로젝트(프롬포트 엔지니어링)일 때만 외부 링크 버튼 표시
+            // 특정 프로젝트(실습3)일 때만 외부 링크 버튼 표시
             if (project.hasExternalLink) {
                 actionButtonContainer.classList.remove('hidden');
             } else {
@@ -254,7 +253,6 @@
             document.getElementById('detail-description').innerText = project.description;
             document.getElementById('detail-category').innerText = project.category;
 
-            // 컬러 테마 설정
             const dummy = document.createElement('div');
             dummy.className = project.color;
             document.body.appendChild(dummy);
