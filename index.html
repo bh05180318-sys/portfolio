@@ -102,7 +102,7 @@
 
         <section class="max-w-7xl mx-auto">
             <div id="project-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 자바스크립트로 카드 삽입 -->
+                <!-- JavaScript renders cards here -->
             </div>
         </section>
     </main>
@@ -111,25 +111,29 @@
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
             
-            <!-- 상단 이동 버튼 (이동 경로 연결) -->
-            <div id="top-action-container" class="hidden mb-8">
-                <a id="top-action-link" href="#" class="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl font-bold transition-all shadow-xl shadow-blue-500/25 active:scale-95 group border border-white/10">
-                    <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
-                        <i class="fa-solid fa-rocket text-xl"></i>
+            <!-- 신규 버튼: 실습 페이지 이동 (./04/index.html) -->
+            <div id="action-button-container" class="mb-8 hidden">
+                <a id="external-link" href="./04/index.html" class="flex items-center justify-between w-full p-5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98] group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl group-hover:rotate-6 transition-transform">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-70">실습 결과물 확인하기</p>
+                            <h4 class="text-lg font-bold">프롬프트 엔지니어링 실습 페이지로 이동</h4>
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <span class="block text-[10px] opacity-70 uppercase font-black tracking-widest">실습 결과물 보러가기</span>
-                        <span class="block text-lg">웹 기술 실습 페이지로 이동</span>
+                    <div class="mr-2 opacity-50 group-hover:translate-x-1 transition-transform">
+                        <i class="fa-solid fa-chevron-right text-xl"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-right text-sm ml-4 opacity-50 group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
             <!-- 헤더 영역 -->
-            <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500">
+            <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500 shadow-2xl">
                 <div id="detail-accent-bg" class="absolute inset-0 z-0 opacity-80"></div>
                 <div class="relative z-10">
-                    <div id="detail-task-id" class="inline-block px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-[10px] font-black uppercase mb-4 tracking-widest">TASK 01</div>
+                    <div id="detail-task-id" class="inline-block px-3 py-1 rounded-lg bg-white/20 backdrop-blur-md text-[10px] font-black uppercase mb-4 tracking-widest">TASK 03</div>
                     <h2 id="detail-title" class="text-4xl md:text-5xl font-black leading-tight mb-6">프로젝트 제목</h2>
                     <div id="detail-tags" class="flex flex-wrap gap-2"></div>
                 </div>
@@ -162,13 +166,6 @@
                         <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">과제 유형</h4>
                         <p id="detail-category" class="font-bold text-slate-800 dark:text-slate-200"></p>
                     </div>
-
-                    <div class="p-8 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-white/10">
-                        <h4 class="text-sm font-bold mb-4">학습 코멘트</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed italic">
-                            "이 과제를 통해 AI 기술을 단순 도구로 사용하는 것을 넘어, 기술의 원리를 이해하고 응용할 수 있는 능력을 길렀습니다."
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -185,7 +182,7 @@
                 description: "구글 NotebookLM을 활용해 AI의 정의와 역사, 최신 생성형 AI 트렌드를 체계적으로 정리하고 학습했습니다.",
                 achievements: [
                     { title: "AI 역사 분석", desc: "기호주의와 연결주의의 발전을 시기별로 정리" },
-                    { title: "NotebookLM 활용", desc: "방대한 소스에서 핵심 인사이트 추출 워크플로우 숙달" }
+                    { title: "NotebookLM 활용", desc: "핵심 인사이트 추출 워크플로우 숙달" }
                 ],
                 tools: ["NotebookLM", "ChatGPT"],
                 category: "기초 이론"
@@ -199,9 +196,9 @@
                 description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 수치로 정의했습니다.",
                 achievements: [
                     { title: "문제 정의 역량", desc: "사회 문제를 데이터 기반의 구체적인 문제로 치환" },
-                    { title: "데이터 시각화", desc: "통계 지표를 통해 문제의 심각성을 객관적으로 입증" }
+                    { title: "데이터 시각화", desc: "통계 지표를 통해 객관적 입증" }
                 ],
-                tools: ["KOSIS", "Data.go.kr", "Excel"],
+                tools: ["KOSIS", "Excel"],
                 category: "데이터 분석"
             },
             { 
@@ -210,10 +207,10 @@
                 tags: ["HTML", "CSS", "Prompt"], 
                 icon: "fa-terminal", 
                 color: "card-purple",
-                directLink: "./04/index.html", 
-                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다.",
+                hasExternalLink: true, // 링크 여부 플래그
+                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다. 특히 AI와 협력하여 웹 페이지를 구축하는 과정을 경험했습니다.",
                 achievements: [
-                    { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 AI 명령어 생성" },
+                    { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
                     { title: "웹 기초 역량 확보", desc: "HTML/CSS 실습을 통한 웹 서비스 구조에 대한 이해" }
                 ],
                 tools: ["VS Code", "Claude 3", "ChatGPT"],
@@ -225,27 +222,13 @@
                 tags: ["Midjourney", "DALL-E", "창의력"], 
                 icon: "fa-palette", 
                 color: "card-rose",
-                description: "AI를 활용하여 텍스트만으로 일관성 있는 캐릭터와 서사를 담은 이미지를 생성했습니다.",
+                description: "AI를 활용하여 텍스트만으로 일관성 있는 캐릭터와 서사를 담은 이미지를 생성하고 시나리오를 구성했습니다.",
                 achievements: [
                     { title: "일관성 유지", desc: "동일 캐릭터를 여러 장면에서 유지하는 기법" },
                     { title: "스타일 제어", desc: "시각적 문법을 통한 정교한 이미지 생성" }
                 ],
                 tools: ["Midjourney", "DALL-E 3"],
                 category: "멀티모달 실습"
-            },
-            { 
-                id: 5, 
-                title: "데이터 클리닝과 기초 통계 해석", 
-                tags: ["Pandas", "데이터정제", "EDA"], 
-                icon: "fa-broom", 
-                color: "card-emerald",
-                description: "원시 데이터를 정제하고 기초적인 상관관계를 도출하여 데이터 리터러시를 강화했습니다.",
-                achievements: [
-                    { title: "데이터 전처리", desc: "결측치 및 이상치 처리 프로세스 수행" },
-                    { title: "상관성 분석", desc: "변수 간 유의미한 관계 도출" }
-                ],
-                tools: ["Python", "Pandas", "Power BI"],
-                category: "데이터 리터러시"
             }
         ];
 
@@ -253,26 +236,25 @@
         const detailView = document.getElementById('detail-view');
         const backBtn = document.getElementById('back-btn');
         const projectContainer = document.getElementById('project-container');
+        const actionButtonContainer = document.getElementById('action-button-container');
 
         function showDetail(projectId) {
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
+
+            // 특정 프로젝트(프롬포트 엔지니어링)일 때만 외부 링크 버튼 표시
+            if (project.hasExternalLink) {
+                actionButtonContainer.classList.remove('hidden');
+            } else {
+                actionButtonContainer.classList.add('hidden');
+            }
 
             document.getElementById('detail-task-id').innerText = `TASK ${String(project.id).padStart(2, '0')}`;
             document.getElementById('detail-title').innerText = project.title;
             document.getElementById('detail-description').innerText = project.description;
             document.getElementById('detail-category').innerText = project.category;
 
-            // 상단 이동 버튼 노출 여부 결정
-            const actionContainer = document.getElementById('top-action-container');
-            const actionLink = document.getElementById('top-action-link');
-            if (project.directLink) {
-                actionContainer.classList.remove('hidden');
-                actionLink.href = project.directLink;
-            } else {
-                actionContainer.classList.add('hidden');
-            }
-
+            // 컬러 테마 설정
             const dummy = document.createElement('div');
             dummy.className = project.color;
             document.body.appendChild(dummy);
@@ -293,7 +275,7 @@
                 </div>
             `).join('');
 
-            document.getElementById('detail-tools').innerHTML = (project.tools || []).map(t => `<span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-600 dark:text-slate-300">${t}</span>`).join('');
+            document.getElementById('detail-tools').innerHTML = project.tools.map(t => `<span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-600 dark:text-slate-300">${t}</span>`).join('');
 
             listView.classList.remove('view-active');
             listView.classList.add('view-hidden');
@@ -326,7 +308,7 @@
                     </div>
                     <div class="px-4 pb-4">
                         <div class="flex items-center gap-2 mb-3">
-                            ${(p.tags || []).slice(0, 2).map(t => `<span class="text-[9px] font-bold text-slate-400 uppercase tracking-tight">#${t}</span>`).join('')}
+                            ${p.tags.slice(0, 2).map(t => `<span class="text-[9px] font-bold text-slate-400 uppercase tracking-tight">#${t}</span>`).join('')}
                         </div>
                         <h3 class="text-xl font-black mb-3 text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors leading-tight">${p.title}</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-6 leading-relaxed">${p.description}</p>
@@ -334,9 +316,9 @@
                         <div class="flex items-center justify-between">
                             <div class="flex -space-x-2">
                                 <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-blue-500/10 text-blue-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-code"></i></div>
-                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-globe"></i></div>
+                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-bolt"></i></div>
                             </div>
-                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
                         </div>
