@@ -47,12 +47,12 @@
         }
 
         /* Modal Styles */
-        #infographic-modal {
+        .modal-overlay {
             display: none;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        #infographic-modal.active {
+        .modal-overlay.active {
             display: flex;
             opacity: 1;
         }
@@ -86,11 +86,18 @@
                 1989년의 정보 시스템에서 2026년 AI 기반 웹까지, 우리가 알고 있는 웹 기술의 본질을 탐구합니다.
             </p>
             
-            <!-- Download Button Added Here -->
-            <div class="flex justify-center">
-                <a href="PPT.04" download="웹_기술의_이해_발표자료.pptx" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold hover:scale-105 transition-transform shadow-xl hover:shadow-2xl active:scale-95 group">
+            <!-- Buttons Group -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <!-- Download Button -->
+                <a href="PPT.04" download="웹_기술의_이해_발표자료.pptx" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold hover:scale-105 transition-transform shadow-xl hover:shadow-2xl active:scale-95 group">
                     <i class="fa-solid fa-file-powerpoint text-xl group-hover:rotate-12 transition-transform"></i>
                     슬라이드 다운로드
+                </a>
+                
+                <!-- Video Button: Open in new window -->
+                <a href="video.mp4" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold hover:scale-105 transition-transform shadow-xl shadow-blue-500/20 hover:shadow-2xl active:scale-95 group">
+                    <i class="fa-solid fa-circle-play text-xl group-hover:scale-125 transition-transform"></i>
+                    동영상 보기
                 </a>
             </div>
         </section>
@@ -266,7 +273,7 @@
     </main>
 
     <!-- Infographic Modal -->
-    <div id="infographic-modal" class="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div id="infographic-modal" class="modal-overlay fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="relative max-w-5xl w-full max-h-[90vh] glass-card rounded-2xl overflow-hidden flex flex-col bg-white dark:bg-slate-900 shadow-2xl">
             <!-- Modal Header -->
             <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
@@ -330,23 +337,21 @@
             activeBtn.classList.add('border-purple-500', 'text-purple-500');
         }
 
-        // Modal Logic
+        // Modal Logic (Infographic)
         const modal = document.getElementById('infographic-modal');
-        
         function openModal() {
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden';
         }
-
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
-        // Close modal on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
+        // Close modals on background click
+        window.onclick = function(event) {
+            if (event.target == modal) closeModal();
+        }
     </script>
 </body>
 </html>
