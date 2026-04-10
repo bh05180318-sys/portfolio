@@ -61,8 +61,13 @@
             transform: translateX(0);
         }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.2); border-radius: 10px; }
+        /* Modal Animation */
+        #author-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #author-modal-content {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-lightBg text-slate-800 dark:bg-darkBg dark:text-slate-200 selection:bg-blue-500/30">
@@ -94,23 +99,90 @@
             <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white">
                 AI 리터러시 결과 보고서
             </h1>
-            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
                 생성형 AI의 이해부터 데이터 분석, 최종 솔루션 제안까지 15주간 진행된 AI 융합 학습의 여정을 소개합니다.
             </p>
+            
+            <!-- 작성자 소개 버튼 -->
+            <button id="open-author-modal" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-slate-900/10 dark:shadow-white/5">
+                <i class="fa-solid fa-id-card-clip"></i>
+                <span>작성자 소개</span>
+            </button>
         </header>
 
-        <section class="max-w-7xl mx-auto">
+        <section class="max-w-7xl mx-auto mb-20">
             <div id="project-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- JavaScript renders cards here -->
             </div>
         </section>
+
+        <footer class="max-w-7xl mx-auto mt-20 text-center text-xs text-slate-400 dark:text-slate-600 pb-10">
+            &copy; 2024 Kim Bo-hyun. All Rights Reserved. Crafted with AI Literacy.
+        </footer>
     </main>
+
+    <!-- 작성자 소개 모달 -->
+    <div id="author-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm opacity-0 invisible">
+        <div id="author-modal-content" class="w-full max-w-lg bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl transform scale-90 opacity-0 border border-slate-200 dark:border-white/10">
+            <div class="h-32 bg-gradient-to-r from-blue-600 to-purple-600 relative">
+                <button id="close-author-modal" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="px-8 pb-10 -mt-12 relative z-10">
+                <div class="w-24 h-24 rounded-3xl bg-white dark:bg-slate-800 p-1.5 shadow-xl mb-6">
+                    <div class="w-full h-full rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-3xl font-black text-slate-900 dark:text-white mb-1">김보현</h4>
+                    <p class="text-blue-600 dark:text-blue-400 font-bold tracking-tight">AI융합교육원 | 202405187</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-1">Affiliation</p>
+                            <p class="text-slate-700 dark:text-slate-300 font-medium">사회과학대학 학생</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-1">Email</p>
+                            <a href="mailto:killua7532@naver.com" class="text-slate-700 dark:text-slate-300 font-medium hover:text-blue-500 transition-colors underline decoration-blue-500/30 underline-offset-4">killua7532@naver.com</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-1">Introduction</p>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
+                                <span class="text-slate-900 dark:text-white font-semibold">AI리터러시의 이해</span> 수업을 통해 인간과 기술의 공존을 탐구하고 있습니다. 사회과학적 시선으로 데이터를 분석하고 문제를 해결하는 미래 인재를 꿈꿉니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 상세 보기 섹션 -->
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
             
-            <!-- 헤더 영역 -->
             <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500 shadow-2xl">
                 <div id="detail-accent-bg" class="absolute inset-0 z-0 opacity-80"></div>
                 <div class="relative z-10">
@@ -150,13 +222,11 @@
                 </div>
             </div>
 
-            <!-- 하단 결과물 보기 버튼 영역 -->
             <div id="bottom-action-container" class="hidden border-t border-slate-200 dark:border-white/10 pt-10">
                 <a id="external-link-bottom" href="#" class="flex items-center justify-center gap-3 w-full py-5 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transform hover:scale-[1.01] active:scale-[0.99] transition-all group">
                     <span>결과물 보기</span>
                     <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                 </a>
-                <p class="text-center mt-4 text-sm text-slate-400">실습 결과 페이지가 새로운 환경에서 열립니다.</p>
             </div>
         </div>
     </main>
@@ -195,26 +265,26 @@
             },
             { 
                 id: 3, 
-                title: "실습 3", 
+                title: "실습3: 웹기술의 이해", 
                 tags: ["HTML", "CSS", "Prompt"], 
                 icon: "fa-terminal", 
                 color: "card-purple",
                 externalLink: "./04/index.html",
-                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다. AI와의 상호작용을 통해 웹 구조를 설계하고 구현하는 기술을 익혔습니다.",
+                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다.",
                 achievements: [
-                    { title: "효과적인 프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
-                    { title: "웹 기초 역량 확보", desc: "HTML/CSS 실습을 통한 웹 서비스 구조에 대한 이해" }
+                    { title: "프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
+                    { title: "웹 기초 역량", desc: "HTML/CSS 실습을 통한 웹 서비스 구조 이해" }
                 ],
-                tools: ["VS Code", "Claude 3", "ChatGPT"],
+                tools: ["VS Code", "Claude 3"],
                 category: "웹 기술 및 프롬프트"
             },
             { 
                 id: 4, 
-                title: "생성형 AI 이미지 스토리텔링", 
+                title: "중간고사 대체 과제", 
                 tags: ["Midjourney", "DALL-E", "창의력"], 
                 icon: "fa-palette", 
                 color: "card-rose",
-                description: "AI를 활용하여 텍스트만으로 일관성 있는 캐릭터와 서사를 담은 이미지를 생성하고 시나리오를 구성했습니다.",
+                description: "AI를 활용하여 일관성 있는 캐릭터와 서사를 담은 이미지를 생성하고 시나리오를 구성했습니다.",
                 achievements: [
                     { title: "일관성 유지", desc: "동일 캐릭터를 여러 장면에서 유지하는 기법" },
                     { title: "스타일 제어", desc: "시각적 문법을 통한 정교한 이미지 생성" }
@@ -231,11 +301,33 @@
         const bottomActionContainer = document.getElementById('bottom-action-container');
         const externalLinkBtn = document.getElementById('external-link-bottom');
 
+        const authorModal = document.getElementById('author-modal');
+        const authorModalContent = document.getElementById('author-modal-content');
+        const openModalBtn = document.getElementById('open-author-modal');
+        const closeModalBtn = document.getElementById('close-author-modal');
+
+        function toggleModal(show) {
+            if (show) {
+                authorModal.classList.remove('invisible');
+                authorModal.classList.add('opacity-100');
+                authorModalContent.classList.remove('scale-90', 'opacity-0');
+                authorModalContent.classList.add('scale-100', 'opacity-100');
+            } else {
+                authorModal.classList.remove('opacity-100');
+                authorModal.classList.add('invisible');
+                authorModalContent.classList.remove('scale-100', 'opacity-100');
+                authorModalContent.classList.add('scale-90', 'opacity-0');
+            }
+        }
+
+        openModalBtn.onclick = () => toggleModal(true);
+        closeModalBtn.onclick = () => toggleModal(false);
+        authorModal.onclick = (e) => { if(e.target === authorModal) toggleModal(false); };
+
         function showDetail(projectId) {
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
 
-            // 외부 링크가 있는 프로젝트일 경우 하단 버튼 보이기
             if (project.externalLink) {
                 bottomActionContainer.classList.remove('hidden');
                 externalLinkBtn.href = project.externalLink;
@@ -291,27 +383,19 @@
             projectContainer.innerHTML = '';
             projects.forEach(p => {
                 const card = document.createElement('div');
-                card.className = `project-card ${p.color} bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-4 cursor-pointer group`;
+                card.className = `project-card ${p.color} bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-4 cursor-pointer group shadow-sm`;
                 
                 card.innerHTML = `
                     <div class="h-48 rounded-[2rem] bg-slate-100 dark:bg-white/5 mb-6 flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-[radial-gradient(circle_at_center,_rgba(var(--accent),0.4)_0%,_transparent_70%)]"></div>
                         <i class="fa-solid ${p.icon} text-5xl text-slate-300 dark:text-slate-800 transition-all duration-500 group-hover:scale-110" style="color: rgba(var(--accent), 0.3)"></i>
-                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md text-[9px] font-black text-slate-500 dark:text-slate-400">TASK ${p.id}</div>
                     </div>
                     <div class="px-4 pb-4">
-                        <div class="flex items-center gap-2 mb-3">
-                            ${p.tags.slice(0, 2).map(t => `<span class="text-[9px] font-bold text-slate-400 uppercase tracking-tight">#${t}</span>`).join('')}
-                        </div>
                         <h3 class="text-xl font-black mb-3 text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors leading-tight">${p.title}</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-6 leading-relaxed">${p.description}</p>
-                        
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-6">${p.description}</p>
                         <div class="flex items-center justify-between">
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-blue-500/10 text-blue-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-code"></i></div>
-                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-bolt"></i></div>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-md">
+                            <span class="text-[10px] font-black uppercase text-slate-400">Task ${p.id}</span>
+                            <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>
                         </div>
