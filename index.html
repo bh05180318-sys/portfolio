@@ -48,7 +48,6 @@
             border-color: rgba(var(--accent), 0.4);
         }
 
-        /* 섹션 전환 애니메이션 */
         .view-section {
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease;
         }
@@ -112,10 +111,11 @@
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
             <!-- 이동 버튼 상단 배치 -->
-            <div id="top-action-button" class="hidden mb-6">
-                <a id="top-external-link" href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all shadow-lg shadow-blue-500/20 active:scale-95">
-                    <i class="fa-solid fa-square-arrow-up-right"></i>
-                    <span>실시간 결과물 대시보드 보기</span>
+            <div id="top-action-button" class="hidden mb-8">
+                <a id="top-external-link" href="#" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-2xl font-bold transition-all shadow-xl shadow-blue-500/25 active:scale-95 group">
+                    <i class="fa-solid fa-laptop-code text-xl group-hover:rotate-12 transition-transform"></i>
+                    <span>웹 기술 실습 결과물 확인하기</span>
+                    <i class="fa-solid fa-chevron-right text-xs ml-2 opacity-70"></i>
                 </a>
             </div>
 
@@ -160,7 +160,7 @@
                     <div class="p-8 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-white/10">
                         <h4 class="text-sm font-bold mb-4">학습 코멘트</h4>
                         <p class="text-xs text-slate-400 leading-relaxed italic">
-                            "이 과제를 통해 AI 기술을 단순 도구로 사용하는 것을 넘어, 우리 사회의 문제를 해결할 수 있는 데이터 기반의 통찰력을 얻을 수 있었습니다."
+                            "이 과제를 통해 AI 기술을 단순 도구로 사용하는 것을 넘어, 기술의 원리를 이해하고 응용할 수 있는 능력을 길렀습니다."
                         </p>
                     </div>
                 </div>
@@ -186,25 +186,11 @@
             },
             { 
                 id: 2, 
-                title: "프롬프트 엔지니어링: 질문의 기술", 
-                tags: ["LLM", "프롬프트", "CoT"], 
-                icon: "fa-comment-dots", 
-                color: "card-blue",
-                description: "효과적인 AI 협업을 위해 페르소나 설정 및 프롬프트 설계 전략을 실습했습니다.",
-                achievements: [
-                    { title: "페르소나 기법 적용", desc: "역할 부여를 통한 출력 품질 개선" },
-                    { title: "CoT 설계", desc: "단계별 사고 유도 프롬프트 작성" }
-                ],
-                tools: ["ChatGPT-4o", "Prompt Guide"],
-                category: "AI 소통 전략"
-            },
-            { 
-                id: 3, 
                 title: "공공 데이터를 활용한 문제 정의", 
                 tags: ["데이터분석", "사회문제", "KOSIS"], 
                 icon: "fa-magnifying-glass-chart", 
                 color: "card-emerald",
-                directLink: "./03/index.html", // 상단 버튼에 연결될 링크
+                directLink: "./03/index.html", 
                 description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 수치로 정의했습니다.",
                 achievements: [
                     { title: "문제 정의 역량", desc: "사회 문제를 데이터 기반의 구체적인 문제로 치환" },
@@ -212,6 +198,21 @@
                 ],
                 tools: ["KOSIS", "Data.go.kr", "Excel"],
                 category: "데이터 분석"
+            },
+            { 
+                id: 3, 
+                title: "실습3", 
+                tags: ["HTML", "CSS", "웹기술"], 
+                icon: "fa-code", 
+                color: "card-purple",
+                directLink: "./04/index.html", // 요청하신 이동 경로 추가
+                description: "웹기술의 이해에 대한 실습을 실행하였습니다",
+                achievements: [
+                    { title: "웹 구조 설계", desc: "HTML5를 활용한 웹 콘텐츠의 논리적 구조화 실습" },
+                    { title: "레이아웃 디자인", desc: "CSS3를 통한 반응형 디자인 및 스타일링 기법 적용" }
+                ],
+                tools: ["VS Code", "Web Browser"],
+                category: "웹 기술 실습"
             },
             { 
                 id: 4, 
@@ -252,24 +253,22 @@
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
 
-            // 상세 데이터 매핑
             document.getElementById('detail-task-id').innerText = `TASK ${String(project.id).padStart(2, '0')}`;
             document.getElementById('detail-title').innerText = project.title;
             document.getElementById('detail-description').innerText = project.description;
             document.getElementById('detail-category').innerText = project.category;
 
-            // 상단 이동 버튼 처리
             const topActionButton = document.getElementById('top-action-button');
             const topExternalLink = document.getElementById('top-external-link');
             
-            if (project.directLink && project.directLink.trim().length > 0) {
+            // 상단 이동 버튼 활성화 로직
+            if (project.directLink) {
                 topActionButton.classList.remove('hidden');
                 topExternalLink.href = project.directLink;
             } else {
                 topActionButton.classList.add('hidden');
             }
 
-            // 헤더 컬러 적용
             const dummy = document.createElement('div');
             dummy.className = project.color;
             document.body.appendChild(dummy);
@@ -277,7 +276,6 @@
             document.body.removeChild(dummy);
             document.getElementById('detail-header').style.backgroundColor = `rgb(${projectAccent})`;
 
-            // 태그 및 성과 목록 렌더링
             document.getElementById('detail-tags').innerHTML = project.tags.map(t => `<span class="px-2 py-1 rounded bg-white/20 text-[9px] font-bold uppercase">#${t}</span>`).join('');
             document.getElementById('detail-achievements').innerHTML = project.achievements.map(a => `
                 <div class="p-5 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex gap-4">
@@ -291,10 +289,8 @@
                 </div>
             `).join('');
 
-            // 도구 목록
             document.getElementById('detail-tools').innerHTML = (project.tools || []).map(t => `<span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-600 dark:text-slate-300">${t}</span>`).join('');
 
-            // 뷰 전환
             listView.classList.remove('view-active');
             listView.classList.add('view-hidden');
             detailView.classList.remove('view-hidden');
@@ -333,8 +329,8 @@
                         
                         <div class="flex items-center justify-between">
                             <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-blue-500/10 text-blue-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-database"></i></div>
-                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-chart-line"></i></div>
+                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-blue-500/10 text-blue-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-code"></i></div>
+                                <div class="w-8 h-8 rounded-full border-2 border-white dark:border-darkBg bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-[10px]"><i class="fa-solid fa-globe"></i></div>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
                                 <i class="fa-solid fa-arrow-right"></i>
