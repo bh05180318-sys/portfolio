@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나와 사회복지, 그리고 AI 스토리</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to right, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 154, 158, 0.2) 0%, rgba(254, 207, 239, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* 상세 화면 오버레이 */
+        .detail-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .detail-screen.active {
+            display: block;
+            transform: translateX(0);
+        }
+
+        .arrow-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 154, 158, 0.3);
+            color: #ff9a9e;
+            transition: all 0.3s ease;
+        }
+
+        .arrow-btn:hover {
+            background: #ff9a9e;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .arrow-btn-blue { border-color: rgba(59, 130, 246, 0.3); color: #3b82f6; }
+        .arrow-btn-blue:hover { background: #3b82f6; color: white; }
+
+        .arrow-btn-yellow { border-color: rgba(234, 179, 8, 0.3); color: #eab308; }
+        .arrow-btn-yellow:hover { background: #eab308; color: white; }
+
+        .arrow-btn-green { border-color: rgba(34, 197, 94, 0.3); color: #22c55e; }
+        .arrow-btn-green:hover { background: #22c55e; color: white; }
+
+        .arrow-btn-purple { border-color: rgba(168, 85, 247, 0.3); color: #a855f7; }
+        .arrow-btn-purple:hover { background: #a855f7; color: white; }
+
+        /* 비전 섹션 전용 액션 버튼 스타일 */
+        .vision-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .story-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #fef3c7;
+            color: #b45309;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .story-btn:hover { background-color: #fde68a; transform: scale(1.05); }
+
+        .bio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #ffedd5;
+            color: #9a3412;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .bio-btn:hover { background-color: #ffdbb2; transform: scale(1.05); }
+
+        /* 메모장 스타일 */
+        .memo-paper {
+            background-color: #fff9c4;
+            background-image: radial-gradient(#f0e68c 1px, transparent 1px);
+            background-size: 20px 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transform: rotate(-1deg);
+        }
+        
+        .memo-paper::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .memo-font {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        /* 아카데믹 카드 스타일 */
+        .academic-info-card {
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border-left: 4px solid #3b82f6;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800 overflow-x-hidden">
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center text-center p-6">
+        <div class="blob" style="top: 10%; left: 10%;"></div>
+        <div class="blob" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
+        
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+            나와 사회복지, 그리고 <br>
+            <span class="hero-gradient">세계를 연결하는 스토리</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
+            "나와 사회복지가 만나는 지점,"<br>
+            저의 이야기를 시작합니다.
+        </p>
+        <a href="#content" class="bg-orange-400 text-white px-8 py-3 rounded-full font-medium hover:bg-orange-500 transition-colors shadow-lg">
+            이야기 둘러보기
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main id="content" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Identity -->
+            <div class="glass-card p-8 rounded-3xl reveal flex flex-col justify-between h-full">
+                <div>
+                    <div class="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="user" class="text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">나는 어떤 사람인가?</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        대학교 3학년, 대학생활 속 나를 살펴보며
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-orange-400">#봉사 #학생회</span>
+                    <button onclick="openDetail('identity')" class="arrow-btn shadow-sm">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2: Academic -->
+            <div class="glass-card p-8 rounded-3xl reveal flex flex-col justify-between h-full">
+                <div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="book-open" class="text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">나의 전공은 무엇인가?</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        사회복지학은 인간의 존엄성과 삶의 질 향상을 위해, 소외된 이가 없는 사회를 설계하는 학문
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-blue-400">#사회복지학 #인간존엄</span>
+                    <button onclick="openDetail('academic')" class="arrow-btn arrow-btn-blue shadow-sm">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3: Synergy -->
+            <div class="glass-card p-8 rounded-3xl reveal flex flex-col justify-between h-full">
+                <div>
+                    <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">나와 전공 간 연결성</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        나의 관심사, 강점, 경험의 영향 
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-yellow-600">#관심사 #강점 #경험 #사회복지학과</span>
+                    <button onclick="openDetail('synergy')" class="arrow-btn arrow-btn-yellow shadow-sm">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 4: Vision -->
+            <div class="glass-card p-8 rounded-3xl reveal flex flex-col justify-between h-full">
+                <div>
+                    <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="globe" class="text-green-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">사회와 미래의 의미</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        2026년 초고령사회 진입과 함께 복지의 패러다임의 변화
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-green-500">#2026초고령사회 #복지</span>
+                    <button onclick="openDetail('vision')" class="arrow-btn arrow-btn-green shadow-sm">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 5: Future -->
+            <div class="glass-card p-8 rounded-3xl reveal flex flex-col justify-between h-full md:col-span-2 lg:col-span-1">
+                <div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="rocket" class="text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">내가 그리는 진로</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        개개인의 삶뿐만 아니라 지역사회 전체의 복지 수준을 높이는 사회복지사로 성장
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-purple-400">#노인사회복지사 </span>
+                    <button onclick="openDetail('future')" class="arrow-btn arrow-btn-purple shadow-sm">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 상세 화면 1: 나는 어떤 사람인가? -->
+    <div id="detail-identity" class="detail-screen">
+        <div class="max-w-5xl mx-auto px-6 py-20 relative text-left">
+            <button onclick="closeDetail('identity')" class="sticky top-0 float-right flex items-center gap-2 text-gray-400 hover:text-gray-800 transition-colors bg-white/80 backdrop-blur px-4 py-2 rounded-full z-10 shadow-sm">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> 돌아가기
+            </button>
+            <div class="clear-both pt-10">
+                <header class="mb-12">
+                    <span class="text-orange-500 font-bold text-sm uppercase mb-2 block">Core Identity</span>
+                    <h2 class="text-4xl md:text-5xl font-bold leading-tight">'김보현'이라는 사람</h2>
+                    <button class="bio-btn"><i data-lucide="history" class="w-4 h-4"></i> 나의 일대기 보기</button>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start mt-8">
+                    <div class="relative aspect-square bg-gray-100 rounded-3xl overflow-hidden border-4 border-white shadow-xl flex items-center justify-center group">
+                        <div class="text-center p-8">
+                            <i data-lucide="image" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                            <p class="text-gray-400 font-medium">여기에 사진을 추가하세요</p>
+                            <p class="text-xs text-gray-300 mt-2">나의 활동 모습 혹은 프로필</p>
+                        </div>
+                    </div>
+
+                    <div class="memo-paper p-8 rounded-lg min-h-[420px]">
+                        <h4 class="text-xl font-bold text-orange-800 mb-6 border-b border-orange-200 pb-2 flex items-center gap-2">
+                            <i data-lucide="edit-3" class="w-5 h-5"></i> Profile Memo
+                        </h4>
+                        <ul class="memo-font space-y-4">
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-400 mt-1">•</span>
+                                <span>부산대 사회복지학과 3학년</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-400 mt-1">•</span>
+                                <span>2025년 SO:WE 홍보부원 → 2026년 FINE 복지부장</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-400 mt-1">•</span>
+                                <span>학과봉사동아리 - 아동 안전 지킴이 프로그램 활동 보조</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-400 mt-1">•</span>
+                                <span>학과봉사동아리 - 금정구 지역사회문제해결 모델 디자인 사업 참여</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-400 mt-1">•</span>
+                                <span>노인봉사동아리 - 학대피해노인 재학대 예방 및 신고 접근성 향상을 위해 홍보 활동</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-16 space-y-6 text-lg text-gray-600 leading-relaxed max-w-3xl">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 화면 2: 나의 전공은 무엇인가? (업데이트됨) -->
+    <div id="detail-academic" class="detail-screen">
+        <div class="max-w-5xl mx-auto px-6 py-20 relative text-left">
+            <button onclick="closeDetail('academic')" class="sticky top-0 float-right flex items-center gap-2 text-gray-400 hover:text-gray-800 bg-white/80 backdrop-blur px-4 py-2 rounded-full z-10 shadow-sm">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> 돌아가기
+            </button>
+            <div class="clear-both pt-10">
+                <header class="mb-16">
+                    <span class="text-blue-500 font-bold text-sm uppercase mb-4 block tracking-widest">Academic Discipline</span>
+                    <h2 class="text-3xl md:text-5xl font-bold leading-tight text-gray-900 mb-6">
+                        "사회복지, <br class="hidden md:block">사람임이 한없이 자랑스러운 세상을 만들기 위해 함께 뛰는 것"
+                    </h2>
+                    <div class="h-1.5 w-24 bg-blue-500 rounded-full"></div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    <!-- 학과 정의 카드 -->
+                    <div class="academic-info-card">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 bg-blue-100 rounded-lg"><i data-lucide="search" class="text-blue-600 w-5 h-5"></i></div>
+                            <h4 class="text-xl font-bold text-gray-800">지식과 기술의 연구 및 적용</h4>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-[1.05rem]">
+                            사회가 변화함에 따라 개인과 집단 및 지역사회는 다양한 문제와 욕구를 직면하게 됩니다. 사회복지학과는 이들에 대하여 전문적인 개입을 통해 효과적으로 해결하기 위한 전문적인 사회서비스에 관한 지식과 기술을 연구합니다. 또한, 이를 통해 얻은 이론과 지식을 실제에 적용해보는 실습과정을 이수함으로써 유능한 사회복지사를 양성합니다.
+                        </p>
+                    </div>
+
+                    <!-- 정책 및 교육 목표 카드 -->
+                    <div class="academic-info-card" style="border-left-color: #60a5fa;">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 bg-blue-100 rounded-lg"><i data-lucide="target" class="text-blue-600 w-5 h-5"></i></div>
+                            <h4 class="text-xl font-bold text-gray-800">바람직한 정책 방향 모색</h4>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-[1.05rem]">
+                            우리나라에서 시행하고 있는 건강보험·국민연금·최저임금·산업재해보상보험·고용보험의 사회보장과 기초생활보장의 공공부조, 그리고 노인·아동·여성·가족·장애인복지 등에 관한 정책 및 제도·행정·법제를 연구합니다. 우리나라의 실정에 맞는 사회복지정책 및 제도의 바람직한 방향을 모색함으로써 공공·민간 복지 영역에서 활동하는 전문 실무자를 육성하는 데 교육목표를 두고 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-16 bg-blue-50 p-8 rounded-3xl border border-blue-100 flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="graduation-cap" class="text-blue-500 w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-lg font-bold text-blue-900 mb-2">미래를 향한 실천적 학문</h5>
+                        <p class="text-blue-800/70">이론적 토대 위에 실습의 깊이를 더하여, 복지 현장에서 즉각적으로 변화를 이끌어낼 수 있는 역량을 배양합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 화면 3: 경험과 전공의 시너지 -->
+    <div id="detail-synergy" class="detail-screen">
+        <div class="max-w-5xl mx-auto px-6 py-20 relative text-left">
+            <button onclick="closeDetail('synergy')" class="sticky top-0 float-right flex items-center gap-2 text-gray-400 hover:text-gray-800 bg-white/80 backdrop-blur px-4 py-2 rounded-full z-10">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> 돌아가기
+            </button>
+            <div class="clear-both pt-10">
+                <header class="mb-16">
+                    <span class="text-yellow-600 font-bold text-sm uppercase mb-2 block">Synergy Architecture</span>
+                    <h2 class="text-4xl md:text-5xl font-bold leading-tight">나의 이야기: 사회복지학과로의 발걸음</h2>
+                    <button class="story-btn"><i data-lucide="play-circle" class="w-4 h-4"></i> 스토리텔링 보기</button>
+                </header>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-[2rem] h-64 flex flex-col justify-center">
+                        <h4 class="font-bold text-xl text-yellow-600 mb-2">나의 관심사</h4>
+                        <p class="text-sm text-gray-500">데이터가 주는 명확한 패턴과 AI의 예측 능력에 매료되었습니다.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-[2rem] h-64 flex flex-col justify-center">
+                        <h4 class="font-bold text-xl text-orange-600 mb-2">나의 강점</h4>
+                        <p class="text-sm text-gray-500">현장의 문제를 논리적으로 분해하고 해결책을 도출합니다.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-[2rem] h-64 flex flex-col justify-center">
+                        <h4 class="font-bold text-xl text-blue-600 mb-2">나의 경험</h4>
+                        <p class="text-sm text-gray-500">부산 인구 데이터 분석을 통해 기술의 실천적 가치를 보았습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 화면 4: 사회와 미래의 의미 -->
+    <div id="detail-vision" class="detail-screen">
+        <div class="max-w-5xl mx-auto px-6 py-20 relative text-left">
+            <button onclick="closeDetail('vision')" class="sticky top-0 float-right flex items-center gap-2 text-gray-400 hover:text-gray-800 transition-colors bg-white/80 backdrop-blur px-4 py-2 rounded-full z-10 shadow-sm border border-gray-100">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> 돌아가기
+            </button>
+            
+            <div class="clear-both pt-10">
+                <header class="mb-12">
+                    <span class="text-green-600 font-bold text-sm tracking-widest uppercase mb-2 block">2026 Welfare Outlook</span>
+                    <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+                        초고령사회와 기술의 융합,<br>
+                        <span class="text-green-600">더 넓고 깊어진 사회복지의 가치</span>
+                    </h2>
+                    
+                    <div class="flex gap-4 mt-8">
+                        <button class="vision-action-btn bg-green-500 text-white hover:bg-green-600 shadow-md">
+                            <i data-lucide="bar-chart-2" class="w-5 h-5"></i> 인포그래픽 보기
+                        </button>
+                        <button class="vision-action-btn border-2 border-green-500 text-green-600 hover:bg-green-50">
+                            <i data-lucide="download" class="w-5 h-5"></i> 슬라이드 다운로드
+                        </button>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-green-50 p-8 rounded-[2rem] border border-green-100">
+                        <h4 class="font-bold text-xl mb-4 text-green-800 flex items-center gap-2">
+                            <i data-lucide="trending-up" class="w-5 h-5"></i> 일자리 전망
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            2026년 한국의 <strong>초고령사회</strong> 진입으로 사회복지사 수요는 폭발적으로 증가
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-[2rem] border border-gray-100">
+                        <h4 class="font-bold text-xl mb-4 text-gray-800 flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-5 h-5"></i> 디지털 돌봄
+                        </h4>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> IoT 센서 기반 안전 확인</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> AI 돌봄 로봇 및 스피커</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-8 rounded-[2rem] border border-blue-100">
+                        <h4 class="font-bold text-xl mb-4 text-blue-800 flex items-center gap-2">
+                            <i data-lucide="smile" class="w-5 h-5"></i> 처우 및 근로 여건
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">서울시 단일임금제 도입 등 점진적 개선 중. 월 평균 보수 315.7만 원(2022 기준)으로 상승세입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상세 화면 5: 내가 그리는 진로 -->
+    <div id="detail-future" class="detail-screen">
+        <div class="max-w-5xl mx-auto px-6 py-20 relative text-left">
+            <button onclick="closeDetail('future')" class="sticky top-0 float-right flex items-center gap-2 text-gray-400 hover:text-gray-800 bg-white/80 backdrop-blur px-4 py-2 rounded-full z-10">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> 돌아가기
+            </button>
+            <div class="clear-both pt-10">
+                <header class="mb-16">
+                    <span class="text-purple-600 font-bold text-sm uppercase mb-2 block">Career Roadmap</span>
+                    <h2 class="text-4xl md:text-5xl font-bold leading-tight">기술로 사람을 잇는 스마트 복지 전문가</h2>
+                </header>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+                        <p>데이터 기반의 정책 기획과 AI 돌봄 모델을 현장에 접목하여 사회복지의 효율성을 극대화하는 기획자가 되겠습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white/50 backdrop-blur-md border-t border-gray-200 py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-6">함께 세상을 더 따뜻하게 만들고 싶습니다.</h2>
+            <p class="text-sm text-gray-500">© 2024 AI Social Welfare Story. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 150) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        const openDetail = (type) => {
+            const detailScreen = document.getElementById(`detail-${type}`);
+            if (detailScreen) {
+                detailScreen.style.display = 'block';
+                setTimeout(() => {
+                    detailScreen.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }, 10);
+            }
+        };
+
+        const closeDetail = (type) => {
+            const detailScreen = document.getElementById(`detail-${type}`);
+            if (detailScreen) {
+                detailScreen.classList.remove('active');
+                setTimeout(() => {
+                    detailScreen.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 500);
+            }
+        };
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+</body>
+</html>
