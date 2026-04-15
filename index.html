@@ -71,7 +71,7 @@
 </head>
 <body class="bg-lightBg text-slate-800 dark:bg-darkBg dark:text-slate-200 selection:bg-blue-500/30">
 
-    <!-- 상단 내비게이션 -->
+    <!-- Navbar -->
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 px-6 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -88,7 +88,7 @@
         </div>
     </nav>
 
-    <!-- 메인 리스트 뷰 -->
+    <!-- Main List View -->
     <main id="list-view" class="view-section view-active pt-32 pb-20 px-6">
         <header class="max-w-5xl mx-auto text-center mb-20 relative">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
@@ -110,16 +110,16 @@
 
         <section class="max-w-7xl mx-auto mb-20">
             <div id="project-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- JavaScript renders cards here -->
+                <!-- Project cards go here -->
             </div>
         </section>
 
         <footer class="max-w-7xl mx-auto mt-20 text-center text-xs text-slate-400 dark:text-slate-600 pb-10">
-            &copy; 2024 Kim Bo-hyun. All Rights Reserved. Crafted with AI Literacy.
+            &copy; 2024 Kim Bo-hyun. All Rights Reserved.
         </footer>
     </main>
 
-    <!-- 작성자 소개 모달 -->
+    <!-- Author Modal -->
     <div id="author-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm opacity-0 invisible">
         <div id="author-modal-content" class="w-full max-w-lg bg-white dark:bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl transform scale-90 opacity-0 border border-slate-200 dark:border-white/10">
             <div class="h-32 bg-gradient-to-r from-blue-600 to-purple-600 relative">
@@ -134,23 +134,11 @@
                         <i class="fa-solid fa-user-graduate"></i>
                     </div>
                 </div>
-
                 <div class="mb-8">
                     <h4 class="text-3xl font-black text-slate-900 dark:text-white mb-1">김보현</h4>
                     <p class="text-blue-600 dark:text-blue-400 font-bold tracking-tight">AI융합교육원 | 202405187</p>
                 </div>
-
                 <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
-                            <i class="fa-solid fa-school"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-1">Affiliation</p>
-                            <p class="text-slate-700 dark:text-slate-300 font-medium">사회과학대학 학생</p>
-                        </div>
-                    </div>
-
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
                             <i class="fa-solid fa-envelope"></i>
@@ -160,32 +148,20 @@
                             <a href="mailto:killua7532@naver.com" class="text-slate-700 dark:text-slate-300 font-medium hover:text-blue-500 transition-colors underline decoration-blue-500/30 underline-offset-4">killua7532@naver.com</a>
                         </div>
                     </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 shrink-0">
-                            <i class="fa-solid fa-pen-nib"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-400 font-black uppercase tracking-widest mb-1">Introduction</p>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
-                                <span class="text-slate-900 dark:text-white font-semibold">AI리터러시의 이해</span> 수업을 통해 인간과 기술의 공존을 탐구하고 있습니다. 사회과학적 시선으로 데이터를 분석하고 문제를 해결하는 미래 인재를 꿈꿉니다.
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 상세 보기 섹션 -->
+    <!-- Detail View Section -->
     <main id="detail-view" class="view-section view-hidden pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto">
             
-            <!-- 상단 헤더 영역 -->
-            <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[300px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500 shadow-2xl">
+            <!-- Detail Header -->
+            <div id="detail-header" class="relative rounded-3xl overflow-hidden mb-12 min-h-[350px] flex flex-col justify-end p-8 md:p-12 text-white transition-colors duration-500 shadow-2xl">
                 <div id="detail-accent-bg" class="absolute inset-0 z-0 opacity-80"></div>
                 
-                <!-- 상단 결과물 보기 버튼 (추가됨) -->
+                <!-- Top Action Button -->
                 <div id="top-link-container" class="absolute top-8 right-8 z-20">
                     <a id="external-link-top" href="#" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/30 rounded-xl font-bold text-sm transition-all group">
                         <span>과제물 보기</span>
@@ -200,6 +176,7 @@
                 </div>
             </div>
 
+            <!-- Content Area -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div class="md:col-span-2 space-y-12">
                     <section>
@@ -222,7 +199,6 @@
                         <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">사용 도구</h4>
                         <div id="detail-tools" class="flex flex-wrap gap-2"></div>
                     </div>
-
                     <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10">
                         <h4 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">과제 유형</h4>
                         <p id="detail-category" class="font-bold text-slate-800 dark:text-slate-200"></p>
@@ -230,11 +206,14 @@
                 </div>
             </div>
 
-            <div id="bottom-action-container" class="hidden border-t border-slate-200 dark:border-white/10 pt-10">
-                <a id="external-link-bottom" href="#" class="flex items-center justify-center gap-3 w-full py-5 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transform hover:scale-[1.01] active:scale-[0.99] transition-all group">
-                    <span>결과물 상세 보기</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-sm opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+            <!-- Bottom Action Button (Fixed to bottom as requested) -->
+            <div id="bottom-action-container" class="mt-16 border-t border-slate-200 dark:border-white/10 pt-12">
+                <a id="external-link-bottom" href="#" class="flex items-center justify-center gap-4 w-full py-6 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-[2rem] font-black text-xl shadow-2xl shadow-blue-500/30 transform hover:scale-[1.02] active:scale-[0.98] transition-all group">
+                    <i class="fa-solid fa-rocket text-xl group-hover:animate-bounce"></i>
+                    <span>과제물 보기</span>
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                 </a>
+                <p class="text-center mt-4 text-sm text-slate-400">클릭하면 상세 과제물 페이지로 이동합니다.</p>
             </div>
         </div>
     </main>
@@ -292,7 +271,7 @@
                 tags: ["Midjourney", "DALL-E", "창의력"], 
                 icon: "fa-palette", 
                 color: "card-rose",
-                externalLink: "./05/index.html", // 요청된 링크 추가
+                externalLink: "./05/index.html", 
                 description: "AI를 활용하여 일관성 있는 캐릭터와 서사를 담은 이미지를 생성하고 시나리오를 구성했습니다.",
                 achievements: [
                     { title: "일관성 유지", desc: "동일 캐릭터를 여러 장면에서 유지하는 기법" },
@@ -307,8 +286,9 @@
         const detailView = document.getElementById('detail-view');
         const backBtn = document.getElementById('back-btn');
         const projectContainer = document.getElementById('project-container');
+        
         const bottomActionContainer = document.getElementById('bottom-action-container');
-        const externalLinkBtn = document.getElementById('external-link-bottom');
+        const externalLinkBottom = document.getElementById('external-link-bottom');
         const topLinkContainer = document.getElementById('top-link-container');
         const externalLinkTop = document.getElementById('external-link-top');
 
@@ -339,21 +319,24 @@
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
 
+            // Link buttons logic
             if (project.externalLink) {
                 bottomActionContainer.classList.remove('hidden');
                 topLinkContainer.classList.remove('hidden');
-                externalLinkBtn.href = project.externalLink;
+                externalLinkBottom.href = project.externalLink;
                 externalLinkTop.href = project.externalLink;
             } else {
                 bottomActionContainer.classList.add('hidden');
                 topLinkContainer.classList.add('hidden');
             }
 
+            // Fill content
             document.getElementById('detail-task-id').innerText = `TASK ${String(project.id).padStart(2, '0')}`;
             document.getElementById('detail-title').innerText = project.title;
             document.getElementById('detail-description').innerText = project.description;
             document.getElementById('detail-category').innerText = project.category;
 
+            // Set accent color
             const dummy = document.createElement('div');
             dummy.className = project.color;
             document.body.appendChild(dummy);
@@ -361,6 +344,7 @@
             document.body.removeChild(dummy);
             document.getElementById('detail-header').style.backgroundColor = `rgb(${projectAccent})`;
 
+            // Tags & Achievements
             document.getElementById('detail-tags').innerHTML = project.tags.map(t => `<span class="px-2 py-1 rounded bg-white/20 text-[9px] font-bold uppercase">#${t}</span>`).join('');
             document.getElementById('detail-achievements').innerHTML = project.achievements.map(a => `
                 <div class="p-5 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex gap-4">
@@ -376,6 +360,7 @@
 
             document.getElementById('detail-tools').innerHTML = project.tools.map(t => `<span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/10 text-[10px] font-bold text-slate-600 dark:text-slate-300">${t}</span>`).join('');
 
+            // Transition
             listView.classList.remove('view-active');
             listView.classList.add('view-hidden');
             detailView.classList.remove('view-hidden');
@@ -424,6 +409,7 @@
         renderCards();
         backBtn.onclick = showList;
 
+        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const html = document.documentElement;
