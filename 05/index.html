@@ -12,7 +12,7 @@
             font-family: 'Noto Sans KR', sans-serif;
             background: #fdfbf7;
             overflow-x: hidden;
-            /* 클릭 효과를 위해 선택 방지 (옵션) */
+            /* 클릭 효과를 위해 선택 방지 */
             user-select: none;
         }
         section {
@@ -268,7 +268,7 @@
                     </div>
                     <h2 class="text-3xl md:text-5xl font-bold mb-6 text-indigo-600">Q3. 나의 강점과 전공의 연결고리는?</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                     <div class="bg-white/50 p-8 rounded-3xl border border-indigo-50 shadow-sm">
                         <h4 class="text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
                             <i class="fas fa-smile-beam"></i> 탁월한 친화력과 봉사 경험
@@ -289,6 +289,13 @@
                             이러한 개인적 배경은 제가 <span class="text-indigo-600 font-bold">노인복지 분야</span>에 깊은 관심을 가지고 전문성을 쌓아가는 강력한 동기가 됩니다.
                         </p>
                     </div>
+                </div>
+                <!-- 스토리텔링 버튼 추가 -->
+                <div class="text-center">
+                    <a href="https://gemini.google.com/share/078c3918a38a" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all transform hover:scale-105 shadow-xl shadow-indigo-100">
+                        <i class="fas fa-book-open text-xl"></i>
+                        스토리텔링 보기
+                    </a>
                 </div>
             </div>
         </div>
@@ -366,14 +373,13 @@
 
         // 클릭 시 반짝임 효과 생성 함수
         function createSparkle(e) {
-            const sparkleCount = 8; // 한 번 클릭 시 생성될 파티클 수
+            const sparkleCount = 8;
             const colors = ['#4f46e5', '#818cf8', '#c7d2fe', '#f472b6', '#fb7185'];
             
             for (let i = 0; i < sparkleCount; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
                 
-                // 랜덤한 방향 설정
                 const dx = (Math.random() - 0.5) * 200 + 'px';
                 const dy = (Math.random() - 0.5) * 200 + 'px';
                 const color = colors[Math.floor(Math.random() * colors.length)];
@@ -387,14 +393,12 @@
                 
                 document.body.appendChild(sparkle);
                 
-                // 애니메이션 종료 후 제거
                 setTimeout(() => {
                     sparkle.remove();
                 }, 800);
             }
         }
 
-        // 전체 문서에 클릭 이벤트 리스너 추가
         document.addEventListener('mousedown', createSparkle);
 
         function openVideo() {
