@@ -36,11 +36,12 @@
             transform: translateY(-8px);
         }
 
-        .card-blue { --accent: 59, 130, 246; --bg-soft: 239, 246, 255; --bg-dark: 30, 58, 138; }
-        .card-purple { --accent: 147, 51, 234; --bg-soft: 250, 245, 255; --bg-dark: 88, 28, 135; }
-        .card-emerald { --accent: 16, 185, 129; --bg-soft: 236, 253, 245; --bg-dark: 6, 78, 59; }
-        .card-rose { --accent: 244, 63, 94; --bg-soft: 255, 241, 242; --bg-dark: 136, 19, 55; }
-        .card-amber { --accent: 245, 158, 11; --bg-soft: 255, 251, 235; --bg-dark: 120, 53, 15; }
+        .card-blue { --accent: 59, 130, 246; }
+        .card-purple { --accent: 147, 51, 234; }
+        .card-emerald { --accent: 16, 185, 129; }
+        .card-rose { --accent: 244, 63, 94; }
+        .card-amber { --accent: 245, 158, 11; }
+        .card-indigo { --accent: 79, 70, 229; }
 
         .project-card:hover {
             box-shadow: 0 20px 40px -10px rgba(var(--accent), 0.2);
@@ -110,7 +111,7 @@
 
         <section class="max-w-7xl mx-auto mb-20">
             <div id="project-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project cards go here -->
+                <!-- Project cards injected by JS -->
             </div>
         </section>
 
@@ -164,7 +165,7 @@
                 <!-- Top Action Button -->
                 <div id="top-link-container" class="absolute top-8 right-8 z-20">
                     <a id="external-link-top" href="#" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/30 rounded-xl font-bold text-sm transition-all group">
-                        <span>과제물 보기</span>
+                        <span id="external-link-top-text">과제물 보기</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
                     </a>
                 </div>
@@ -206,11 +207,11 @@
                 </div>
             </div>
 
-            <!-- Bottom Action Button (Fixed to bottom as requested) -->
+            <!-- Bottom Action Button -->
             <div id="bottom-action-container" class="mt-16 border-t border-slate-200 dark:border-white/10 pt-12">
                 <a id="external-link-bottom" href="#" class="flex items-center justify-center gap-4 w-full py-6 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-[2rem] font-black text-xl shadow-2xl shadow-blue-500/30 transform hover:scale-[1.02] active:scale-[0.98] transition-all group">
                     <i class="fa-solid fa-rocket text-xl group-hover:animate-bounce"></i>
-                    <span>과제물 보기</span>
+                    <span id="external-link-bottom-text">과제물 보기</span>
                     <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                 </a>
                 <p class="text-center mt-4 text-sm text-slate-400">클릭하면 상세 과제물 페이지로 이동합니다.</p>
@@ -279,6 +280,22 @@
                 ],
                 tools: ["Midjourney", "DALL-E 3"],
                 category: "멀티모달 실습"
+            },
+            { 
+                id: 5, 
+                title: "데이터 분석", 
+                tags: ["파이썬", "판다스", "시각화"], 
+                icon: "fa-chart-pie", 
+                color: "card-indigo",
+                externalLink: "./06/index.html", 
+                buttonLabel: "과제물 보기_1", // 전용 라벨 추가
+                description: "Python 라이브러리를 활용하여 대규모 데이터셋을 정제하고, 유의미한 상관관계를 도출하여 시각화 보고서를 작성했습니다.",
+                achievements: [
+                    { title: "데이터 정제", desc: "결측치 처리 및 이상치 제거를 통한 데이터 품질 개선" },
+                    { title: "인사이트 도출", desc: "상관계수 분석을 통한 핵심 변수 간의 관계 규명" }
+                ],
+                tools: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+                category: "심화 데이터 분석"
             }
         ];
 
@@ -289,8 +306,10 @@
         
         const bottomActionContainer = document.getElementById('bottom-action-container');
         const externalLinkBottom = document.getElementById('external-link-bottom');
+        const externalLinkBottomText = document.getElementById('external-link-bottom-text');
         const topLinkContainer = document.getElementById('top-link-container');
         const externalLinkTop = document.getElementById('external-link-top');
+        const externalLinkTopText = document.getElementById('external-link-top-text');
 
         const authorModal = document.getElementById('author-modal');
         const authorModalContent = document.getElementById('author-modal-content');
@@ -320,11 +339,14 @@
             if (!project) return;
 
             // Link buttons logic
+            const btnText = project.buttonLabel || "과제물 보기";
             if (project.externalLink) {
                 bottomActionContainer.classList.remove('hidden');
                 topLinkContainer.classList.remove('hidden');
                 externalLinkBottom.href = project.externalLink;
                 externalLinkTop.href = project.externalLink;
+                externalLinkBottomText.innerText = btnText;
+                externalLinkTopText.innerText = btnText;
             } else {
                 bottomActionContainer.classList.add('hidden');
                 topLinkContainer.classList.add('hidden');
@@ -409,7 +431,6 @@
         renderCards();
         backBtn.onclick = showList;
 
-        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const html = document.documentElement;
