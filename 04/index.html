@@ -48,9 +48,21 @@
             background: #3b82f6;
         }
 
-        /* Modal Overlay Animation */
+        /* Modal Animation */
         .modal-overlay {
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
         }
     </style>
 </head>
@@ -77,302 +89,170 @@
             웹 표준의 변천사와<br>기술적 지속 가능성
         </h1>
         <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-8">
-            1989년의 '정보 메시'에서 2026년의 'AI-First' 에코시스템까지,<br>
-            우리가 사용하는 웹 기술의 본질과 미래 전략을 분석합니다.
+            1989년의 '정보 메시'부터 2026년의 'AI-First' 에코시스템까지,<br>
+            현대 웹 기술의 본질과 미래 전략을 집약한 가이드입니다.
         </p>
         
         <!-- Action Buttons -->
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-3">
             <!-- Infographic Button -->
-            <button id="openModal" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full shadow-lg shadow-blue-500/30 transition-all active:scale-95">
+            <button onclick="toggleModal('infographicModal', true)" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full shadow-lg shadow-blue-500/30 transition-all active:scale-95">
                 <i data-lucide="image" class="w-5 h-5"></i>
                 인포그래픽 보기
             </button>
             
             <!-- PDF Download Button -->
-            <a href="PPT.04.pdf" download="웹_표준_변천사_전략_분석.pdf" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-full shadow-sm transition-all active:scale-95">
-                <i data-lucide="download-cloud" class="w-5 h-5 text-blue-500"></i>
+            <a href="PPT.04.pdf" download="웹_표준_변천사_보고서.pdf" class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-full shadow-sm transition-all active:scale-95">
+                <i data-lucide="file-text" class="w-5 h-5 text-blue-500"></i>
                 보고서 PDF 다운로드
             </a>
 
             <!-- Video Watch Button -->
-            <button id="openVideoModal" class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full shadow-lg shadow-red-500/30 transition-all active:scale-95">
-                <i data-lucide="play-circle" class="w-5 h-5"></i>
+            <button onclick="toggleModal('videoModal', true)" class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full shadow-lg shadow-red-500/30 transition-all active:scale-95">
+                <i data-lucide="play" class="w-5 h-5"></i>
                 해설 영상 시청
             </button>
         </div>
     </header>
 
     <!-- Modal for Infographic -->
-    <div id="infographicModal" class="modal-overlay fixed inset-0 z-[60] flex items-center justify-center bg-black/80 invisible opacity-0 p-4 backdrop-blur-sm">
-        <button id="closeModal" class="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <div class="max-w-5xl w-full max-h-[90vh] overflow-auto rounded-xl shadow-2xl">
+    <div id="infographicModal" class="modal-overlay fixed inset-0 z-[60] bg-black/80 invisible opacity-0 p-4 backdrop-blur-sm">
+        <div class="absolute inset-0" onclick="toggleModal('infographicModal', false)"></div>
+        <div class="modal-content relative max-w-5xl w-full max-h-[90vh] overflow-auto rounded-xl shadow-2xl bg-white dark:bg-gray-900">
+            <div class="p-4 flex justify-between items-center border-b dark:border-gray-800">
+                <h3 class="font-bold">기술 전략 인포그래픽</h3>
+                <button onclick="toggleModal('infographicModal', false)" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
             <img src="img.04.png" alt="웹 기술 인포그래픽" class="w-full h-auto block" onerror="this.src='https://via.placeholder.com/1200x800?text=Infographic+Image+Not+Found'">
         </div>
     </div>
 
     <!-- Modal for Video -->
-    <div id="videoModal" class="modal-overlay fixed inset-0 z-[60] flex items-center justify-center bg-black/80 invisible opacity-0 p-4 backdrop-blur-sm">
-        <button id="closeVideoModal" class="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <div class="max-w-4xl w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
-            <video id="guideVideo" controls class="w-full h-full">
+    <div id="videoModal" class="modal-overlay fixed inset-0 z-[60] bg-black/80 invisible opacity-0 p-4 backdrop-blur-sm">
+        <div class="absolute inset-0" onclick="toggleModal('videoModal', false)"></div>
+        <div class="modal-content relative max-w-4xl w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
+            <button onclick="toggleModal('videoModal', false)" class="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <video id="player" controls class="w-full h-full">
                 <source src="mp4.04_50%.mp4" type="video/mp4">
-                브라우저가 비디오 태그를 지원하지 않습니다.
+                브라우저가 비디오 재생을 지원하지 않습니다.
             </video>
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto px-4 pb-20 space-y-24">
-        
-        <!-- Section 1: Origins -->
-        <section id="origins" class="space-y-8">
+    <main class="max-w-4xl mx-auto px-4 pb-20 space-y-20">
+        <!-- Section: Content Snippet -->
+        <section class="space-y-6">
             <div class="flex items-center gap-3">
                 <div class="bg-blue-100 dark:bg-blue-900 p-2 rounded-lg">
-                    <i data-lucide="anchor" class="text-blue-600 dark:text-blue-300"></i>
+                    <i data-lucide="book-open" class="text-blue-600 dark:text-blue-300"></i>
                 </div>
-                <h2 class="text-2xl font-bold">1. 웹의 기원과 아키텍처</h2>
+                <h2 class="text-2xl font-bold">전략적 분석 요약</h2>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 card-transition">
-                    <h3 class="font-bold text-blue-500 mb-2">웹의 3대 핵심 요소</h3>
-                    <ul class="space-y-3">
-                        <li class="flex gap-2"><strong>URL:</strong> 식별 (자원의 위치)</li>
-                        <li class="flex gap-2"><strong>HTML:</strong> 표현 (구조와 내용)</li>
-                        <li class="flex gap-2"><strong>HTTP:</strong> 전송 (통신 프로토콜)</li>
-                    </ul>
-                </div>
-                <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 card-transition">
-                    <h3 class="font-bold text-green-500 mb-2">3-Tier 구조 (현대 표준)</h3>
-                    <div class="text-sm space-y-2">
-                        <div class="flex justify-between border-b pb-1 dark:border-gray-700"><span>Presentation</span> <span class="text-gray-500 italic">Front-end</span></div>
-                        <div class="flex justify-between border-b pb-1 dark:border-gray-700"><span>Application</span> <span class="text-gray-500 italic">WAS/Logic</span></div>
-                        <div class="flex justify-between"><span>Data</span> <span class="text-gray-500 italic">DB/Storage</span></div>
-                    </div>
-                </div>
-            </div>
-            <p class="text-gray-600 dark:text-gray-400 italic text-sm">
-                * Layer(논리적 격리)와 Tier(물리적 분리)를 구분하는 것이 아키텍처 설계의 핵심입니다.
-            </p>
-        </section>
-
-        <!-- Section 2: Browser War -->
-        <section id="standards" class="space-y-8">
-            <div class="flex items-center gap-3">
-                <div class="bg-red-100 dark:bg-red-900 p-2 rounded-lg">
-                    <i data-lucide="swords" class="text-red-600 dark:text-red-300"></i>
-                </div>
-                <h2 class="text-2xl font-bold">2. 브라우저 전쟁과 표준화</h2>
-            </div>
-
-            <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-3 pl-8 space-y-12">
-                <div class="relative timeline-dot">
-                    <h4 class="font-bold text-lg">90년대 후반: 파편화의 시대</h4>
-                    <p class="text-gray-600 dark:text-gray-400">넷스케이프 vs IE. 독자 태그 경쟁으로 개발자들의 고통이 극에 달했던 시기.</p>
-                </div>
-                <div class="relative timeline-dot">
-                    <h4 class="font-bold text-lg text-red-500">W3C의 패착 (XHTML)</h4>
-                    <p class="text-gray-600 dark:text-gray-400">하위 호환성을 무시한 엄격한 구조화 시도로 시장에서 외면받음.</p>
-                </div>
-                <div class="relative timeline-dot">
-                    <h4 class="font-bold text-lg text-blue-500">WHATWG의 승리 (Living Standard)</h4>
-                    <p class="text-gray-600 dark:text-gray-400">실용주의와 '작동하는 코드' 중심으로 HTML5 주도권 확보 (2019년 사양 제정권 통합).</p>
-                </div>
+            <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p>
+                    현대 웹 아키텍처는 정보의 무결성과 확장성을 보장하기 위해 계층형 구조로 진화해 왔습니다. 
+                    수석 아키텍트가 주목해야 할 핵심은 <strong>계층(Layer)</strong>과 <strong>층(Tier)</strong>의 명확한 구분입니다. 
+                    3-계층 구조(3-tier)는 각 계층을 물리적으로 독립시켜 시스템의 안정성을 극대화합니다.
+                </p>
             </div>
         </section>
 
-        <!-- Section 3: Protocol Evolution -->
-        <section id="protocols" class="space-y-8">
-            <div class="flex items-center gap-3">
-                <div class="bg-purple-100 dark:bg-purple-900 p-2 rounded-lg">
-                    <i data-lucide="zap" class="text-purple-600 dark:text-purple-300"></i>
-                </div>
-                <h2 class="text-2xl font-bold">3. 통신 프로토콜의 진화</h2>
+        <!-- Feature Grid -->
+        <section class="grid md:grid-cols-3 gap-6">
+            <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 card-transition">
+                <i data-lucide="layers" class="text-blue-500 mb-4"></i>
+                <h3 class="font-bold mb-2">계층 분리</h3>
+                <p class="text-sm text-gray-500">논리적 Layer와 물리적 Tier 구분을 통한 유지보수성 확보</p>
             </div>
-
-            <div class="space-y-4">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <button onclick="showProtocol('h1')" class="protocol-btn flex-1 p-4 rounded-xl border-2 border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-left transition-all">
-                        <span class="block font-bold">HTTP/1.1</span>
-                        <span class="text-xs opacity-70">텍스트 기반 / HoL 블로킹</span>
-                    </button>
-                    <button onclick="showProtocol('h2')" class="protocol-btn flex-1 p-4 rounded-xl border-2 border-transparent bg-white dark:bg-gray-800 text-left transition-all">
-                        <span class="block font-bold">HTTP/2</span>
-                        <span class="text-xs opacity-70">멀티플렉싱 / 바이너리 프레임</span>
-                    </button>
-                    <button onclick="showProtocol('h3')" class="protocol-btn flex-1 p-4 rounded-xl border-2 border-transparent bg-white dark:bg-gray-800 text-left transition-all">
-                        <span class="block font-bold">HTTP/3</span>
-                        <span class="text-xs opacity-70">QUIC (UDP 기반) / 고성능</span>
-                    </button>
-                </div>
-                <div id="protocolDesc" class="p-6 bg-gray-100 dark:bg-gray-800 rounded-2xl min-h-[100px]">
-                    HTTP/1.1은 한 번에 하나의 요청만 처리할 수 있어 줄서기 문제(Head-of-Line Blocking)가 발생했습니다.
-                </div>
+            <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 card-transition">
+                <i data-lucide="shield-check" class="text-green-500 mb-4"></i>
+                <h3 class="font-bold mb-2">보안 내재화</h3>
+                <p class="text-sm text-gray-500">서버 컴포넌트 활용을 통한 클라이언트 데이터 노출 최소화</p>
             </div>
-        </section>
-
-        <!-- Section 4: 2026 Future Strategy -->
-        <section id="future" class="p-8 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-xl">
-            <div class="flex items-center gap-3 mb-6">
-                <i data-lucide="trending-up" class="w-8 h-8"></i>
-                <h2 class="text-3xl font-bold">2026 웹 트렌드 8선</h2>
+            <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 card-transition">
+                <i data-lucide="zap" class="text-yellow-500 mb-4"></i>
+                <h3 class="font-bold mb-2">성능 최적화</h3>
+                <p class="text-sm text-gray-500">HTTP/3 및 엣지 컴퓨팅을 활용한 밀리초 단위 응답 구현</p>
             </div>
-            
-            <div class="grid sm:grid-cols-2 gap-4 text-sm">
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">1</span>
-                    <div><strong>AI-First:</strong> AI가 코드를 짜고 개발자는 설계에 집중합니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">2</span>
-                    <div><strong>메타프레임워크:</strong> Next.js 같은 도구가 기본이 됩니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">3</span>
-                    <div><strong>에지 컴퓨팅:</strong> 사용자 바로 옆에서 데이터를 처리합니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">4</span>
-                    <div><strong>현대적 CSS:</strong> JS 대신 브라우저 엔진이 UI를 그립니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">5</span>
-                    <div><strong>보안 내재화:</strong> 서버 컴포넌트로 데이터 노출을 줄입니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">6</span>
-                    <div><strong>INP 최적화:</strong> '클릭 후 반응' 속도가 가장 중요해집니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">7</span>
-                    <div><strong>TypeScript:</strong> AI 협업을 위한 필수 언어로 정착합니다.</div>
-                </div>
-                <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex items-start gap-3">
-                    <span class="bg-white text-indigo-600 rounded-full w-5 h-5 flex items-center justify-center font-bold text-xs shrink-0">8</span>
-                    <div><strong>TanStack:</strong> 프레임워크에 얽매이지 않는 로직이 확산됩니다.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final Recommendation -->
-        <section class="text-center space-y-6">
-            <h2 class="text-2xl font-bold">수석 아키텍트의 권고</h2>
-            <div class="inline-block p-1 rounded-full bg-gray-200 dark:bg-gray-800">
-                <div class="flex gap-4 px-6 py-2">
-                    <div class="flex items-center gap-2 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> 표준 기반 선택</div>
-                    <div class="flex items-center gap-2 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> 네이티브 기능 우선</div>
-                    <div class="flex items-center gap-2 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> AI 협업 역량</div>
-                </div>
-            </div>
-            <p class="max-w-xl mx-auto text-gray-500">
-                웹의 역사는 독점과 폐쇄를 넘어 개방성을 확보하기 위한 투쟁이었습니다. 
-                브라우저 순정 기능을 활용해 지속 가능한 디지털 자산을 구축하십시오.
-            </p>
         </section>
     </main>
 
     <footer class="py-12 border-t border-gray-200 dark:border-gray-800 text-center text-gray-400 text-sm">
-        <p>© 2024 Web Technology Insight. Based on Strategic Analysis Report.</p>
+        <p>© 2026 Web Architecture Insight. All rights reserved.</p>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
+        // Initialize Icons
         lucide.createIcons();
 
-        // Theme Toggle Logic
-        const body = document.body;
-        const themeBtn = document.getElementById('themeToggle');
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
-
-        themeBtn.addEventListener('click', () => {
-            if (body.classList.contains('light')) {
-                body.classList.replace('light', 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isLight = document.body.classList.contains('light');
+            if (isLight) {
+                document.body.classList.replace('light', 'dark');
                 sunIcon.classList.add('hidden');
                 moonIcon.classList.remove('hidden');
             } else {
-                body.classList.replace('dark', 'light');
+                document.body.classList.replace('dark', 'light');
                 sunIcon.classList.remove('hidden');
                 moonIcon.classList.add('hidden');
             }
         });
 
-        // Infographic Modal Logic
-        const infoModal = document.getElementById('infographicModal');
-        const openInfoBtn = document.getElementById('openModal');
-        const closeInfoBtn = document.getElementById('closeModal');
+        // Modal Functionality
+        const videoPlayer = document.getElementById('player');
+        let playPromise = null;
 
-        openInfoBtn.addEventListener('click', () => {
-            infoModal.classList.remove('invisible', 'opacity-0');
-            infoModal.classList.add('visible', 'opacity-100');
-            body.style.overflow = 'hidden';
-        });
-
-        closeInfoBtn.addEventListener('click', () => {
-            infoModal.classList.add('invisible', 'opacity-0');
-            infoModal.classList.remove('visible', 'opacity-100');
-            body.style.overflow = '';
-        });
-
-        // Video Modal Logic
-        const videoModal = document.getElementById('videoModal');
-        const openVideoBtn = document.getElementById('openVideoModal');
-        const closeVideoBtn = document.getElementById('closeVideoModal');
-        const guideVideo = document.getElementById('guideVideo');
-
-        openVideoBtn.addEventListener('click', () => {
-            videoModal.classList.remove('invisible', 'opacity-0');
-            videoModal.classList.add('visible', 'opacity-100');
-            body.style.overflow = 'hidden';
-            guideVideo.play();
-        });
-
-        closeVideoBtn.addEventListener('click', () => {
-            videoModal.classList.add('invisible', 'opacity-0');
-            videoModal.classList.remove('visible', 'opacity-100');
-            body.style.overflow = '';
-            guideVideo.pause();
-            guideVideo.currentTime = 0;
-        });
-
-        // Close modals when clicking outside
-        [infoModal, videoModal].forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    if (modal.id === 'infographicModal') closeInfoBtn.click();
-                    else closeVideoBtn.click();
+        function toggleModal(id, show) {
+            const modal = document.getElementById(id);
+            if (show) {
+                modal.classList.remove('invisible', 'opacity-0');
+                modal.classList.add('visible', 'opacity-100', 'active');
+                document.body.style.overflow = 'hidden';
+                
+                if (id === 'videoModal') {
+                    // play()는 Promise를 반환하므로 이를 추적합니다.
+                    playPromise = videoPlayer.play();
                 }
-            });
-        });
-
-        // Protocol Info Toggle
-        const protocols = {
-            h1: "HTTP/1.1은 텍스트 기반으로 한 번에 하나의 요청만 처리할 수 있어, 패킷 손실이나 대기 시간이 길어지면 전체 성능이 저하되는 HoL 블로킹 문제가 있었습니다.",
-            h2: "HTTP/2는 바이너리 프레이밍과 멀티플렉싱을 도입했습니다. 하나의 연결에서 여러 요청과 응답을 동시에 주고받을 수 있어 처리량이 혁신적으로 향상되었습니다.",
-            h3: "HTTP/3는 TCP 대신 UDP 기반의 QUIC 프로토콜을 사용합니다. 패킷 손실이 발생해도 다른 데이터 전송에 영향을 주지 않아 모바일 및 고지연 네트워크에서 압도적입니다."
-        };
-
-        function showProtocol(key) {
-            const desc = document.getElementById('protocolDesc');
-            const btns = document.querySelectorAll('.protocol-btn');
-            
-            desc.style.opacity = 0;
-            setTimeout(() => {
-                desc.textContent = protocols[key];
-                desc.style.opacity = 1;
-            }, 150);
-
-            btns.forEach(btn => {
-                btn.classList.remove('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/30');
-                btn.classList.add('border-transparent', 'bg-white', 'dark:bg-gray-800');
-            });
-            event.currentTarget.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/30');
-            event.currentTarget.classList.remove('border-transparent', 'bg-white', 'dark:bg-gray-800');
+            } else {
+                modal.classList.add('invisible', 'opacity-0');
+                modal.classList.remove('visible', 'opacity-100', 'active');
+                document.body.style.overflow = '';
+                
+                if (id === 'videoModal') {
+                    if (playPromise !== null) {
+                        playPromise.then(() => {
+                            // play()가 완료된 후에만 pause()를 호출합니다.
+                            videoPlayer.pause();
+                            videoPlayer.currentTime = 0;
+                        }).catch(error => {
+                            // 자동 재생 정책 등으로 인한 에러 처리
+                            console.error("Video play was prevented:", error);
+                        });
+                        playPromise = null;
+                    } else {
+                        videoPlayer.pause();
+                        videoPlayer.currentTime = 0;
+                    }
+                }
+            }
         }
+
+        // Close on Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                toggleModal('infographicModal', false);
+                toggleModal('videoModal', false);
+            }
+        });
     </script>
 </body>
 </html>
