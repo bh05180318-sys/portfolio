@@ -42,6 +42,7 @@
         .card-rose { --accent: 244, 63, 94; }
         .card-amber { --accent: 245, 158, 11; }
         .card-indigo { --accent: 79, 70, 229; }
+        .card-cyan { --accent: 6, 182, 212; }
 
         .project-card:hover {
             box-shadow: 0 20px 40px -10px rgba(var(--accent), 0.2);
@@ -200,7 +201,7 @@
             </div>
 
             <!-- Bottom Action Buttons Container -->
-            <div id="bottom-action-container" class="mt-16 border-t border-slate-200 dark:border-white/10 pt-12 space-y-4">
+            <div id="bottom-action-container" class="mt-16 border-t border-slate-200 dark:border-white/10 pt-12 flex flex-col gap-4">
                 <!-- Buttons will be injected here -->
             </div>
             <p id="bottom-helper-text" class="text-center mt-6 text-sm text-slate-400">클릭하면 상세 과제물 페이지로 이동합니다.</p>
@@ -271,7 +272,7 @@
             },
             { 
                 id: 5, 
-                title: "데이터 분석", 
+                title: "데이터 분석1", 
                 tags: ["파이썬", "판다스", "시각화"], 
                 icon: "fa-chart-pie", 
                 color: "card-indigo",
@@ -279,12 +280,29 @@
                     { label: "과제물 보기_1", url: "./06/index.html" },
                     { label: "과제물 보기_2", url: "./07/index.html" }
                 ], 
-                description: "Python 라이브러리를 활용하여 대규모 데이터셋을 정제하고, 유의미한 상관관계를 도출하여 시각화 보고서를 작성했습니다.",
+                description: "Python 라이브러리를 활용하여 대규모 데이터셋을 정제하고 기본적인 통계 분석을 수행했습니다.",
                 achievements: [
                     { title: "데이터 정제", desc: "결측치 처리 및 이상치 제거를 통한 데이터 품질 개선" },
-                    { title: "인사이트 도출", desc: "상관계수 분석을 통한 핵심 변수 간의 관계 규명" }
+                    { title: "기초 통계 분석", desc: "데이터 분포와 기초적인 통계량 도출" }
                 ],
-                tools: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+                tools: ["Python", "Pandas", "Matplotlib"],
+                category: "심화 데이터 분석"
+            },
+            { 
+                id: 6, 
+                title: "데이터 분석2", 
+                tags: ["머신러닝", "예측모델", "고급시각화"], 
+                icon: "fa-brain", 
+                color: "card-cyan",
+                links: [
+                    { label: "과제물 보기_2", url: "./08/index.html" }
+                ], 
+                description: "복합적인 데이터 상관관계를 분석하고 예측 모델의 기초를 설계하여 인사이트를 도출했습니다.",
+                achievements: [
+                    { title: "인사이트 도출", desc: "상관계수 분석을 통한 핵심 변수 간의 관계 규명" },
+                    { title: "고급 시각화", desc: "Seaborn을 활용한 다차원 관계 시각화" }
+                ],
+                tools: ["Python", "Scikit-learn", "Seaborn"],
                 category: "심화 데이터 분석"
             }
         ];
@@ -331,7 +349,12 @@
                 project.links.forEach((link, index) => {
                     const btn = document.createElement('a');
                     btn.href = link.url;
-                    btn.className = `flex items-center justify-center gap-4 w-full py-5 px-8 bg-gradient-to-r ${index === 0 ? 'from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800' : 'from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800'} text-white rounded-[2rem] font-black text-lg shadow-xl transform hover:scale-[1.01] active:scale-[0.99] transition-all group`;
+                    // 버튼별 그라데이션 차별화
+                    const gradientClass = index === 0 
+                        ? 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
+                        : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
+                    
+                    btn.className = `flex items-center justify-center gap-4 w-full py-5 px-8 bg-gradient-to-r ${gradientClass} text-white rounded-[2rem] font-black text-lg shadow-xl transform hover:scale-[1.01] active:scale-[0.99] transition-all group`;
                     btn.innerHTML = `
                         <i class="fa-solid ${index === 0 ? 'fa-rocket' : 'fa-lightbulb'} text-lg group-hover:animate-bounce"></i>
                         <span>${link.label}</span>
