@@ -6,6 +6,8 @@
     <title>Dynamic Busan - New Era of Tourism</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 한글 PDF 렌더링을 위해 html2pdf 라이브러리로 변경 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
         
@@ -63,7 +65,6 @@
             <a href="#contents" class="hover:text-cyan-300 transition-colors">핵심 콘텐츠</a>
             <a href="#strategy" class="hover:text-cyan-300 transition-colors">마케팅 전략</a>
         </div>
-        <!-- 다운로드 함수 연결 -->
         <button onclick="downloadProposal()" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/30">
             기획서 다운로드
         </button>
@@ -110,14 +111,14 @@
                 </div>
                 <div class="md:w-1/2 grid grid-cols-2 gap-4">
                     <div class="bg-slate-100 h-64 rounded-3xl overflow-hidden shadow-lg relative group">
-                        <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?q=80&w=2074&auto=format&fit=crop" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Busan Vibrant Market">
+                        <img src="08.2img.jpg" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Busan Vibrant Market">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4 text-white">
                             <span class="text-xs font-medium text-orange-400 mb-1">VIBRANT ENERGY</span>
                             <div class="font-bold text-lg">전통시장 활력</div>
                         </div>
                     </div>
                     <div class="bg-slate-100 h-64 rounded-3xl overflow-hidden shadow-lg mt-8 relative group">
-                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec41b513?q=80&w=2070&auto=format&fit=crop" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Jeonpo Cafe Street">
+                        <img src="08.1img.jpg" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Jeonpo Cafe Street">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4 text-white">
                             <span class="text-xs font-medium text-cyan-300 mb-1">REAL LOCAL BUSAN</span>
                             <div class="font-bold text-lg">전포동 카페거리</div>
@@ -137,7 +138,6 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Content 1 -->
                 <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
                     <div class="text-4xl mb-6">☕️</div>
                     <h3 class="text-2xl font-bold mb-4">전포동 로컬 라이프</h3>
@@ -148,7 +148,6 @@
                     </ul>
                 </div>
 
-                <!-- Content 2 -->
                 <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
                     <div class="text-4xl mb-6">🍜</div>
                     <h3 class="text-2xl font-bold mb-4">사투리 쿠킹 클래스</h3>
@@ -159,7 +158,6 @@
                     </ul>
                 </div>
 
-                <!-- Content 3 -->
                 <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
                     <div class="text-4xl mb-6">🌉</div>
                     <h3 class="text-2xl font-bold mb-4">광안리 미드나잇</h3>
@@ -173,7 +171,7 @@
         </div>
     </section>
 
-    <!-- Strategy Section (Interactive Tabs) -->
+    <!-- Strategy Section -->
     <section id="strategy" class="py-24 bg-white px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-4xl font-bold text-center mb-16 gradient-text">지속 가능한 관광 전략</h2>
@@ -185,7 +183,6 @@
             </div>
 
             <div id="tab-content" class="bg-slate-50 p-10 rounded-3xl border border-slate-100 shadow-sm min-h-[300px] flex flex-col justify-center">
-                <!-- Content will be injected here -->
             </div>
         </div>
     </section>
@@ -224,7 +221,6 @@
             }
         };
 
-        // Tab Content Switching
         const strategyData = {
             trust: {
                 title: "바가지 요금 근절: 착한 가게 인증제",
@@ -269,54 +265,79 @@
             }, 200);
         }
 
-        // --- 기획서 다운로드 기능 추가 ---
+        // --- 한글 지원 PDF 다운로드 기능 (html2pdf 사용) ---
         function downloadProposal() {
-            const proposalTitle = "부산 관광 신규 콘텐츠 기획서";
-            const proposalContent = `
-[기획서] 부산 로컬 라이프스타일 기반 신규 관광 콘텐츠 개발
-
-1. 프로젝트 배경 및 목적
-- 배경: 통계상 외국인 관광객은 급증하고 있으나 특정 지역 편중 심화. 로컬 니즈 확인.
-- 목적: 부산의 '에너지', '정(情)', '미식'을 결합한 체험형 콘텐츠 개발.
-
-2. 핵심 타겟
-- MZ세대 외국인 (타이완/일본)
-- 디지털 노마드 및 워케이션족
-- K-문화 마니아
-
-3. 신규 콘텐츠 기획안
-① 전포동 전리단길 투어: 로컬 청년 문화 및 카페 투어
-② 사투리 쿠킹 클래스: 부산 음식과 사투리 엔터테인먼트 결합
-③ 광안리 미드나잇 피크닉: 야경과 수제 맥주, 회 포장 문화 브랜딩
-
-4. 운영 및 마케팅 전략
-- 착한 가게 인증제: 바가지 요금 근절을 통한 신뢰 회복
-- 부기(Boogi) 캐릭터 마케팅: 글로벌 친밀도 강화
-- 부산 패스 고도화: 끊김 없는 로컬 교통 인프라 제공
-
-5. 기대 효과
-- 관광객 분산 및 지역 상권 활성화
-- 재방문율 증대 및 월드 클래스 관광 브랜드 구축
-            `;
-
-            // 파일 생성 및 다운로드 로직
-            const element = document.createElement('a');
-            const file = new Blob([proposalContent], {type: 'text/plain;charset=utf-8'});
-            element.href = URL.createObjectURL(file);
-            element.download = "Busan_Tourism_Proposal.txt";
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-            
-            // 시각적 피드백
             const btn = document.querySelector('button[onclick="downloadProposal()"]');
             const originalText = btn.innerText;
-            btn.innerText = "다운로드 완료!";
-            btn.classList.replace('bg-cyan-500', 'bg-green-500');
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.replace('bg-green-500', 'bg-cyan-500');
-            }, 2000);
+            btn.innerText = "PDF 생성 중...";
+            
+            // PDF에 렌더링할 내용을 가상의 div 엘리먼트로 생성합니다.
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div style="padding: 40px; font-family: 'Noto Sans KR', sans-serif; color: #333;">
+                    <h1 style="color: #2563eb; font-size: 26px; margin-bottom: 20px; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
+                        [기획서] 부산 로컬 라이프스타일 기반 신규 관광 콘텐츠 개발
+                    </h1>
+                    
+                    <h2 style="font-size: 18px; color: #1e293b; margin-top: 30px;">1. 프로젝트 배경 및 목적</h2>
+                    <ul style="margin-left: 20px; margin-bottom: 15px; line-height: 1.8; font-size: 14px;">
+                        <li><strong>배경:</strong> 외국인 관광객 급증 및 특정 지역(해운대 등) 편중 심화, 로컬 니즈 확인</li>
+                        <li><strong>목적:</strong> 부산의 '에너지', '정(情)', '미식'을 결합한 체험형 콘텐츠 개발로 상권 다각화</li>
+                    </ul>
+
+                    <h2 style="font-size: 18px; color: #1e293b; margin-top: 30px;">2. 핵심 타겟</h2>
+                    <ul style="margin-left: 20px; margin-bottom: 15px; line-height: 1.8; font-size: 14px;">
+                        <li>MZ세대 외국인 (타이완/일본 타겟)</li>
+                        <li>디지털 노마드 및 워케이션족</li>
+                        <li>K-문화 마니아 (시장 및 로컬 감성 선호)</li>
+                    </ul>
+
+                    <h2 style="font-size: 18px; color: #1e293b; margin-top: 30px;">3. 신규 콘텐츠 기획안</h2>
+                    <ul style="margin-left: 20px; margin-bottom: 15px; line-height: 1.8; font-size: 14px;">
+                        <li><strong>전포동 전리단길 투어:</strong> 유동인구 1위 서면 기반의 로컬 청년 문화, 소품샵 탐방</li>
+                        <li><strong>사투리 쿠킹 클래스:</strong> 시장 장보기 미션 및 사투리로 직접 만들어보는 돼지국밥</li>
+                        <li><strong>광안리 미드나잇 피크닉:</strong> 광안대교 야경과 로컬 수제 맥주, 회 포장 문화를 결합</li>
+                    </ul>
+
+                    <h2 style="font-size: 18px; color: #1e293b; margin-top: 30px;">4. 운영 및 마케팅 전략</h2>
+                    <ul style="margin-left: 20px; margin-bottom: 15px; line-height: 1.8; font-size: 14px;">
+                        <li><strong>착한 가게 인증제:</strong> 바가지 요금 근절을 통한 신뢰 회복 (부기 마크 인증)</li>
+                        <li><strong>캐릭터 마케팅:</strong> 인기 캐릭터 '부기'를 활용한 글로벌 친밀도 극대화</li>
+                        <li><strong>부산 패스(Busan Pass) 고도화:</strong> 공항-상권 셔틀 연계 및 통합 패스 구축</li>
+                    </ul>
+
+                    <div style="margin-top: 50px; text-align: center; color: #64748b; font-size: 12px; border-top: 1px solid #cbd5e1; padding-top: 15px;">
+                        Dynamic Busan - 2024 Tourism Content Planning Report
+                    </div>
+                </div>
+            `;
+            
+            // html2pdf 옵션 설정
+            const opt = {
+                margin:       10,
+                filename:     '부산 관광 신규 콘텐츠 기획서.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // 요소로부터 PDF 생성 후 저장
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerText = "다운로드 완료!";
+                btn.classList.replace('bg-cyan-500', 'bg-green-500');
+                
+                // 2초 후 원래 버튼 상태로 복귀
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.replace('bg-green-500', 'bg-cyan-500');
+                }, 2000);
+            }).catch(err => {
+                console.error("PDF 생성 에러:", err);
+                btn.innerText = "오류 발생";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            });
         }
 
         window.onload = () => switchTab('trust');
