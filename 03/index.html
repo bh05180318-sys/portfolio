@@ -71,7 +71,7 @@
             <!-- Video Element -->
             <div class="aspect-video w-full bg-black flex items-center justify-center">
                 <video id="storyVideo" controls class="w-full h-full">
-                    <source src="../Vrew+suno.mp4" type="video/mp4">
+                    <source src="../Vrew_suno.mp4" type="video/mp4">
                     브라우저가 비디오 재생을 지원하지 않습니다.
                 </video>
             </div>
@@ -116,7 +116,6 @@
                 최근 5년간 부산의 인구 지표는 가파른 변화를 겪었습니다. 총인구는 지속적으로 감소하여 325만 명 수준으로 떨어졌으나, 60세 이상 고령자 인구는 폭발적으로 성장하여 사상 처음 100만 명을 돌파했습니다.
             </p>
             
-            <!-- 지표 카드 세 개 -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div class="glass-card rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 text-6xl opacity-10">📉</div>
@@ -241,7 +240,7 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            // Reset video and play
+            // Reset video and play with safety promise
             video.currentTime = 0;
             const playPromise = video.play();
             
@@ -255,7 +254,7 @@
         const closeVideo = () => {
             const video = document.getElementById('storyVideo');
             
-            // Safety check for pause
+            // Safety check for pause to avoid AbortError
             if (video && !video.paused) {
                 video.pause();
             }
