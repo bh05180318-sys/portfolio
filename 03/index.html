@@ -48,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -64,13 +64,17 @@
     <!-- Video Modal -->
     <div id="videoModal" onclick="closeVideo()">
         <div class="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
-            <button onclick="closeVideo()" class="absolute top-4 right-4 text-white hover:text-orange-500 z-10 bg-black/50 p-2 rounded-full transition-colors">
+            <!-- Close Button -->
+            <button onclick="closeVideo()" class="absolute top-4 right-4 text-white hover:text-orange-500 z-50 bg-black/50 p-2 rounded-full transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <video id="storyVideo" controls class="w-full">
-                <source src="../Vrew+suno.mp4" type="video/mp4">
-                브라우저가 비디오 재생을 지원하지 않습니다.
-            </video>
+            <!-- Video Element -->
+            <div class="aspect-video w-full bg-black flex items-center justify-center">
+                <video id="storyVideo" controls class="w-full h-full">
+                    <source src="../Vrew+suno.mp4" type="video/mp4">
+                    브라우저가 비디오 재생을 지원하지 않습니다.
+                </video>
+            </div>
         </div>
     </div>
 
@@ -111,6 +115,8 @@
             <p class="text-slate-600 mb-8 text-lg">
                 최근 5년간 부산의 인구 지표는 가파른 변화를 겪었습니다. 총인구는 지속적으로 감소하여 325만 명 수준으로 떨어졌으나, 60세 이상 고령자 인구는 폭발적으로 성장하여 사상 처음 100만 명을 돌파했습니다.
             </p>
+            
+            <!-- 지표 카드 세 개 -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div class="glass-card rounded-2xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 text-6xl opacity-10">📉</div>
@@ -227,26 +233,43 @@
     </footer>
 
     <script>
-        // Modal functions
+        // Modal functions with enhanced safety and error handling
         const openVideo = () => {
-            document.getElementById('videoModal').classList.add('active');
-            document.getElementById('storyVideo').play();
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('storyVideo');
+            
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Reset video and play
+            video.currentTime = 0;
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("자동 재생이 차단되었습니다. 사용자가 수동으로 재생해야 할 수 있습니다.", error);
+                });
+            }
         };
 
         const closeVideo = () => {
             const video = document.getElementById('storyVideo');
-            video.pause();
-            video.currentTime = 0;
+            
+            // Safety check for pause
+            if (video && !video.paused) {
+                video.pause();
+            }
+            
             document.getElementById('videoModal').classList.remove('active');
             document.body.style.overflow = 'auto';
         };
 
         // ESC key to close modal
-        window.onkeydown = (e) => {
+        window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeVideo();
-        };
+        });
 
+        // Initialize Charts
         const initTrendChart = () => {
             const ctx = document.getElementById('trendChart').getContext('2d');
             new Chart(ctx, {
@@ -274,8 +297,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: { position: 'left', min: 3200000 },
-                        y1: { position: 'right', grid: { drawOnChartArea: false }, min: 850000 }
+                        y: { position: 'left', min: 3200000, title: { display: true, text: '총인구 (명)' } },
+                        y1: { position: 'right', grid: { drawOnChartArea: false }, min: 850000, title: { display: true, text: '고령자 (명)' } }
                     }
                 }
             });
