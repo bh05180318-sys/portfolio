@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Busan - New Era of Tourism</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1578351508240-a35205562098?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content-card {
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-morphism py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300" id="navbar">
+        <div class="text-2xl font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-anchor text-cyan-400"></i>
+            DYNAMIC BUSAN
+        </div>
+        <div class="hidden md:flex gap-8 text-white font-medium">
+            <a href="#vision" class="hover:text-cyan-300 transition-colors">프로젝트 배경</a>
+            <a href="#contents" class="hover:text-cyan-300 transition-colors">핵심 콘텐츠</a>
+            <a href="#strategy" class="hover:text-cyan-300 transition-colors">마케팅 전략</a>
+        </div>
+        <!-- 다운로드 함수 연결 -->
+        <button onclick="downloadProposal()" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/30">
+            기획서 다운로드
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center text-center px-4">
+        <div class="animate-fade-in">
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-6 leading-tight">
+                진짜 부산은<br><span class="text-cyan-400">골목</span>에 있다
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 mb-10 max-w-3xl mx-auto leading-relaxed">
+                해운대와 광안리를 넘어, 부산의 로컬 에너지를 직접 경험하는<br>새로운 차원의 라이프스타일 관광 콘텐츠를 소개합니다.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#contents" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all">콘텐츠 보기</a>
+                <a href="#strategy" class="border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all">전략 분석</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Vision Section -->
+    <section id="vision" class="py-24 px-6 md:px-24 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold mb-8 gradient-text">왜 부산이어야 하는가?</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="bg-blue-100 p-4 rounded-full h-fit"><i class="fa-solid fa-chart-line text-blue-600"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">외국인 관광객 300만 시대</h3>
+                                <p class="text-slate-600">코로나 이후 사상 최고치를 갱신 중인 외국인 관광 수요. 특히 타이완/일본 관광객의 급성장에 주목합니다.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-teal-100 p-4 rounded-full h-fit"><i class="fa-solid fa-comments text-teal-600"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">로컬에 대한 갈망</h3>
+                                <p class="text-slate-600">유튜브 댓글 분석 결과, 전포동/서면 등 부산 사람들의 '진짜 삶'을 보고 싶어 하는 니즈가 강력합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="bg-slate-100 h-64 rounded-3xl overflow-hidden shadow-lg relative group">
+                        <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?q=80&w=2074&auto=format&fit=crop" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Busan Vibrant Market">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4 text-white">
+                            <span class="text-xs font-medium text-orange-400 mb-1">VIBRANT ENERGY</span>
+                            <div class="font-bold text-lg">전통시장 활력</div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 h-64 rounded-3xl overflow-hidden shadow-lg mt-8 relative group">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec41b513?q=80&w=2070&auto=format&fit=crop" class="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500" alt="Jeonpo Cafe Street">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4 text-white">
+                            <span class="text-xs font-medium text-cyan-300 mb-1">REAL LOCAL BUSAN</span>
+                            <div class="font-bold text-lg">전포동 카페거리</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Contents Section -->
+    <section id="contents" class="py-24 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4">3대 핵심 관광 콘텐츠</h2>
+                <p class="text-slate-400 text-lg">부산의 사투리, 야경, 그리고 로컬의 에너지를 담았습니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Content 1 -->
+                <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
+                    <div class="text-4xl mb-6">☕️</div>
+                    <h3 class="text-2xl font-bold mb-4">전포동 로컬 라이프</h3>
+                    <p class="text-slate-400 mb-6">유동 인구 전국 1위 서면과 맞닿은 전포동 카페거리. 부산 MZ세대의 진짜 트렌드를 체험합니다.</p>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>독립 소품샵 탐방</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>야간 펍 네트워킹</li>
+                    </ul>
+                </div>
+
+                <!-- Content 2 -->
+                <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
+                    <div class="text-4xl mb-6">🍜</div>
+                    <h3 class="text-2xl font-bold mb-4">사투리 쿠킹 클래스</h3>
+                    <p class="text-slate-400 mb-6">"보이소, 무보이소!" 부산 사투리를 배우며 직접 만들어보는 돼지국밥과 밀면 클래스.</p>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>시장 장보기 미션</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>실전 사투리 토크</li>
+                    </ul>
+                </div>
+
+                <!-- Content 3 -->
+                <div class="content-card bg-slate-800 p-8 rounded-4xl border border-slate-700">
+                    <div class="text-4xl mb-6">🌉</div>
+                    <h3 class="text-2xl font-bold mb-4">광안리 미드나잇</h3>
+                    <p class="text-slate-400 mb-6">광안대교를 바라보며 즐기는 로컬 수제 맥주와 회 포장 피크닉. 야경과 바다의 조화.</p>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>드론쇼 야외 직관</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>해변 버스킹 피크닉</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section (Interactive Tabs) -->
+    <section id="strategy" class="py-24 bg-white px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">지속 가능한 관광 전략</h2>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="switchTab('trust')" id="btn-trust" class="tab-btn px-8 py-3 rounded-full font-bold bg-blue-600 text-white shadow-lg transition-all">신뢰도 회복</button>
+                <button onclick="switchTab('character')" id="btn-character" class="tab-btn px-8 py-3 rounded-full font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">캐릭터 마케팅</button>
+                <button onclick="switchTab('infra')" id="btn-infra" class="tab-btn px-8 py-3 rounded-full font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">교통/인프라</button>
+            </div>
+
+            <div id="tab-content" class="bg-slate-50 p-10 rounded-3xl border border-slate-100 shadow-sm min-h-[300px] flex flex-col justify-center">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600 text-white text-center">
+        <h2 class="text-3xl md:text-5xl font-black mb-8 leading-tight">함께 만드는 월드 클래스 부산,<br>지금 제안에 참여하세요.</h2>
+        <div class="flex gap-4 justify-center">
+            <button onclick="alert('참여 신청이 완료되었습니다!')" class="bg-white text-blue-600 px-10 py-4 rounded-2xl font-bold text-xl hover:shadow-2xl transition-all">파트너십 제안하기</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-12 px-6 text-slate-500 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-xl font-black text-white">DYNAMIC BUSAN</div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-youtube text-2xl"></i></a>
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook text-2xl"></i></a>
+            </div>
+            <p>&copy; 2024 Busan Tourism Content Planning. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.onscroll = function() {
+            const nav = document.getElementById('navbar');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('bg-slate-900/90', 'py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('bg-slate-900/90', 'py-2');
+                nav.classList.add('py-4');
+            }
+        };
+
+        // Tab Content Switching
+        const strategyData = {
+            trust: {
+                title: "바가지 요금 근절: 착한 가게 인증제",
+                desc: "댓글 분석 결과 가장 큰 우려점은 '바가지 요금'이었습니다. 지자체와 협업하여 정찰제를 준수하고 외국어 메뉴를 완비한 매장에 부기 인증 마크를 부여하여 신뢰도를 혁신합니다.",
+                icon: "fa-shield-halved"
+            },
+            character: {
+                title: "글로벌 부기(Boogi) 프로젝트",
+                desc: "타이완에서 이미 검증된 인기 캐릭터 '부기'를 활용하여 글로벌 팬미팅 및 숏폼 챌린지를 진행합니다. 친근한 캐릭터를 통해 부산의 친밀도를 극대화합니다.",
+                icon: "fa-face-smile"
+            },
+            infra: {
+                title: "부산 패스(Busan Pass) 고도화",
+                desc: "공항부터 로컬 골목까지 막힘없이 이어지는 전용 셔틀 시스템과 교통-결제-입장이 하나로 연결된 통합 패스를 구축하여 개별 관광객의 편의성을 극대화합니다.",
+                icon: "fa-bus"
+            }
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg');
+
+            const contentArea = document.getElementById('tab-content');
+            contentArea.style.opacity = 0;
+            
+            setTimeout(() => {
+                const data = strategyData[tabId];
+                contentArea.innerHTML = `
+                    <div class="flex items-center gap-4 mb-6">
+                        <i class="fa-solid ${data.icon} text-4xl text-blue-500"></i>
+                        <h3 class="text-3xl font-bold text-slate-800">${data.title}</h3>
+                    </div>
+                    <p class="text-xl text-slate-600 leading-relaxed">${data.desc}</p>
+                `;
+                contentArea.style.opacity = 1;
+                contentArea.classList.add('animate-fade-in');
+            }, 200);
+        }
+
+        // --- 기획서 다운로드 기능 추가 ---
+        function downloadProposal() {
+            const proposalTitle = "부산 관광 신규 콘텐츠 기획서";
+            const proposalContent = `
+[기획서] 부산 로컬 라이프스타일 기반 신규 관광 콘텐츠 개발
+
+1. 프로젝트 배경 및 목적
+- 배경: 통계상 외국인 관광객은 급증하고 있으나 특정 지역 편중 심화. 로컬 니즈 확인.
+- 목적: 부산의 '에너지', '정(情)', '미식'을 결합한 체험형 콘텐츠 개발.
+
+2. 핵심 타겟
+- MZ세대 외국인 (타이완/일본)
+- 디지털 노마드 및 워케이션족
+- K-문화 마니아
+
+3. 신규 콘텐츠 기획안
+① 전포동 전리단길 투어: 로컬 청년 문화 및 카페 투어
+② 사투리 쿠킹 클래스: 부산 음식과 사투리 엔터테인먼트 결합
+③ 광안리 미드나잇 피크닉: 야경과 수제 맥주, 회 포장 문화 브랜딩
+
+4. 운영 및 마케팅 전략
+- 착한 가게 인증제: 바가지 요금 근절을 통한 신뢰 회복
+- 부기(Boogi) 캐릭터 마케팅: 글로벌 친밀도 강화
+- 부산 패스 고도화: 끊김 없는 로컬 교통 인프라 제공
+
+5. 기대 효과
+- 관광객 분산 및 지역 상권 활성화
+- 재방문율 증대 및 월드 클래스 관광 브랜드 구축
+            `;
+
+            // 파일 생성 및 다운로드 로직
+            const element = document.createElement('a');
+            const file = new Blob([proposalContent], {type: 'text/plain;charset=utf-8'});
+            element.href = URL.createObjectURL(file);
+            element.download = "Busan_Tourism_Proposal.txt";
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            
+            // 시각적 피드백
+            const btn = document.querySelector('button[onclick="downloadProposal()"]');
+            const originalText = btn.innerText;
+            btn.innerText = "다운로드 완료!";
+            btn.classList.replace('bg-cyan-500', 'bg-green-500');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.replace('bg-green-500', 'bg-cyan-500');
+            }, 2000);
+        }
+
+        window.onload = () => switchTab('trust');
+    </script>
+</body>
+</html>
