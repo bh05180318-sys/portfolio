@@ -295,7 +295,7 @@
                 icon: "fa-brain", 
                 color: "card-cyan",
                 links: [
-                    { label: "과제물 보기_2", url: "./08/index.html" }
+                    { label: "과제물 보기", url: "./08/index.html" }
                 ], 
                 description: "복합적인 데이터 상관관계를 분석하고 예측 모델의 기초를 설계하여 인사이트를 도출했습니다.",
                 achievements: [
@@ -349,10 +349,17 @@
                 project.links.forEach((link, index) => {
                     const btn = document.createElement('a');
                     btn.href = link.url;
-                    // 버튼별 그라데이션 차별화
-                    const gradientClass = index === 0 
-                        ? 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
-                        : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
+                    
+                    // Assign gradients based on the number of buttons
+                    let gradientClass = 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700';
+                    if (project.links.length > 1) {
+                        gradientClass = index === 0 
+                            ? 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
+                            : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
+                    } else if (project.id === 6) {
+                        // Cyan accent for Data Analysis 2
+                        gradientClass = 'from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700';
+                    }
                     
                     btn.className = `flex items-center justify-center gap-4 w-full py-5 px-8 bg-gradient-to-r ${gradientClass} text-white rounded-[2rem] font-black text-lg shadow-xl transform hover:scale-[1.01] active:scale-[0.99] transition-all group`;
                     btn.innerHTML = `
