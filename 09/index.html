@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>효원 낭만 백서 - 부산대학교 라이프 가이드북</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Korean & English -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* 이통일반 애니메이션 */
+        @keyframes liquid-flow {
+            0% { height: 0%; }
+            100% { height: 100%; }
+        }
+        .liquid-anim {
+            animation: liquid-flow 3s forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header Section -->
+    <header class="gradient-bg text-white py-16 px-4 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <!-- 이국적인 야자수 배경 그래픽 패턴화 -->
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="100" x2="100%" y2="100" stroke="white" stroke-width="2" stroke-dasharray="5,5"/>
+                <circle cx="10%" cy="80%" r="50" fill="white" />
+                <circle cx="90%" cy="20%" r="80" fill="white" />
+            </svg>
+        </div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="bg-teal-500/30 text-teal-200 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">PNU 로컬 라이프 가이드</span>
+            <h1 class="text-4xl md:text-6xl font-black mt-4 mb-2 tracking-tight leading-tight">효원 낭만 백서</h1>
+            <p class="text-lg md:text-xl text-teal-100 font-light max-w-2xl mx-auto">
+                경사도 높은 캠퍼스 지형부터 낭만 가득한 솔밭집 '이통일반'까지,<br class="hidden md:inline"> 부산대 라이프를 100% 완벽 접수하기 위한 가이드북
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="#guidebook" class="bg-white text-teal-900 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-slate-100 transition duration-300">
+                    📖 가이드북 보러가기
+                </a>
+                <a href="#playground" class="bg-teal-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-teal-700 transition duration-300 border border-teal-500/30">
+                    🎮 인터랙티브 체험존
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 네비게이션 탭 -->
+    <div class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 flex justify-around md:justify-center md:gap-12 overflow-x-auto">
+            <a href="#climb-game" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">⛰️ 등교 시뮬레이터</a>
+            <a href="#pitch-quiz" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🗣️ 2의 2승 성조 배틀</a>
+            <a href="#mixology" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🍶 이통일반 조제실</a>
+            <a href="#guidebook" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">📖 요약 백서</a>
+        </div>
+    </div>
+
+    <!-- 인터랙티브 체험존 (Playground) -->
+    <main class="max-w-6xl mx-auto px-4 py-12" id="playground">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">🎮 효원 로컬 인터랙티브 체험존</h2>
+            <p class="text-slate-600 mt-2">직접 마우스와 터치로 조작하며 부산대 낭만 라이프를 온몸으로 선학습해 보세요!</p>
+        </div>
+
+        <!-- 1. 등교 시뮬레이터 미니 게임 -->
+        <section id="climb-game" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12 border border-slate-100 scroll-mt-24">
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <span class="text-teal-600 font-bold text-sm tracking-wider uppercase">01. 지형 체험 시뮬레이션</span>
+                    <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4 text-slate-900">악명 높은 '효원 오르막길' 완등기</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        부산대학교 정문에서 출발해 캠퍼스 최정상 경암체육관까지 총 **1,000m**의 등산 코스를 오르는 가상 하이킹 게임입니다. 
+                        중간중간 구역이 바뀔 때마다 경사도가 가팔라지니 마우스를 빠르게 연타하거나 터치하여 체력을 유지하고, 정상까지 무사히 질주해 보세요!
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p class="text-sm font-semibold text-slate-700">💡 등산 생존수칙</p>
+                        <ul class="text-xs text-slate-500 mt-2 space-y-1 list-disc list-inside">
+                            <li>오르막 구역이 높아질 때마다 기본 초당 체력 소모량이 급격히 커집니다.</li>
+                            <li>체력이 0이 되기 전에 '탭/클릭'으로 부지런히 전진하여 에너지를 유지하세요!</li>
+                            <li>정문에서부터 경암체육관까지 총 12개의 주요 거점을 순차적으로 정복해야 완등 수료증이 지급됩니다.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 게임 캔버스/보드 영역 -->
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden min-h-[350px] flex flex-col justify-between shadow-2xl border border-slate-800">
+                        <!-- 게임 오버 / 성공 화면 오버레이 -->
+                        <div id="game-overlay" class="absolute inset-0 bg-slate-900/95 z-20 flex flex-col items-center justify-center text-center p-6 hidden">
+                            <div id="game-status-icon" class="text-6xl mb-4">🏆</div>
+                            <h4 id="game-status-title" class="text-2xl font-black">명예로운 완등 성공!</h4>
+                            <p id="game-status-desc" class="text-slate-400 text-sm mt-2 max-w-xs"></p>
+                            <button onclick="resetGame()" class="mt-6 bg-teal-500 hover:bg-teal-600 text-slate-900 font-bold px-6 py-2.5 rounded-xl transition">
+                                다시 도전하기
+                            </button>
+                        </div>
+
+                        <!-- 게임 플레이 헤더 -->
+                        <div class="flex justify-between items-center relative z-10">
+                            <div>
+                                <span class="text-xs text-slate-400">현재 구역</span>
+                                <p id="current-zone" class="font-bold text-teal-400 text-sm">📍 정문 (NC백화점)</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400">체력 (HP)</span>
+                                <div class="w-24 bg-slate-800 rounded-full h-3 overflow-hidden mt-1 border border-slate-700">
+                                    <div id="hp-bar" class="bg-emerald-500 h-full w-full transition-all duration-200"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 게임 플레이 센터 (시각화 애니메이션) -->
+                        <div class="my-6 relative h-32 flex items-end">
+                            <!-- 배경 산 및 나무 구조물 스케치 느낌의 SVG -->
+                            <svg class="absolute inset-x-0 bottom-0 h-full w-full text-slate-800" fill="none" viewBox="0 0 100 50" preserveAspectRatio="none">
+                                <path d="M0,45 Q15,40 30,30 T60,25 T90,15 L100,10 L100,50 L0,50 Z" fill="currentColor" opacity="0.3"></path>
+                                <path d="M0,48 Q20,45 40,35 T70,30 T100,15 L100,50 L0,50 Z" fill="currentColor" opacity="0.5"></path>
+                            </svg>
+
+                            <!-- 야자수 일러스트 간이 배치 -->
+                            <div id="game-palm-tree" class="absolute left-1/2 bottom-3 text-2xl animate-bounce hidden">🌴</div>
+
+                            <!-- 캐릭터 진행 슬라이더 -->
+                            <div id="game-character-container" class="absolute bottom-2 left-[10%] transition-all duration-300 z-10 text-center">
+                                <span class="text-4xl block animate-pulse">🏃</span>
+                                <span class="bg-teal-500/90 text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap block mt-1">효원이</span>
+                            </div>
+
+                            <!-- 목표물 (정상 깃발) -->
+                            <div class="absolute right-4 bottom-8 text-3xl">🚩</div>
+                        </div>
+
+                        <!-- 게임 조작 및 미션 진행 상황 -->
+                        <div class="relative z-10">
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>완등 지점까지 남은 거리</span>
+                                <span id="distance-text">1000m</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
+                                <div id="progress-bar" class="bg-teal-400 h-full w-0 transition-all"></div>
+                            </div>
+                            <button id="btn-climb" onclick="climbStep()" class="w-full bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold py-3 rounded-xl transition shadow-lg select-none">
+                                ⚡ 클릭하여 오르기! (TAP)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 영남권 성조 및 사투리 퀴즈 보드 -->
+        <section id="pitch-quiz" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12 border border-slate-100 scroll-mt-24">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-teal-600 font-bold text-sm tracking-wider uppercase">02. 언어 문화 체험존</span>
+                <h3 class="text-3xl font-black mt-2 mb-4 text-slate-900">"2의 2승" 사운드 가이드 & 사투리 보드</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    타 지역 학생들이 신입생 OT 술자리에서 가장 난감해하는 순간! 
+                    경상도 고유의 강렬한 억양(성조)과 블루베리 스무디의 매혹적인 발음 차이를 터치 한 번으로 명쾌하게 해독합니다.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 왼쪽: 2의 2승 피치 비교기 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span>🔊</span> 수학적 수식 성조 체험기
+                    </h4>
+                    <p class="text-sm text-slate-500 mb-6">아래의 행(Row)을 클릭하여 음성 성조의 차이와 원리를 애니메이션으로 확인하세요.</p>
+
+                    <div class="space-y-3">
+                        <!-- 2^2 -->
+                        <div onclick="playPitch('2_2')" class="cursor-pointer bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:border-teal-500 hover:shadow-md transition">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xl font-bold text-teal-600">$2^2$</span>
+                                    <span class="text-slate-800 font-bold">2의 2승</span>
+                                </div>
+                                <span class="bg-slate-100 text-slate-500 text-xs px-2.5 py-1 rounded-md">평탄조</span>
+                            </div>
+                            <div id="wave-2_2" class="h-8 mt-3 hidden flex items-center justify-around">
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce"></div>
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <span class="text-xs text-teal-600 font-bold ml-2">"이의 이승" (모두 평탄하게~)</span>
+                            </div>
+                        </div>
+
+                        <!-- 2^e -->
+                        <div onclick="playPitch('2_e')" class="cursor-pointer bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:border-teal-500 hover:shadow-md transition">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xl font-bold text-teal-600">$2^e$</span>
+                                    <span class="text-slate-800 font-bold">2의 e승</span>
+                                </div>
+                                <span class="bg-teal-500/10 text-teal-700 text-xs px-2.5 py-1 rounded-md">후강조</span>
+                            </div>
+                            <div id="wave-2_e" class="h-8 mt-3 hidden flex items-center justify-around">
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce"></div>
+                                <div class="w-1.5 h-4 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 h-6 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 h-8 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <span class="text-xs text-teal-600 font-bold ml-2">"이의 ↗이이이이승" (e를 길고 높게!)</span>
+                            </div>
+                        </div>
+
+                        <!-- e^2 -->
+                        <div onclick="playPitch('e_2')" class="cursor-pointer bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:border-teal-500 hover:shadow-md transition">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xl font-bold text-teal-600">$e^2$</span>
+                                    <span class="text-slate-800 font-bold">e의 2승</span>
+                                </div>
+                                <span class="bg-teal-500/10 text-teal-700 text-xs px-2.5 py-1 rounded-md">선강조</span>
+                            </div>
+                            <div id="wave-e_2" class="h-8 mt-3 hidden flex items-center justify-around">
+                                <div class="w-1.5 h-8 bg-teal-500 rounded-full animate-bounce"></div>
+                                <div class="w-1.5 h-6 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 h-4 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 h-3 bg-teal-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <span class="text-xs text-teal-600 font-bold ml-2">"↗이이이의 이승" (e를 높고 강하게 시작!)</span>
+                            </div>
+                        </div>
+
+                        <!-- e^e -->
+                        <div onclick="playPitch('e_e')" class="cursor-pointer bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:border-teal-500 hover:shadow-md transition">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xl font-bold text-teal-600">$e^e$</span>
+                                    <span class="text-slate-800 font-bold">e의 e승</span>
+                                </div>
+                                <span class="bg-red-500/10 text-red-700 text-xs px-2.5 py-1 rounded-md">완전 고강조</span>
+                            </div>
+                            <div id="wave-e_e" class="h-8 mt-3 hidden flex items-center justify-around">
+                                <div class="w-1.5 h-8 bg-red-500 rounded-full animate-bounce"></div>
+                                <div class="w-1.5 h-8 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-1.5 h-8 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                <div class="w-1.5 h-8 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <span class="text-xs text-red-600 font-bold ml-2">"↗이이이의 ↗이이이승" (둘 다 소리 지르듯이!)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 사투리 번역 및 바니바니 퀴즈 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <span>🎓</span> 부산대 서바이벌 사투리 자격증 시험
+                        </h4>
+                        <p class="text-sm text-slate-500 mb-6">"오빠야~"의 미묘한 억양이나 사투리 표현을 읽고 상황에 맞는 정답을 맞춰보세요!</p>
+
+                        <!-- 퀴즈 콘텐츠 컨테이너 -->
+                        <div id="quiz-box" class="bg-white p-5 rounded-xl border border-slate-200">
+                            <span class="text-xs text-teal-600 font-bold uppercase tracking-wider">문제 1</span>
+                            <p id="quiz-question" class="font-bold text-slate-800 mt-1 mb-4 leading-relaxed">
+                                부산대 선배가 나지막하게 <strong>"밥 뭇나?"</strong>라고 물었을 때, 가장 올바른 대답의 상황은?
+                            </p>
+                            <div class="space-y-2" id="quiz-options">
+                                <button onclick="checkQuizAnswer(1)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                                    A. "어떤 음식을 먹었는지" 꼬치꼬치 먹은 메뉴 리스트를 말해준다.
+                                </button>
+                                <button onclick="checkQuizAnswer(2)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                                    B. "식사를 했는지 안 했는지" 여부만 간단히 '예/아니오'로 대답한다.
+                                </button>
+                                <button onclick="checkQuizAnswer(3)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                                    C. 대답하지 않고 같이 바니바니 게임을 하자고 공격을 날린다.
+                                </button>
+                            </div>
+                            <div id="quiz-feedback" class="mt-4 p-3 rounded-lg text-sm font-bold hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-between items-center border-t pt-4">
+                        <span class="text-xs text-slate-400">맞춘 개수: <strong id="score-text" class="text-teal-600">0</strong>/2</span>
+                        <button id="btn-next-quiz" onclick="loadNextQuiz()" class="text-xs text-teal-600 font-bold hover:underline hidden">
+                            다음 문제 풀기 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 이통일반 믹싱 시뮬레이션 -->
+        <section id="mixology" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12 border border-slate-100 scroll-mt-24">
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <span class="text-teal-600 font-bold text-sm tracking-wider uppercase">03. 로컬 주조 가상 체험</span>
+                    <h3 class="text-3xl font-black mt-2 mb-4 text-slate-900">솔밭집 전설의 '이통일반' 제조 실습</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        부산대학교 학생이라면 반드시 마스터해야 할 금정산의 필수 비법 레시피. 
+                        막걸리와 사이다의 황금 비율을 정확히 맞춰 주전자를 꽉 채워보세요!
+                        가장 완벽한 비율로 믹싱했을 때 솔밭집 할머니의 극찬 평점이 쏟아집니다.
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-bold text-slate-700 mb-1">
+                                <span>🌾 막걸리 (Makgeolli)</span>
+                                <span id="val-makgeolli">2 통</span>
+                            </div>
+                            <input type="range" id="range-makgeolli" min="0" max="4" step="0.5" value="2" oninput="mixRatioChange()" class="w-full accent-teal-600 bg-slate-200 rounded-lg appearance-none h-2">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-bold text-slate-700 mb-1">
+                                <span>🥤 사이다 (Cider)</span>
+                                <span id="val-cider">1 병</span>
+                            </div>
+                            <input type="range" id="range-cider" min="0" max="3" step="0.5" value="1" oninput="mixRatioChange()" class="w-full accent-emerald-500 bg-slate-200 rounded-lg appearance-none h-2">
+                        </div>
+                        <div class="pt-4">
+                            <button onclick="brewLees()" class="w-full bg-slate-900 text-white font-bold py-3.5 rounded-xl hover:bg-slate-800 transition shadow-md">
+                                🧪 주전자에 붓기 & 믹싱하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 믹싱 그래픽 시각화 영역 -->
+                <div class="lg:w-1/2 w-full flex justify-center">
+                    <div class="bg-teal-50/50 rounded-2xl p-8 border border-teal-100 max-w-sm w-full text-center relative">
+                        <h4 class="font-bold text-teal-800 mb-4">🍯 가상 은주전자 시각 시뮬레이터</h4>
+                        
+                        <!-- 주전자 그래픽 모양 -->
+                        <div class="w-48 h-64 mx-auto relative border-4 border-slate-400 bg-slate-200/20 rounded-b-3xl rounded-t-lg overflow-hidden flex flex-col justify-end">
+                            <!-- 사이다 층 -->
+                            <div id="cider-fluid" class="w-full bg-cyan-300/60 transition-all duration-500" style="height: 33%"></div>
+                            <!-- 막걸리 층 -->
+                            <div id="makgeolli-fluid" class="w-full bg-amber-50/80 border-t border-slate-300 transition-all duration-500" style="height: 67%"></div>
+                            
+                            <!-- 비율 눈금 선 -->
+                            <div class="absolute inset-x-0 top-1/3 border-b border-dashed border-slate-400/50"></div>
+                            <div class="absolute inset-x-0 top-2/3 border-b border-dashed border-slate-400/50"></div>
+                            
+                            <!-- 믹싱 완성 시 블렌딩되는 오버레이 -->
+                            <div id="mixed-fluid" class="absolute inset-0 bg-yellow-50/90 hidden flex items-center justify-center">
+                                <span class="text-slate-800 font-black text-sm animate-pulse">🌟 이통일반 완성 🌟</span>
+                            </div>
+                        </div>
+
+                        <!-- 솔밭집 평가 피드백 보드 -->
+                        <div id="eval-board" class="mt-6 p-4 rounded-xl bg-white border border-teal-100 hidden">
+                            <div class="text-2xl" id="eval-stars">⭐⭐⭐⭐⭐</div>
+                            <p class="font-bold text-slate-800 mt-2" id="eval-title">할머니 감탄!</p>
+                            <p class="text-xs text-slate-500 mt-1" id="eval-desc">"역시 기계과 학생답구만! 오차 없는 기막힌 2대1 정밀 제어다!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- [효원 낭만 백서] 가이드북 요약 뷰어 -->
+    <section id="guidebook" class="bg-slate-900 text-white py-16 px-4 scroll-mt-24">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-teal-400 font-bold text-sm tracking-wider uppercase">가이드북 요약 뷰어</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-2 mb-4">📖 효원 낭만 백서 핵심 요약</h2>
+                <p class="text-slate-400 font-light max-w-xl mx-auto">부산대학교 기계공학부 학생으로서 거쳐 가게 될 아름답고 유쾌한 일상의 세 가지 축을 한눈에 살펴보세요.</p>
+            </div>
+
+            <!-- 책 레이아웃 형태의 요약 카드들 -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- 카드 1 -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
+                    <div class="text-teal-400 text-3xl mb-4">⛰️</div>
+                    <h3 class="text-xl font-bold mb-2">지형과 백화점</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        산과 인접한 지리적 지형 덕에 강인한 하체가 자동 단련됩니다. 정문의 백화점 슬세권 인프라와 언덕의 조화는 부산대만의 고유한 정체성입니다.
+                    </p>
+                    <span class="text-xs text-slate-500">낭만 백서 1장 수록</span>
+                </div>
+
+                <!-- 카드 2 -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
+                    <div class="text-teal-400 text-3xl mb-4">🍶</div>
+                    <h3 class="text-xl font-bold mb-2">솔밭집 '이통일반'</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        막걸리 2통과 사이다 1병을 믹싱하여 주전자에 먹는 비법 제조 음료. 공부에 지쳤을 때 야외 솔숲 정취를 만끽하며 즐기는 낭만적인 힐링의 장입니다.
+                    </p>
+                    <span class="text-xs text-slate-500">낭만 백서 2장 수록</span>
+                </div>
+
+                <!-- 카드 3 -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
+                    <div class="text-teal-400 text-3xl mb-4">🗣️</div>
+                    <h3 class="text-xl font-bold mb-2">사투리와 성조 플레이</h3>
+                    <p class="text-slate-600/10 text-teal-400 text-sm leading-relaxed mb-4">
+                        동기들과 융합하기 위한 필수 서바이벌 스킬. e와 2의 완벽한 발음 변별력과 부산대식 사투리의 의미 구별을 상세하게 정리했습니다.
+                    </p>
+                    <span class="text-xs text-slate-500">낭만 백서 3장 수록</span>
+                </div>
+            </div>
+
+            <!-- 홍보용 Call To Action -->
+            <div class="mt-16 bg-gradient-to-r from-teal-900 to-slate-800 p-8 rounded-3xl border border-teal-500/30 text-center">
+                <h3 class="text-2xl font-bold mb-2">지금 바로 가이드북 전체 텍스트를 무료로 보시겠습니까?</h3>
+                <p class="text-slate-300 text-sm mb-6">부산대의 참매력을 완벽하게 서술한 로컬 서바이벌 바이블 완판본 제공 중!</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="alert('가이드북 텍스트가 정상적으로 공유되었습니다! 우측 탭의 pnu_campus_life_proposal.md 파일을 확인하세요.')" class="bg-teal-500 hover:bg-teal-400 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition">
+                        🔗 가이드북 링크 복사하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-500 text-xs py-12 px-4 text-center">
+        <div class="max-w-6xl mx-auto space-y-4">
+            <p>본 가이드북 및 홍보 웹페이지는 ootb STUDIO의 〈전과자〉 부산대 기계공학부 편 분석 자료를 모태로 가공되었습니다.</p>
+            <p class="text-slate-700">&copy; 2026 효원 낭만 백서 편찬 위원회. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- ==================== JAVASCRIPT GAME & INTERACTION LOGIC ==================== -->
+    <script>
+        // ----------------------------------------
+        // 1. 등교 시뮬레이터 게임 로직 (1,000m 확장 버전)
+        // ----------------------------------------
+        let hp = 100;
+        let distanceLeft = 1000; // 미터 단위 가상 (1000m로 확장)
+        let isGameOver = false;
+
+        const currentZoneEl = document.getElementById('current-zone');
+        const hpBarEl = document.getElementById('hp-bar');
+        const distanceTextEl = document.getElementById('distance-text');
+        const progressBarEl = document.getElementById('progress-bar');
+        const charContainerEl = document.getElementById('game-character-container');
+        const palmTreeEl = document.getElementById('game-palm-tree');
+        const gameOverlayEl = document.getElementById('game-overlay');
+        const gameStatusIcon = document.getElementById('game-status-icon');
+        const gameStatusTitle = document.getElementById('game-status-title');
+        const gameStatusDesc = document.getElementById('game-status-desc');
+
+        // 거리에 따른 12개 주요 건물 리스트 정의
+        const zones = [
+            { name: "📍 정문 (출발지 - 경사 완만)", min: 0, max: 80, hpLoss: 1 },
+            { name: "📍 본관 (통과 중 - 기분 좋은 숲길)", min: 80, max: 160, hpLoss: 1.5 },
+            { name: "📍 문창회관 (학식 스폿 지나는 중)", min: 160, max: 240, hpLoss: 2 },
+            { name: "📍 제2도서관 (시험 기간인 시험림 진입)", min: 240, max: 320, hpLoss: 2 },
+            { name: "📍 사회관 (언덕 시작 - 허벅지 펌핑)", min: 320, max: 410, hpLoss: 2.5 },
+            { name: "📍 법학관 (공부의 숨결이 느껴지는 고개)", min: 410, max: 500, hpLoss: 3 },
+            { name: "📍 화학관 (야자나무 수림 진입 - 호놀룰루 드립!)", min: 500, max: 590, hpLoss: 3 },
+            { name: "📍 생활환경관 (조금만 더 힘내세요!)", min: 590, max: 680, hpLoss: 3.5 },
+            { name: "📍 예술관 (가파른 헤어핀 코스)", min: 680, max: 770, hpLoss: 4 },
+            { name: "📍 제2사범관 (마의 급경사 통과 중!)", min: 770, max: 850, hpLoss: 4.5 },
+            { name: "📍 학생회관 (동아리방 열기가 가득한 고지)", min: 850, max: 930, hpLoss: 3 },
+            { name: "📍 경암체육관 (최종 목적지 도착 임박!)", min: 930, max: 1001, hpLoss: 4 }
+        ];
+
+        // 매 초마다 지형 경사에 따라 스태미나가 소모되는 인터벌 구동 예정
+        let gameTicker = setInterval(() => {
+            if (isGameOver) return;
+            
+            // 거리에 따른 실시간 구역 계산 (0m ~ 1000m 범위)
+            let traveled = 1000 - distanceLeft;
+            let hpDecrease = 2; // 기본 소모량 데드라인 설정
+
+            // 12개 거점 데이터 매핑
+            const currentZoneData = zones.find(z => traveled >= z.min && traveled < z.max);
+            if (currentZoneData) {
+                currentZoneEl.innerText = currentZoneData.name;
+                hpDecrease = currentZoneData.hpLoss;
+                
+                // 화학관 부근 (호놀룰루 야자나무 구간)에서만 미니 야자수 띄우기
+                if (traveled >= 500 && traveled < 590) {
+                    palmTreeEl.classList.remove('hidden');
+                } else {
+                    palmTreeEl.classList.add('hidden');
+                }
+            }
+
+            // 체력 깎기
+            hp = Math.max(0, hp - hpDecrease);
+            hpBarEl.style.width = hp + '%';
+
+            // 체력바 색상 피드백
+            if (hp > 50) {
+                hpBarEl.className = "bg-emerald-500 h-full transition-all duration-200";
+            } else if (hp > 20) {
+                hpBarEl.className = "bg-amber-500 h-full transition-all duration-200";
+            } else {
+                hpBarEl.className = "bg-rose-600 h-full transition-all duration-200";
+            }
+
+            // 게임 패배 조건 체크
+            if (hp <= 0) {
+                triggerGameOver(false);
+            }
+        }, 200); // 1000m 확장에 맞춰 반응 주기를 조금 단축
+
+        function climbStep() {
+            if (isGameOver) return;
+
+            // 한 클릭당 체력 6 회복 및 거리 20m 전진 (1000m 확장에 따른 등반 밸런스 조정)
+            hp = Math.min(100, hp + 6);
+            distanceLeft = Math.max(0, distanceLeft - 20);
+
+            let progress = 1000 - distanceLeft;
+            progressBarEl.style.width = (progress / 10) + '%';
+            distanceTextEl.innerText = distanceLeft + 'm';
+
+            // 캐릭터 슬라이더 위치 전진
+            charContainerEl.style.left = `calc(${10 + ((progress / 10) * 0.75)}%)`;
+
+            // 완등 성공 조건 체크
+            if (distanceLeft <= 0) {
+                triggerGameOver(true);
+            }
+        }
+
+        function triggerGameOver(isSuccess) {
+            isGameOver = true;
+            gameOverlayEl.classList.remove('hidden');
+
+            if (isSuccess) {
+                gameStatusIcon.innerText = "🏆";
+                gameStatusTitle.innerText = "명예로운 1,000m 완등 성공!";
+                gameStatusDesc.innerText = "정문에서 시작해 화학관 야자수를 거쳐 경암체육관 정상까지 완벽히 정복했습니다! 이제 자랑스럽게 솔밭집으로 가 이통일반으로 하체를 리프레시하세요!";
+            } else {
+                gameStatusIcon.innerText = "💀";
+                gameStatusTitle.innerText = "경사 극복 실패 및 탈진";
+                gameStatusDesc.innerText = "예술관과 제2사범관 사이의 무자비한 고비를 넘지 못했습니다. 다음 등반 시에는 백화점에서 에너지 충전 키트를 더 든든히 챙겨서 재도전하세요!";
+            }
+        }
+
+        function resetGame() {
+            hp = 100;
+            distanceLeft = 1000;
+            isGameOver = false;
+            gameOverlayEl.classList.add('hidden');
+            progressBarEl.style.width = '0%';
+            distanceTextEl.innerText = '1000m';
+            charContainerEl.style.left = '10%';
+            hpBarEl.style.width = '100%';
+        }
+
+
+        // ----------------------------------------
+        // 2. 성조 & 퀴즈 보드
+        // ----------------------------------------
+        function playPitch(pitchId) {
+            // 모든 파형 감춤
+            document.getElementById('wave-2_2').classList.add('hidden');
+            document.getElementById('wave-2_e').classList.add('hidden');
+            document.getElementById('wave-e_2').classList.add('hidden');
+            document.getElementById('wave-e_e').classList.add('hidden');
+
+            // 대상 파형 오픈
+            document.getElementById(`wave-${pitchId}`).classList.remove('hidden');
+        }
+
+        // 퀴즈 데이터 및 상태
+        let currentQuizIndex = 0;
+        let score = 0;
+        const quizzes = [
+            {
+                question: "부산대 친구들과 바니바니 게임을 시작하려고 합니다. 로컬 텐션을 폭발시킬 수 있는 가장 완벽한 인트로 억양은?",
+                options: [
+                    "A. 서울식으로 조용하고 다정하게 '바니바니~ 당근당근~'",
+                    "B. 파이팅 넘치고 스타카토 억양으로 '바뉘바뉘! 당근당근!' 씩씩하게 소리 지르기",
+                    "C. 침묵을 지키다 오빠야라고 부르기"
+                ],
+                correctAnswer: 1, // B
+                explanation: "맞습니다! 부산 지역 대학 술자리는 한 호흡에 끊어 치는 타격감 강한 억양이 핵심입니다."
+            },
+            {
+                question: "선배가 2의 e승을 발음해 달라고 합니다. 어떻게 해야 부산 현지인 평가를 통과할까요?",
+                options: [
+                    "A. 앞의 숫자 '2'를 얕고 짧게 부르고, 뒤의 알파벳 'e'를 아주 뾰족하고 강하게 올려서 길게 뺀다.",
+                    "B. 두 개 다 로봇처럼 또박또박 구별 없이 읽는다.",
+                    "C. 블루베리 스무디를 한 잔 마시며 얼버무린다."
+                ],
+                correctAnswer: 0, // A
+                explanation: "딩동댕! 앞 소리는 평탄하게, 뒷소리인 e의 성조를 강하게 올리는 영남 특유의 수식 발음법입니다!"
+            }
+        ];
+
+        const quizQuestionEl = document.getElementById('quiz-question');
+        const quizOptionsEl = document.getElementById('quiz-options');
+        const quizFeedbackEl = document.getElementById('quiz-feedback');
+        const btnNextQuizEl = document.getElementById('btn-next-quiz');
+        const scoreTextEl = document.getElementById('score-text');
+
+        function checkQuizAnswer(selectedIndex) {
+            const currentQuiz = quizzes[currentQuizIndex];
+            quizFeedbackEl.classList.remove('hidden');
+
+            if (selectedIndex === currentQuiz.correctAnswer) {
+                quizFeedbackEl.className = "mt-4 p-3 rounded-lg text-sm font-bold bg-emerald-100 text-emerald-800";
+                quizFeedbackEl.innerText = "⭕ 정답입니다! " + currentQuiz.explanation;
+                if (currentQuizIndex === 0 && score === 0) score = 1;
+                if (currentQuizIndex === 1 && score === 1) score = 2;
+            } else {
+                quizFeedbackEl.className = "mt-4 p-3 rounded-lg text-sm font-bold bg-rose-100 text-rose-800";
+                quizFeedbackEl.innerText = "❌ 아쉽네요! 오답입니다. 다시 천천히 읽어 보세요.";
+            }
+
+            scoreTextEl.innerText = score;
+            btnNextQuizEl.classList.remove('hidden');
+        }
+
+        function loadNextQuiz() {
+            currentQuizIndex++;
+            if (currentQuizIndex >= quizzes.length) {
+                // 퀴즈가 끝나면 처음으로 리셋
+                currentQuizIndex = 0;
+                score = 0;
+                scoreTextEl.innerText = score;
+            }
+
+            const nextQuiz = quizzes[currentQuizIndex];
+            quizQuestionEl.innerText = nextQuiz.question;
+            
+            // 옵션 재구성
+            quizOptionsEl.innerHTML = `
+                <button onclick="checkQuizAnswer(0)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                    ${nextQuiz.options[0]}
+                </button>
+                <button onclick="checkQuizAnswer(1)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                    ${nextQuiz.options[1]}
+                </button>
+                <button onclick="checkQuizAnswer(2)" class="w-full text-left p-3 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-slate-50 transition text-sm text-slate-700">
+                    ${nextQuiz.options[2]}
+                </button>
+            `;
+
+            quizFeedbackEl.classList.add('hidden');
+            btnNextQuizEl.classList.add('hidden');
+        }
+
+
+        // ----------------------------------------
+        // 3. 이통일반 믹싱 시뮬레이션
+        // ----------------------------------------
+        const rangeMakgeolli = document.getElementById('range-makgeolli');
+        const rangeCider = document.getElementById('range-cider');
+        const valMakgeolli = document.getElementById('val-makgeolli');
+        const valCider = document.getElementById('val-cider');
+
+        const makgeolliFluid = document.getElementById('makgeolli-fluid');
+        const ciderFluid = document.getElementById('cider-fluid');
+        const mixedFluid = document.getElementById('mixed-fluid');
+        const evalBoard = document.getElementById('eval-board');
+        const evalStars = document.getElementById('eval-stars');
+        const evalTitle = document.getElementById('eval-title');
+        const evalDesc = document.getElementById('eval-desc');
+
+        function mixRatioChange() {
+            const mVal = parseFloat(rangeMakgeolli.value);
+            const cVal = parseFloat(rangeCider.value);
+
+            valMakgeolli.innerText = mVal + ' 통';
+            valCider.innerText = cVal + ' 병';
+
+            // 비주얼 유체 높이 비율로 설정
+            const total = mVal + cVal;
+            if (total === 0) {
+                makgeolliFluid.style.height = '0%';
+                ciderFluid.style.height = '0%';
+                return;
+            }
+
+            const mPercent = (mVal / total) * 100;
+            const cPercent = (cVal / total) * 100;
+
+            makgeolliFluid.style.height = mPercent + '%';
+            ciderFluid.style.height = cPercent + '%';
+
+            // 믹싱 상태 해제 (조제 버튼 다시 누르도록 유도)
+            mixedFluid.classList.add('hidden');
+            evalBoard.classList.add('hidden');
+        }
+
+        function brewLees() {
+            const mVal = parseFloat(rangeMakgeolli.value);
+            const cVal = parseFloat(rangeCider.value);
+
+            if (mVal === 0 && cVal === 0) {
+                alert('주전자가 비어 있습니다. 막걸리와 사이다 비율을 먼저 설정해 주세요!');
+                return;
+            }
+
+            // 블렌딩 오버레이 오픈 애니메이션 효과
+            mixedFluid.classList.remove('hidden');
+            evalBoard.classList.remove('hidden');
+
+            // 비율에 따라 솔밭집 평점 피드백 출력
+            if (mVal === 2 && cVal === 1) {
+                evalStars.innerText = "⭐⭐⭐⭐⭐";
+                evalTitle.innerText = "기적의 솔밭 명장 탄생!";
+                evalDesc.innerText = "완벽한 2:1 골든 마스터 정밀 제어입니다! 막걸리의 묵직하고 구수한 곡물 향과 사이다의 톡 쏘는 청량감이 정교한 황금률을 이루어 탄식을 자아냅니다.";
+            } else if (mVal > 0 && cVal === 0) {
+                evalStars.innerText = "⭐⭐";
+                evalTitle.innerText = "걸쭉한 아재 취향";
+                evalDesc.innerText = "사이다가 빠지니 청량감이 전무한 막걸리 원액입니다. 4학년 설계 과제 스트레스가 지나쳐 묵직한 취기를 원할 때만 제조하세요.";
+            } else if (mVal === 0 && cVal > 0) {
+                evalStars.innerText = "⭐";
+                evalTitle.innerText = "달달한 무알코올 음료수";
+                evalDesc.innerText = "막걸리가 없는 이통일반은 탄산수나 다름없습니다. 솔밭 할머니가 혀를 끌끌 차며 뒤통수를 한 대 때릴 만한 조합입니다.";
+            } else {
+                // 비정형 비율
+                const currentRatio = mVal / cVal;
+                if (currentRatio > 2) {
+                    evalStars.innerText = "⭐⭐⭐";
+                    evalTitle.innerText = "과도한 곡주 묵직함";
+                    evalDesc.innerText = "사이다가 조금 모자라 막걸리 맛이 과하게 걸쭉합니다. 마시는 순간 나른해져 오후 로봇기구학 수업 시간에 수식 필기가 불가능해질 수 있습니다.";
+                } else {
+                    evalStars.innerText = "⭐⭐⭐";
+                    evalTitle.innerText = "톡 쏘는 음료 감성";
+                    evalDesc.innerText = "사이다 비중이 높아 과하게 달고 탄산이 튑니다. 입문용으로는 괜찮으나, 정밀 기계 설계자 수준의 완벽한 밸런스는 조금 아쉽네요.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
