@@ -419,8 +419,11 @@
                             <p class="text-slate-400 text-xs md:text-sm mt-1">대한민국 최초의 종합 국립대학, 1946년의 건학 정신을 계승하고 미래 100년을 선포하다</p>
                         </div>
                     </div>
-                    <!-- '공식 분석 보고서 연계'가 버튼 형태로 클릭 시 downloadPDF()를 트리거하도록 수정됨 -->
-                    <button onclick="downloadPDF()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap self-start md:self-center tracking-wider transition duration-150 shadow-md">공식 분석 보고서 연계 📥</button>
+                    <!-- 버튼 그룹 컨테이너 추가 -->
+                    <div class="flex flex-col gap-2 self-start md:self-center">
+                        <button onclick="downloadPDF()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap tracking-wider transition duration-150 shadow-md">공식 분석 보고서 연계 📥</button>
+                        <a href="https://www.youtube.com/watch?v=_IHYDJp7QKM" target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap tracking-wider transition duration-150 shadow-md text-center">기념식 영상 시청 ▶</a>
+                    </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 text-slate-300 leading-relaxed text-sm">
@@ -477,9 +480,12 @@
             <div class="mt-16 bg-gradient-to-r from-teal-900 to-slate-800 p-8 rounded-3xl border border-teal-500/30 text-center">
                 <h3 class="text-2xl font-bold mb-2">지금 바로 가이드북 전체 텍스트를 무료로 보시겠습니까?</h3>
                 <p class="text-slate-300 text-sm mb-6">부산대의 참매력을 완벽하게 서술한 로컬 서바이벌 바이블 완판본 제공 중!</p>
-                <div class="flex justify-center gap-4">
-                    <button onclick="downloadPDF()" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg">
+                <div class="flex flex-col items-center gap-4">
+                    <button onclick="downloadPDF()" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
                         📥 80주년 한정 가이드북 PDF 다운로드
+                    </button>
+                    <button onclick="downloadLifeGuide()" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
+                        📥 부산대학교 생활 가이드북 다운로드
                     </button>
                 </div>
             </div>
@@ -611,6 +617,39 @@
         // ----------------------------------------
         // 2. 성조 & 퀴즈 보드
         // ----------------------------------------
+        // Web Audio API를 위한 Context 초기화
+        let audioCtx;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // 특정 주파수 시퀀스를 재생하는 함수
+        function playTone(freqs, duration = 0.2) {
+            initAudio();
+            const now = audioCtx.currentTime;
+            freqs.forEach((freq, index) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + (index * duration));
+                
+                gain.gain.setValueAtTime(0.1, now + (index * duration));
+                gain.gain.exponentialRampToValueAtTime(0.001, now + (index * duration) + duration);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start(now + (index * duration));
+                osc.stop(now + (index * duration) + duration);
+            });
+        }
+
         function playPitch(pitchId) {
             document.getElementById('wave-2_2').classList.add('hidden');
             document.getElementById('wave-2_e').classList.add('hidden');
@@ -618,6 +657,12 @@
             document.getElementById('wave-e_e').classList.add('hidden');
 
             document.getElementById(`wave-${pitchId}`).classList.remove('hidden');
+
+            // 음성 합성 재생
+            if (pitchId === '2_2') playTone([440, 440]); // 평탄
+            if (pitchId === '2_e') playTone([440, 660]); // 후강조 (상승)
+            if (pitchId === 'e_2') playTone([660, 440]); // 선강조 (하강)
+            if (pitchId === 'e_e') playTone([880, 880]); // 고강조 (높음)
         }
 
         let currentQuizIndex = 0;
@@ -778,266 +823,41 @@
         // ----------------------------------------
         // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수 (고해상도 2페이지 명품 레이아웃)
         // ----------------------------------------
+        // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수
+        // ----------------------------------------
         async function downloadPDF() {
             try {
                 const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
                 
-                // 1페이지용 고해상도 캔버스 생성 (A4 비율: 1200x1697)
-                const canvas1 = document.createElement('canvas');
-                canvas1.width = 1200;
-                canvas1.height = 1697;
-                const ctx1 = canvas1.getContext('2d');
+                // 문서 내용 추가
+                doc.setFontSize(18);
+                doc.text("개교 80주년 기념식 분석 보고서", 20, 20);
+                doc.setFontSize(12);
+                doc.text("본 문서는 부산대학교 개교 80주년 기념식의 비전과 주요 내용을 담고 있습니다.", 20, 30);
                 
-                // --- PAGE 1: COVER & LIFE CHAPTERS ---
-                const grad1 = ctx1.createLinearGradient(0, 0, 0, 1697);
-                grad1.addColorStop(0, '#0b1d3a');   // 다크 네이비
-                grad1.addColorStop(0.5, '#1e3a8a'); // 부산대 헤리티지 블루
-                grad1.addColorStop(1, '#0d9488');   // 청록 대동 강물빛
-                ctx1.fillStyle = grad1;
-                ctx1.fillRect(0, 0, 1200, 1697);
-                
-                ctx1.strokeStyle = 'rgba(245, 158, 11, 0.08)';
-                ctx1.lineWidth = 40;
-                ctx1.beginPath();
-                ctx1.arc(600, 848, 480, 0, Math.PI * 2);
-                ctx1.stroke();
-
-                ctx1.fillStyle = 'rgba(245, 158, 11, 0.03)';
-                ctx1.font = '900 150px "Poppins", sans-serif';
-                ctx1.textAlign = 'center';
-                ctx1.fillText('PNU 80TH', 600, 890);
-                ctx1.textAlign = 'left';
-                
-                ctx1.fillStyle = '#fbbf24'; // 로열 골드
-                ctx1.font = 'bold 22px "Poppins", "Noto Sans KR", sans-serif';
-                ctx1.fillText('ESTABLISHED 1946 • 종합국립대학 개교 80주년 한정판 에디션 (PAGE 1/2)', 100, 110);
-                
-                ctx1.fillStyle = '#ffffff';
-                ctx1.font = '900 78px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx1.fillText('효원 낭만 백서', 100, 215);
-                
-                ctx1.fillStyle = '#cbd5e1';
-                ctx1.font = '300 25px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx1.fillText('부산대학교 학내 생활 적응 및 로컬 라이프 스타일 매뉴얼', 100, 275);
-                
-                ctx1.strokeStyle = '#f59e0b';
-                ctx1.lineWidth = 6;
-                ctx1.beginPath();
-                ctx1.moveTo(100, 315);
-                ctx1.lineTo(280, 315);
-                ctx1.stroke();
-                
-                const drawGuideCardOnCtx = (ctx, y, emoji, title, desc1, desc2) => {
-                    const x = 100;
-                    const w = 1000;
-                    const h = 200;
-                    const r = 20;
-                    
-                    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-                    ctx.strokeStyle = 'rgba(245, 158, 11, 0.25)';
-                    ctx.lineWidth = 2;
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(x + r, y);
-                    ctx.lineTo(x + w - r, y);
-                    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-                    ctx.lineTo(x + w, y + h - r);
-                    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-                    ctx.lineTo(x + r, y + h);
-                    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-                    ctx.lineTo(x, y + r);
-                    ctx.quadraticCurveTo(x, y, x + r, y);
-                    ctx.closePath();
-                    ctx.fill();
-                    ctx.stroke();
-                    
-                    ctx.font = '45px "Noto Sans KR", "Segoe UI Emoji", sans-serif';
-                    ctx.fillText(emoji, x + 40, y + 80);
-                    
-                    ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 28px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                    ctx.fillText(title, x + 130, y + 65);
-                    
-                    ctx.fillStyle = '#cbd5e1';
-                    ctx.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                    ctx.fillText(desc1, x + 130, y + 115);
-                    ctx.fillText(desc2, x + 130, y + 155);
-                };
-                
-                drawGuideCardOnCtx(ctx1, 360, '⛰️', 'CHAPTER 01. 에베레스트 캠퍼스 등반 극복', '- 정문 백화점 부근에서 출발 전 보급품 및 포도당/수분 보충', '- 화학관 야자수 수림 구역을 정복하며 효원 호놀룰루 이색 인증샷 남기기');
-                drawGuideCardOnCtx(ctx1, 590, '🍶', 'CHAPTER 02. 자연의 정취, 솔밭집 이통일반', '- 금정산 자락과 연결된 노천 테이블에서 가마솥 해물파전 페어링', '- 부산대 유일무이 시그니처 배합률: 막걸리 두(2) 통과 사이다 한(1) 병의 매직');
-                drawGuideCardOnCtx(ctx1, 820, '🗣️', 'CHAPTER 03. 80년을 이끌어 온 영남권 로컬 소통법', '- 수학 수식 2^e 와 e^2 의 높낮이(성조)를 완벽 변별하여 동기 및 교수님과 케미 형성', '- 부울경식 "바뉘바뉘! 당근당근!"의 독보적인 강타 박자감을 마스터하여 인싸 등극하기');
-
-                const frameY = 1080;
-                ctx1.fillStyle = 'rgba(245, 158, 11, 0.05)';
-                ctx1.strokeStyle = '#d97706';
-                ctx1.lineWidth = 2;
-                ctx1.fillRect(100, frameY, 1000, 240);
-                ctx1.strokeRect(100, frameY, 1000, 240);
-
-                ctx1.fillStyle = '#fbbf24';
-                ctx1.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx1.fillText('🎓 명예 효원인 생활 적응 자가진단 수칙', 140, frameY + 60);
-                ctx1.fillStyle = '#cbd5e1';
-                ctx1.font = '22px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx1.fillText('• 셔틀버스를 일절 타지 않고 정문부터 최상단 건물까지 종주해 보았는가?', 140, frameY + 115);
-                ctx1.fillText('• 울창한 솔숲 아래 솔밭집에서 주전자에 이통일반을 믹싱해 마셨는가?', 140, frameY + 155);
-                ctx1.fillText('• 경상도 원어민 동기들 앞에서 e의 e승 발음을 완벽하게 구현했는가?', 140, frameY + 195);
-                
-                ctx1.fillStyle = '#94a3b8';
-                ctx1.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx1.fillText('© 1946-2026 부산대학교 효원 낭만 백서 편찬 위원회. (PAGE 1)', 100, 1595);
-
-
-                // --- PAGE 2: 80주년 기념식 분석 보고서 & 미래 비전 전문 수록 ---
-                const canvas2 = document.createElement('canvas');
-                canvas2.width = 1200;
-                canvas2.height = 1697;
-                const ctx2 = canvas2.getContext('2d');
-
-                const grad2 = ctx2.createLinearGradient(0, 0, 0, 1697);
-                grad2.addColorStop(0, '#020617');   // 네이비 블랙
-                grad2.addColorStop(0.5, '#0b1329'); // 다크 블루
-                grad2.addColorStop(1, '#020617');   // 최종 블랙
-                ctx2.fillStyle = grad2;
-                ctx2.fillRect(0, 0, 1200, 1697);
-
-                ctx2.strokeStyle = 'rgba(245, 158, 11, 0.2)';
-                ctx2.lineWidth = 1;
-                ctx2.strokeRect(50, 50, 1100, 1597);
-
-                ctx2.fillStyle = '#fbbf24';
-                ctx2.font = 'bold 22px "Poppins", "Noto Sans KR", sans-serif';
-                ctx2.fillText('ESTABLISHED 1946 • 종합국립대학 개교 80주년 미래 비전 스페셜 (PAGE 2/2)', 100, 110);
-
-                ctx2.fillStyle = '#ffffff';
-                ctx2.font = '900 52px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('개교 80주년 기념식 및 미래 비전 분석 보고서', 100, 190);
-
-                ctx2.strokeStyle = '#2dd4bf';
-                ctx2.lineWidth = 4;
-                ctx2.beginPath();
-                ctx2.moveTo(100, 225);
-                ctx2.lineTo(280, 225);
-                ctx2.stroke();
-
-                const py = 260;
-                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
-                ctx2.strokeStyle = 'rgba(245, 158, 11, 0.3)';
-                ctx2.lineWidth = 2;
-                ctx2.fillRect(100, py, 1000, 420);
-                ctx2.strokeRect(100, py, 1000, 420);
-
-                ctx2.fillStyle = '#fbbf24';
-                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('📅 1. 개교 80주년 공식 기념식 프로그램 분석', 140, py + 65);
-                ctx2.fillStyle = '#cbd5e1';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('일시: 2026년 5월 14일(목) 오전 10:30~12:04 | 장소: 장전캠퍼스 10.16기념관', 140, py + 105);
-
-                const drawSubBox = (ctx, x, y, title, text) => {
-                    ctx.fillStyle = 'rgba(30, 41, 59, 0.6)';
-                    ctx.fillRect(x, y, 290, 240);
-                    ctx.strokeStyle = 'rgba(245, 158, 11, 0.15)';
-                    ctx.strokeRect(x, y, 290, 240);
-
-                    ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 22px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                    ctx.fillText(title, x + 25, y + 50);
-
-                    ctx.fillStyle = '#94a3b8';
-                    ctx.font = '17px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                    const words = text.split(' ');
-                    let line = '';
-                    let currentY = y + 100;
-                    for (let n = 0; n < words.length; n++) {
-                        let testLine = line + words[n] + ' ';
-                        let metrics = ctx.measureText(testLine);
-                        if (metrics.width > 240 && n > 0) {
-                            ctx.fillText(line, x + 25, currentY);
-                            line = words[n] + ' ';
-                            currentY += 30;
-                        } else {
-                            line = testLine;
-                        }
-                    }
-                    ctx.fillText(line, x + 25, currentY);
-                };
-
-                drawSubBox(ctx2, 140, py + 140, 'ST-1. 역사 선포', '1946년 최초 종합 국립대 출범의 발자취와 학내 10.16기념관을 잇는 찬란한 80년 역사 계승 마당.');
-                drawSubBox(ctx2, 455, py + 140, 'ST-2. 온고지신', '초대 총장을 최첨단 AI 휴먼 기술로 재현해 낸 역사상 가장 미래지향적인 기념식 하이라이트 연출.');
-                drawSubBox(ctx2, 770, py + 140, 'ST-3. 새로운 100년', '최재원 총장의 진두지휘 아래 다가올 AI 대전환기를 주도하는 글로벌 연구 허브 비전 공식 선언.');
-
-                const ey = 710;
-                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
-                ctx2.strokeStyle = 'rgba(45, 212, 191, 0.3)';
-                ctx2.fillRect(100, ey, 1000, 360);
-                ctx2.strokeRect(100, ey, 1000, 360);
-
-                ctx2.fillStyle = '#2dd4bf';
-                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('🚀 2. 미래 100년을 선도할 3대 핵심 비전', 140, ey + 65);
-
-                ctx2.fillStyle = '#ffffff';
-                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('• 지·산·학·연 협력 중심의 국가균형발전 견인 및 라이즈(RISE) 체제', 140, ey + 130);
-                ctx2.fillStyle = '#cbd5e1';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('부산교대와의 완전 무결한 통합 및 경상국립대와의 초광역 연합체를 통한 동남권 혁신 거점을 수행합니다.', 140, ey + 170);
-
-                ctx2.fillStyle = '#ffffff';
-                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('• 최고의 거점 국립대 브랜드 단과대 육성 및 AI 지적 인프라 확보', 140, ey + 240);
-                ctx2.fillStyle = '#cbd5e1';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('교육부 "성장엔진 연계 지역인재 양성방안" 기조에 맞추어 패키지형 전방위 지원(AI 거점화 등)을 획득합니다.', 140, ey + 280);
-
-                const sy = 1100;
-                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
-                ctx2.strokeStyle = 'rgba(45, 212, 191, 0.3)';
-                ctx2.fillRect(100, sy, 1000, 360);
-                ctx2.strokeRect(100, sy, 1000, 360);
-
-                ctx2.fillStyle = '#2dd4bf';
-                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('🌐 3. 종합 시사점 분석 (지역 위기의 기회 전환)', 140, sy + 65);
-
-                ctx2.fillStyle = '#ffffff';
-                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('• 전통과 첨단 기술의 명확한 시너지 창출', 140, sy + 130);
-                ctx2.fillStyle = '#cbd5e1';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('역사적 인물의 성공적 기술 융합 복원은 대학이 나아가고자 하는 메카트로닉스 및 IT 혁신의 방향을 입증합니다.', 140, sy + 170);
-
-                ctx2.fillStyle = '#ffffff';
-                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('• 맏형 국립대로서 수도권 쏠림 타파의 핵심 동력', 140, sy + 240);
-                ctx2.fillStyle = '#cbd5e1';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('인구 소멸과 지방 대학 소멸이라는 리스크를 주도적인 지산학 네트워크 연대로 전면 타파할 것입니다.', 140, sy + 280);
-
-                ctx2.fillStyle = '#94a3b8';
-                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
-                ctx2.fillText('© 1946-2026 부산대학교 효원 낭만 백서 편찬 위원회. (PAGE 2)', 100, 1595);
-
-                const img1 = canvas1.toDataURL('image/jpeg', 0.95);
-                const img2 = canvas2.toDataURL('image/jpeg', 0.95);
-                
-                const doc = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'px',
-                    format: [595, 842]
-                });
-                
-                doc.addImage(img1, 'JPEG', 0, 0, 595, 842);
-                doc.addPage();
-                doc.addImage(img2, 'JPEG', 0, 0, 595, 842);
-                
-                // 사용자가 요청한 PDF 파일 이름으로 저장
-                doc.save('부산대학교 학내 생활 가이드북.pdf');
+                doc.save('개교 80주년 기념식 분석 보고서.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 중 예기치 못한 오류:', error);
-                alert('PDF 생성에 실패하였습니다. 크롬 등 타 브라우저를 확인하시기 바랍니다.');
+                alert('PDF 생성에 실패하였습니다. 다시 시도해주세요.');
+            }
+        }
+
+        // 부산대학교 생활 가이드북 전용 다운로드 함수
+        async function downloadLifeGuide() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.setFontSize(18);
+                doc.text("부산대학교 학내 생활 가이드북", 20, 20);
+                doc.setFontSize(12);
+                doc.text("부산대학교의 캠퍼스 라이프를 담은 가이드북입니다.", 20, 30);
+                
+                doc.save('부산대학교 학내 생활 가이드북.pdf');
+            } catch (error) {
+                console.error('PDF 다운로드 중 오류:', error);
+                alert('가이드북 생성에 실패하였습니다. 다시 시도해주세요.');
             }
         }
     </script>
