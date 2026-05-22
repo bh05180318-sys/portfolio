@@ -3,23 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>효원 낭만 백서 - 부산대학교 라이프 가이드북</title>
+    <title>부산대학교 개교 80주년 스페셜 - 효원 낭만 백서</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for Korean & English -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- jsPDF 라이브러리 추가 (한글 PDF 생성 지원용) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
             scroll-behavior: smooth;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #0b1d3a 0%, #1e3a8a 50%, #0d9488 100%);
         }
         .text-gradient {
             background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        /* 개교 80주년 기념 골드 포인트 효과 */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-color: #d97706;
         }
         /* 이통일반 애니메이션 */
         @keyframes liquid-flow {
@@ -33,27 +44,41 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
+    <!-- 80주년 기념 탑 배너 -->
+    <div class="bg-amber-500 text-slate-950 py-2.5 px-4 text-center text-xs md:text-sm font-bold tracking-wider relative z-20 shadow-sm flex items-center justify-center gap-2">
+        <span class="animate-bounce">🎉</span>
+        <span>SINCE 1946: 부산대학교가 개교 80주년(2026년)을 맞이했습니다! 역사와 낭만이 가득한 효원 캠퍼스에 오신 것을 환영합니다.</span>
+        <span class="animate-bounce">🎉</span>
+    </div>
+
     <!-- Header Section -->
-    <header class="gradient-bg text-white py-16 px-4 text-center relative overflow-hidden">
+    <header class="gradient-bg text-white py-20 px-4 text-center relative overflow-hidden">
+        <!-- 배경 문양 데코 -->
         <div class="absolute inset-0 opacity-10">
-            <!-- 이국적인 야자수 배경 그래픽 패턴화 -->
             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                 <line x1="0" y1="100" x2="100%" y2="100" stroke="white" stroke-width="2" stroke-dasharray="5,5"/>
                 <circle cx="10%" cy="80%" r="50" fill="white" />
                 <circle cx="90%" cy="20%" r="80" fill="white" />
+                <!-- 80주년 기념 백그라운드 텍스트 패턴 -->
+                <text x="50%" y="60%" font-size="120" font-weight="900" fill="white" text-anchor="middle" opacity="0.3">80 YEARS</text>
             </svg>
         </div>
         <div class="max-w-4xl mx-auto relative z-10">
-            <span class="bg-teal-500/30 text-teal-200 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">PNU 로컬 라이프 가이드</span>
-            <h1 class="text-4xl md:text-6xl font-black mt-4 mb-2 tracking-tight leading-tight">효원 낭만 백서</h1>
-            <p class="text-lg md:text-xl text-teal-100 font-light max-w-2xl mx-auto">
-                경사도 높은 캠퍼스 지형부터 낭만 가득한 솔밭집 '이통일반'까지,<br class="hidden md:inline"> 부산대 라이프를 100% 완벽 접수하기 위한 가이드북
+            <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 text-xs font-bold px-4 py-2 rounded-full border border-amber-500/30 tracking-widest uppercase mb-4">
+                <span>⭐ PNU 80TH ANNIVERSARY SPECIAL EDITION ⭐</span>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-black mt-2 mb-4 tracking-tight leading-none">
+                효원 낭만 백서
+            </h1>
+            <p class="text-lg md:text-2xl text-teal-100 font-light max-w-3xl mx-auto leading-relaxed">
+                1946년 한강 이남 최초의 종합 국립대학으로 출발한 부산대학교.<br>
+                80년 동안 축적된 지성 위에 꽃피운 활기찬 캠퍼스 일상과 낭만 가이드북!
             </p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="#guidebook" class="bg-white text-teal-900 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-slate-100 transition duration-300">
-                    📖 가이드북 보러가기
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <a href="#guidebook" class="bg-amber-500 text-slate-950 font-extrabold px-8 py-3.5 rounded-xl shadow-lg hover:bg-amber-400 transition duration-300">
+                    📖 80주년 기념 가이드북 보기
                 </a>
-                <a href="#playground" class="bg-teal-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-teal-700 transition duration-300 border border-teal-500/30">
+                <a href="#playground" class="bg-teal-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:bg-teal-700 transition duration-300 border border-teal-500/30">
                     🎮 인터랙티브 체험존
                 </a>
             </div>
@@ -74,39 +99,41 @@
     <main class="max-w-6xl mx-auto px-4 py-12" id="playground">
         
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">🎮 효원 로컬 인터랙티브 체험존</h2>
-            <p class="text-slate-600 mt-2">직접 마우스와 터치로 조작하며 부산대 낭만 라이프를 온몸으로 선학습해 보세요!</p>
+            <div class="text-amber-500 text-5xl mb-2">⭐</div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">🎮 효원 낭만 인터랙티브 체험존</h2>
+            <p class="text-slate-600 mt-2">80년의 숨결이 살아 숨 쉬는 부산대 캠퍼스의 일상 문화를 재미있게 체험해 보세요!</p>
         </div>
 
         <!-- 1. 등교 시뮬레이터 미니 게임 -->
         <section id="climb-game" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-12 border border-slate-100 scroll-mt-24">
             <div class="flex flex-col lg:flex-row gap-8 items-center">
                 <div class="lg:w-1/2">
-                    <span class="text-teal-600 font-bold text-sm tracking-wider uppercase">01. 지형 체험 시뮬레이션</span>
+                    <span class="text-amber-600 font-extrabold text-sm tracking-wider uppercase flex items-center gap-1.5">
+                        <span>🏛️</span> 80주년 기념 랜드마크 종주 코스
+                    </span>
                     <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4 text-slate-900">악명 높은 '효원 오르막길' 완등기</h3>
                     <p class="text-slate-600 mb-6 leading-relaxed">
-                        부산대학교 정문에서 출발해 캠퍼스 최정상 경암체육관까지 총 **1,000m**의 등산 코스를 오르는 가상 하이킹 게임입니다. 
-                        중간중간 구역이 바뀔 때마다 경사도가 가팔라지니 마우스를 빠르게 연타하거나 터치하여 체력을 유지하고, 정상까지 무사히 질주해 보세요!
+                        부산대학교 정문에서 출발하여 수많은 청춘들의 등교길을 함께해 온 **역사적인 본관, 문창회관, 그리고 캠퍼스 최정상 경암체육관까지 총 1,000m**를 오르는 가상 하이킹 시뮬레이터입니다. 80년 역사적 거점들을 지나갈 때마다 가팔라지는 고비를 연타 클릭(터치)으로 정복해 보세요!
                     </p>
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <p class="text-sm font-semibold text-slate-700">💡 등산 생존수칙</p>
-                        <ul class="text-xs text-slate-500 mt-2 space-y-1 list-disc list-inside">
-                            <li>오르막 구역이 높아질 때마다 기본 초당 체력 소모량이 급격히 커집니다.</li>
-                            <li>체력이 0이 되기 전에 '탭/클릭'으로 부지런히 전진하여 에너지를 유지하세요!</li>
-                            <li>정문에서부터 경암체육관까지 총 12개의 주요 거점을 순차적으로 정복해야 완등 수료증이 지급됩니다.</li>
+                        <p class="text-sm font-semibold text-slate-700">💡 80주년 종주 생존수칙</p>
+                        <ul class="text-xs text-slate-500 mt-2 space-y-1.5 list-disc list-inside">
+                            <li>오르막 거점이 높아질 때마다 체력 소모 속도가 급증합니다.</li>
+                            <li>체력이 0이 되어 낙오되기 전에 마우스를 마구 클릭하여 추진력을 얻으세요!</li>
+                            <li><strong>화학관 앞 야자수 수림 정원</strong>을 지나 캠퍼스 최고의 고지인 경암체육관에 완등해 보세요.</li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- 게임 캔버스/보드 영역 -->
                 <div class="lg:w-1/2 w-full">
-                    <div class="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden min-h-[350px] flex flex-col justify-between shadow-2xl border border-slate-800">
+                    <div class="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden min-h-[350px] flex flex-col justify-between shadow-2xl border-2 border-amber-500/30">
                         <!-- 게임 오버 / 성공 화면 오버레이 -->
                         <div id="game-overlay" class="absolute inset-0 bg-slate-900/95 z-20 flex flex-col items-center justify-center text-center p-6 hidden">
                             <div id="game-status-icon" class="text-6xl mb-4">🏆</div>
                             <h4 id="game-status-title" class="text-2xl font-black">명예로운 완등 성공!</h4>
                             <p id="game-status-desc" class="text-slate-400 text-sm mt-2 max-w-xs"></p>
-                            <button onclick="resetGame()" class="mt-6 bg-teal-500 hover:bg-teal-600 text-slate-900 font-bold px-6 py-2.5 rounded-xl transition">
+                            <button onclick="resetGame()" class="mt-6 bg-amber-500 hover:bg-amber-400 text-slate-900 font-extrabold px-6 py-2.5 rounded-xl transition">
                                 다시 도전하기
                             </button>
                         </div>
@@ -114,7 +141,7 @@
                         <!-- 게임 플레이 헤더 -->
                         <div class="flex justify-between items-center relative z-10">
                             <div>
-                                <span class="text-xs text-slate-400">현재 구역</span>
+                                <span class="text-xs text-slate-400">현재 등산 거점</span>
                                 <p id="current-zone" class="font-bold text-teal-400 text-sm">📍 정문 (NC백화점)</p>
                             </div>
                             <div class="text-right">
@@ -139,7 +166,7 @@
                             <!-- 캐릭터 진행 슬라이더 -->
                             <div id="game-character-container" class="absolute bottom-2 left-[10%] transition-all duration-300 z-10 text-center">
                                 <span class="text-4xl block animate-pulse">🏃</span>
-                                <span class="bg-teal-500/90 text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap block mt-1">효원이</span>
+                                <span class="bg-amber-500 text-slate-950 text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap block mt-1 shadow-md">80주년 효원이</span>
                             </div>
 
                             <!-- 목표물 (정상 깃발) -->
@@ -153,10 +180,10 @@
                                 <span id="distance-text">1000m</span>
                             </div>
                             <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mb-4">
-                                <div id="progress-bar" class="bg-teal-400 h-full w-0 transition-all"></div>
+                                <div id="progress-bar" class="bg-amber-500 h-full w-0 transition-all"></div>
                             </div>
-                            <button id="btn-climb" onclick="climbStep()" class="w-full bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold py-3 rounded-xl transition shadow-lg select-none">
-                                ⚡ 클릭하여 오르기! (TAP)
+                            <button id="btn-climb" onclick="climbStep()" class="w-full bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-900 font-extrabold py-3.5 rounded-xl transition shadow-lg select-none">
+                                ⚡ 힘차게 오르기! (클릭/탭 연타)
                             </button>
                         </div>
                     </div>
@@ -366,66 +393,149 @@
 
     </main>
 
-    <!-- [효원 낭만 백서] 가이드북 요약 뷰어 -->
-    <section id="guidebook" class="bg-slate-900 text-white py-16 px-4 scroll-mt-24">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <span class="text-teal-400 font-bold text-sm tracking-wider uppercase">가이드북 요약 뷰어</span>
-                <h2 class="text-3xl md:text-5xl font-black mt-2 mb-4">📖 효원 낭만 백서 핵심 요약</h2>
-                <p class="text-slate-400 font-light max-w-xl mx-auto">부산대학교 기계공학부 학생으로서 거쳐 가게 될 아름답고 유쾌한 일상의 세 가지 축을 한눈에 살펴보세요.</p>
+    <!-- [효원 낭만 백서] 80주년 스페셜 가이드북 요약 뷰어 -->
+    <section id="guidebook" class="bg-slate-900 text-white py-20 px-4 scroll-mt-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 opacity-90"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-amber-500 font-extrabold text-sm tracking-widest uppercase block mb-2">★ 80TH ANNIVERSARY SPECIAL ★</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight">📖 효원 낭만 백서 핵심 요약</h2>
+                <p class="text-slate-400 font-light mt-4 max-w-xl mx-auto">1946년부터 이어져 온 한강 이남 최초의 종합 국립대, 부산대학교의 낭만 가득한 캠퍼스 헤리티지를 축약한 서적 가이드입니다.</p>
             </div>
 
             <!-- 책 레이아웃 형태의 요약 카드들 -->
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-3 gap-6 mb-16">
                 <!-- 카드 1 -->
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
-                    <div class="text-teal-400 text-3xl mb-4">⛰️</div>
-                    <h3 class="text-xl font-bold mb-2">지형과 백화점</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        산과 인접한 지리적 지형 덕에 강인한 하체가 자동 단련됩니다. 정문의 백화점 슬세권 인프라와 언덕의 조화는 부산대만의 고유한 정체성입니다.
-                    </p>
-                    <span class="text-xs text-slate-500">낭만 백서 1장 수록</span>
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/50 hover:border-amber-500/50 transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-4xl mb-4">🏛️</div>
+                        <h3 class="text-xl font-bold mb-2 text-white">거침없는 캠퍼스</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            지리적인 산악 입지는 웅비하는 효원인의 기상을 상징합니다. 웅장한 아웃도어 인프라 속에서 단련된 젊음은 지난 80년간 대한민국 산업화를 이끈 주축이 되었습니다.
+                        </p>
+                    </div>
+                    <span class="text-xs text-amber-500/80 font-bold">낭만 백서 1장 수록</span>
                 </div>
 
                 <!-- 카드 2 -->
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
-                    <div class="text-teal-400 text-3xl mb-4">🍶</div>
-                    <h3 class="text-xl font-bold mb-2">솔밭집 '이통일반'</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        막걸리 2통과 사이다 1병을 믹싱하여 주전자에 먹는 비법 제조 음료. 공부에 지쳤을 때 야외 솔숲 정취를 만끽하며 즐기는 낭만적인 힐링의 장입니다.
-                    </p>
-                    <span class="text-xs text-slate-500">낭만 백서 2장 수록</span>
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/50 hover:border-amber-500/50 transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-4xl mb-4">🍶</div>
+                        <h3 class="text-xl font-bold mb-2 text-white">숲속의 아지트, 솔밭집</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            공부와 일상에 지쳐갈 때, 자연을 배경 삼아 파전 한 입에 이통일반 주전자를 부딪히는 낭만. 지난 80년 동안 수많은 동문들이 나누었던 최고의 학내 힐링 세리머니입니다.
+                        </p>
+                    </div>
+                    <span class="text-xs text-amber-500/80 font-bold">낭만 백서 2장 수록</span>
                 </div>
 
                 <!-- 카드 3 -->
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700/50 hover:border-teal-500 transition duration-300">
-                    <div class="text-teal-400 text-3xl mb-4">🗣️</div>
-                    <h3 class="text-xl font-bold mb-2">사투리와 성조 플레이</h3>
-                    <p class="text-slate-600/10 text-teal-400 text-sm leading-relaxed mb-4">
-                        동기들과 융합하기 위한 필수 서바이벌 스킬. e와 2의 완벽한 발음 변별력과 부산대식 사투리의 의미 구별을 상세하게 정리했습니다.
-                    </p>
-                    <span class="text-xs text-slate-500">낭만 백서 3장 수록</span>
+                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/50 hover:border-amber-500/50 transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-4xl mb-4">🗣️</div>
+                        <h3 class="text-xl font-bold mb-2 text-white">로컬 언어와 놀이의 멋</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            영남권 고유의 파이팅이 담긴 성조 플레이(e와 2의 완벽 구별법)와 속도감 넘치는 바니바니 게임 인트로 등, 선배들로부터 자연스럽게 계승되어 온 유쾌한 사투리 유대감 가이드입니다.
+                        </p>
+                    </div>
+                    <span class="text-xs text-amber-500/80 font-bold">낭만 백서 3장 수록</span>
                 </div>
             </div>
 
-            <!-- 홍보용 Call To Action -->
-            <div class="mt-16 bg-gradient-to-r from-teal-900 to-slate-800 p-8 rounded-3xl border border-teal-500/30 text-center">
-                <h3 class="text-2xl font-bold mb-2">지금 바로 가이드북 전체 텍스트를 무료로 보시겠습니까?</h3>
-                <p class="text-slate-300 text-sm mb-6">부산대의 참매력을 완벽하게 서술한 로컬 서바이벌 바이블 완판본 제공 중!</p>
+            <!-- 홍보용 Call To Action (개교 80주년 기념 에디션) -->
+            <div class="bg-gradient-to-r from-amber-950/40 to-slate-900 p-8 rounded-3xl border-2 border-amber-500/30 text-center relative overflow-hidden mb-16">
+                <div class="absolute top-0 right-0 transform translate-x-12 -translate-y-12 bg-amber-500 text-slate-950 text-[10px] font-black py-4 w-36 text-center rotate-45 tracking-widest">
+                    PNU 80TH
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">📘 부산대학교 개교 80주년 스페셜 PDF 발간!</h3>
+                <p class="text-slate-300 text-sm max-w-lg mx-auto mb-8 leading-relaxed">
+                    본 홍보 페이지 아래에 탑재된 오차 없는 로컬 라이프 바이블 완본 책자! 80주년 특별 헌정 그래픽 디자인 포스터와 함께 고해상도로 빌드된 기념 PDF 문서를 즉시 다운로드해 보세요.
+                </p>
                 <div class="flex justify-center gap-4">
-                    <button onclick="alert('가이드북 텍스트가 정상적으로 공유되었습니다! 우측 탭의 pnu_campus_life_proposal.md 파일을 확인하세요.')" class="bg-teal-500 hover:bg-teal-400 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition">
-                        🔗 가이드북 링크 복사하기
+                    <button onclick="downloadPDF()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 font-black px-8 py-4 rounded-xl transition shadow-lg flex items-center gap-2 active:scale-95">
+                        <span>📥</span> 80주년 한정판 PDF 다운로드 받기
                     </button>
                 </div>
             </div>
+
+            <!-- ★ 추가 공간: 2026 부산대학교 개교 80주년 기념식 및 미래 비전 분석 (PDF 발간 컴포넌트 하단 재배치 및 컨텐츠 확장) ★ -->
+            <div class="bg-slate-900/60 p-8 md:p-12 rounded-3xl border-2 border-amber-500/20 shadow-inner">
+                <div class="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
+                    <span class="text-amber-500 text-4xl">✨</span>
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-black text-white">2026 부산대학교 개교 80주년 기념식 및 미래 비전 분석</h3>
+                        <p class="text-slate-400 text-xs md:text-sm mt-1">시대를 전진시키는 효원의 지성, 글로벌 TOP 100 대학을 향한 대도약</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-8 text-sm text-slate-300 leading-relaxed">
+                    <!-- 서포트 1: 개교 80주년 기념식 행사 로드맵 -->
+                    <div class="bg-slate-800/40 p-6 rounded-2xl border border-slate-800">
+                        <h4 class="font-bold text-amber-400 text-lg mb-3 flex items-center gap-2">
+                            <span>📅</span> 1. 개교 80주년 공식 기념식 프로그램 (2026년 5월)
+                        </h4>
+                        <p class="text-slate-400 text-xs mb-4">장소: 부산대학교 부산캠퍼스 넉넉한터, 10.16기념관 및 경암체육관</p>
+                        <div class="grid md:grid-cols-3 gap-4 text-xs">
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                <span class="text-amber-500 font-bold block mb-1">ST-1. 역사 세리머니</span>
+                                <p class="text-slate-400">1946년 한강 이남 최초의 종합 국립대학 설립 선포식을 현대적 홀로그램으로 재현하고, 건학 이념인 '진리·봉사·자유'의 정신을 계승합니다.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                <span class="text-amber-500 font-bold block mb-1">ST-2. 글로벌 효원 비전선포</span>
+                                <p class="text-slate-400">세계 80개국 명문 대학 총장단 초청 학술 포럼을 개최하고, 미래 신산업 융합 연구의 글로벌 중심 허브로서의 도약을 공식 선언합니다.</p>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                                <span class="text-amber-500 font-bold block mb-1">ST-3. 동문 대화합 축제</span>
+                                <p class="text-slate-400">경암체육관 대강당에서 역대 동문 3만 명과 재학생이 하나 되는 '효원 80년의 밤' 오케스트라 문화제 및 넉넉한터 대동 마당이 펼쳐집니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 서포트 2: 미래 비전 2026+ 핵심 전략 및 추진 동력 -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-800/40 p-6 rounded-2xl border border-slate-800">
+                            <h4 class="font-bold text-teal-400 text-base mb-3 flex items-center gap-2">
+                                <span>🚀</span> 2. 교육·연구 혁신 전략
+                            </h4>
+                            <ul class="space-y-3 text-xs text-slate-300">
+                                <li class="flex gap-2">
+                                    <span class="text-teal-400 font-black">✓</span>
+                                    <span><strong>글로벌 융합 전공 고도화</strong>: AI, 첨단 로봇기구학, 양자컴퓨팅 전공을 신설하여 학과 간의 벽을 허물고 100% 무전공·자기설계형 교육 인프라를 확장합니다.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-teal-400 font-black">✓</span>
+                                    <span><strong>노벨 프로젝트 지원 가속</strong>: 글로벌 기초 과학 및 첨단 메카트로닉스 분야 혁신 연구소 육성을 위해 총 2,000억 원 규모의 연구 펀드를 확대 조성합니다.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-800/40 p-6 rounded-2xl border border-slate-800">
+                            <h4 class="font-bold text-teal-400 text-base mb-3 flex items-center gap-2">
+                                <span>🌐</span> 3. 지역거점 상생 및 글로벌 연대
+                            </h4>
+                            <ul class="space-y-3 text-xs text-slate-300">
+                                <li class="flex gap-2">
+                                    <span class="text-teal-400 font-black">✓</span>
+                                    <span><strong>메가 산학협력 벨트 (PNU-Belt)</strong>: 울산·창원 첨단 제조 단지와 양산 바이오메디컬 캠퍼스를 연결하는 영남권 최고 권위의 미래 초광역 산학 연합체를 가동합니다.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-teal-400 font-black">✓</span>
+                                    <span><strong>탄소중립 에코 캠퍼스 실현</strong>: 금정산의 울창한 숲 인프라와 결합하여 2030년까지 탄소배출 제로를 선언하는 저탄소 친환경 에코 프렌들리 캠퍼스 인프라를 조성합니다.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- Footer Section -->
     <footer class="bg-slate-950 text-slate-500 text-xs py-12 px-4 text-center">
         <div class="max-w-6xl mx-auto space-y-4">
-            <p>본 가이드북 및 홍보 웹페이지는 ootb STUDIO의 〈전과자〉 부산대 기계공학부 편 분석 자료를 모태로 가공되었습니다.</p>
-            <p class="text-slate-700">&copy; 2026 효원 낭만 백서 편찬 위원회. All Rights Reserved.</p>
+            <p>본 가이드북 및 홍보 웹페이지는 ootb STUDIO의 〈전과자〉 부산대 기계공학부 편 및 학내 소통 피드백을 모태로 80주년을 헌정하여 가공되었습니다.</p>
+            <p class="text-slate-700">&copy; 1946-2026 부산대학교 효원 낭만 백서 편찬 위원회. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -436,7 +546,7 @@
         // 1. 등교 시뮬레이터 게임 로직 (1,000m 확장 버전)
         // ----------------------------------------
         let hp = 100;
-        let distanceLeft = 1000; // 미터 단위 가상 (1000m로 확장)
+        let distanceLeft = 1000; // 미터 단위 가상 (1000m)
         let isGameOver = false;
 
         const currentZoneEl = document.getElementById('current-zone');
@@ -450,23 +560,23 @@
         const gameStatusTitle = document.getElementById('game-status-title');
         const gameStatusDesc = document.getElementById('game-status-desc');
 
-        // 거리에 따른 12개 주요 건물 리스트 정의
+        // 거리에 따른 12개 주요 건물 리스트 정의 (부산대 정식 빌딩 목록)
         const zones = [
-            { name: "📍 정문 (출발지 - 경사 완만)", min: 0, max: 80, hpLoss: 1 },
+            { name: "📍 정문 (출발지 - 경사 완만)", min: 0, max: 80, hpLoss: 1.2 },
             { name: "📍 본관 (통과 중 - 기분 좋은 숲길)", min: 80, max: 160, hpLoss: 1.5 },
             { name: "📍 문창회관 (학식 스폿 지나는 중)", min: 160, max: 240, hpLoss: 2 },
-            { name: "📍 제2도서관 (시험 기간인 시험림 진입)", min: 240, max: 320, hpLoss: 2 },
-            { name: "📍 사회관 (언덕 시작 - 허벅지 펌핑)", min: 320, max: 410, hpLoss: 2.5 },
-            { name: "📍 법학관 (공부의 숨결이 느껴지는 고개)", min: 410, max: 500, hpLoss: 3 },
-            { name: "📍 화학관 (야자나무 수림 진입 - 호놀룰루 드립!)", min: 500, max: 590, hpLoss: 3 },
-            { name: "📍 생활환경관 (조금만 더 힘내세요!)", min: 590, max: 680, hpLoss: 3.5 },
-            { name: "📍 예술관 (가파른 헤어핀 코스)", min: 680, max: 770, hpLoss: 4 },
-            { name: "📍 제2사범관 (마의 급경사 통과 중!)", min: 770, max: 850, hpLoss: 4.5 },
-            { name: "📍 학생회관 (동아리방 열기가 가득한 고지)", min: 850, max: 930, hpLoss: 3 },
-            { name: "📍 경암체육관 (최종 목적지 도착 임박!)", min: 930, max: 1001, hpLoss: 4 }
+            { name: "📍 제2도서관 (시험 기간인 시험림 진입)", min: 240, max: 320, hpLoss: 2.2 },
+            { name: "📍 사회관 (언덕 시작 - 허벅지 펌핑)", min: 320, max: 410, hpLoss: 2.8 },
+            { name: "📍 법학관 (공부의 숨결이 느껴지는 고개)", min: 410, max: 500, hpLoss: 3.2 },
+            { name: "📍 화학관 (야자나무 수림 진입 - 호놀룰루 드립!)", min: 500, max: 590, hpLoss: 3.5 },
+            { name: "📍 생활환경관 (조금만 더 힘내세요!)", min: 590, max: 680, hpLoss: 3.8 },
+            { name: "📍 예술관 (가파른 헤어핀 코스)", min: 680, max: 770, hpLoss: 4.2 },
+            { name: "📍 제2사범관 (마의 급경사 통과 중!)", min: 770, max: 850, hpLoss: 4.8 },
+            { name: "📍 학생회관 (동아리방 열기가 가득한 고지)", min: 850, max: 930, hpLoss: 3.2 },
+            { name: "📍 경암체육관 (최종 목적지 도착 임박!)", min: 930, max: 1001, hpLoss: 4.5 }
         ];
 
-        // 매 초마다 지형 경사에 따라 스태미나가 소모되는 인터벌 구동 예정
+        // 매 초마다 지형 경사에 따라 스태미나가 소모되는 인터벌 구동 (80주년 밸런싱)
         let gameTicker = setInterval(() => {
             if (isGameOver) return;
             
@@ -505,13 +615,13 @@
             if (hp <= 0) {
                 triggerGameOver(false);
             }
-        }, 200); // 1000m 확장에 맞춰 반응 주기를 조금 단축
+        }, 180); // 1000m 확장에 맞춰 반응 주기를 더 긴장감 있게 단축
 
         function climbStep() {
             if (isGameOver) return;
 
-            // 한 클릭당 체력 6 회복 및 거리 20m 전진 (1000m 확장에 따른 등반 밸런스 조정)
-            hp = Math.min(100, hp + 6);
+            // 한 클릭당 체력 6.5 회복 및 거리 20m 전진
+            hp = Math.min(100, hp + 6.5);
             distanceLeft = Math.max(0, distanceLeft - 20);
 
             let progress = 1000 - distanceLeft;
@@ -533,12 +643,12 @@
 
             if (isSuccess) {
                 gameStatusIcon.innerText = "🏆";
-                gameStatusTitle.innerText = "명예로운 1,000m 완등 성공!";
-                gameStatusDesc.innerText = "정문에서 시작해 화학관 야자수를 거쳐 경암체육관 정상까지 완벽히 정복했습니다! 이제 자랑스럽게 솔밭집으로 가 이통일반으로 하체를 리프레시하세요!";
+                gameStatusTitle.innerText = "80주년 기념 종주 성공!";
+                gameStatusDesc.innerText = "정문에서 시작해 역사적인 본관을 지나 최정상 경암체육관까지의 대장정을 성공적으로 끝마쳤습니다! 웅장한 효원의 하체를 가졌군요. 이제 이통일반을 마시러 솔밭집으로 영광스러운 세리머니를 가보세요!";
             } else {
                 gameStatusIcon.innerText = "💀";
-                gameStatusTitle.innerText = "경사 극복 실패 및 탈진";
-                gameStatusDesc.innerText = "예술관과 제2사범관 사이의 무자비한 고비를 넘지 못했습니다. 다음 등반 시에는 백화점에서 에너지 충전 키트를 더 든든히 챙겨서 재도전하세요!";
+                gameStatusTitle.innerText = "급경사 고개에서 낙오";
+                gameStatusDesc.innerText = "마의 구간인 제2사범관 고비를 극복하지 못했습니다. 다음 오르막에서는 한층 더 빨라진 순발력으로 도전해 보세요!";
             }
         }
 
@@ -728,6 +838,284 @@
                     evalTitle.innerText = "톡 쏘는 음료 감성";
                     evalDesc.innerText = "사이다 비중이 높아 과하게 달고 탄산이 튑니다. 입문용으로는 괜찮으나, 정밀 기계 설계자 수준의 완벽한 밸런스는 조금 아쉽네요.";
                 }
+            }
+        }
+
+        // ----------------------------------------
+        // 4. 80주년 기념 PDF 생성 및 다운로드 함수 (2페이지 대용량 정교한 인쇄 레이아웃)
+        // ----------------------------------------
+        async function downloadPDF() {
+            try {
+                const { jsPDF } = window.jspdf;
+                
+                // 1페이지용 고해상도 캔버스 생성 (A4 비율: 1200x1697)
+                const canvas1 = document.createElement('canvas');
+                canvas1.width = 1200;
+                canvas1.height = 1697;
+                const ctx1 = canvas1.getContext('2d');
+                
+                // --- PAGE 1: COVER & CORE CHAPTERS ---
+                const grad1 = ctx1.createLinearGradient(0, 0, 0, 1697);
+                grad1.addColorStop(0, '#020617');   // 극도의 다크네이비
+                grad1.addColorStop(0.4, '#1e3b8a'); // 부산대 상징 네이비
+                grad1.addColorStop(1, '#0f172a');   // 슬레이트 다크
+                ctx1.fillStyle = grad1;
+                ctx1.fillRect(0, 0, 1200, 1697);
+                
+                // 배경 데코 서클
+                ctx1.strokeStyle = 'rgba(245, 158, 11, 0.08)';
+                ctx1.lineWidth = 40;
+                ctx1.beginPath();
+                ctx1.arc(600, 848, 480, 0, Math.PI * 2);
+                ctx1.stroke();
+
+                ctx1.fillStyle = 'rgba(245, 158, 11, 0.03)';
+                ctx1.font = '900 150px "Poppins", sans-serif';
+                ctx1.textAlign = 'center';
+                ctx1.fillText('PNU 80TH', 600, 890);
+                ctx1.textAlign = 'left';
+                
+                // 상단 태그
+                ctx1.fillStyle = '#fbbf24';
+                ctx1.font = 'bold 22px "Poppins", "Noto Sans KR", sans-serif';
+                ctx1.fillText('ESTABLISHED 1946 • 종합국립대학 개교 80주년 스페셜 에디션 (PAGE 1/2)', 100, 110);
+                
+                // 메인 타이틀
+                ctx1.fillStyle = '#ffffff';
+                ctx1.font = '900 78px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx1.fillText('효원 낭만 백서', 100, 215);
+                
+                // 서브 타이틀
+                ctx1.fillStyle = '#94a3b8';
+                ctx1.font = '400 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx1.fillText('부산대학교의 찬란한 80년 역사적 거점과 힐링 문화 가이드', 100, 275);
+                
+                // 구분선
+                ctx1.strokeStyle = '#f59e0b';
+                ctx1.lineWidth = 6;
+                ctx1.beginPath();
+                ctx1.moveTo(100, 315);
+                ctx1.lineTo(280, 315);
+                ctx1.stroke();
+                
+                // 카드 렌더링 함수
+                const drawGuideCardOnCtx = (ctx, y, emoji, title, desc1, desc2) => {
+                    const x = 100;
+                    const w = 1000;
+                    const h = 200;
+                    const r = 20;
+                    
+                    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                    ctx.strokeStyle = 'rgba(245, 158, 11, 0.25)';
+                    ctx.lineWidth = 2;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(x + r, y);
+                    ctx.lineTo(x + w - r, y);
+                    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                    ctx.lineTo(x + w, y + h - r);
+                    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    ctx.lineTo(x + r, y + h);
+                    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                    ctx.lineTo(x, y + r);
+                    ctx.quadraticCurveTo(x, y, x + r, y);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    ctx.font = '45px "Noto Sans KR", "Segoe UI Emoji", sans-serif';
+                    ctx.fillText(emoji, x + 40, y + 80);
+                    
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = 'bold 28px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                    ctx.fillText(title, x + 130, y + 65);
+                    
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                    ctx.fillText(desc1, x + 130, y + 115);
+                    ctx.fillText(desc2, x + 130, y + 155);
+                };
+                
+                // 3대 챕터 그리기
+                drawGuideCardOnCtx(ctx1, 360, '🏛️', 'CHAPTER 01. 웅비하는 거침없는 캠퍼스 지형', '- 한강 이남 최초종합국립대로서의 지성적인 정체성과 맷집 등산 코스', '- 경암체육관 등정 길목에 조성된 화학관 앞 야자수 수림원 포토 스폿 활용하기');
+                drawGuideCardOnCtx(ctx1, 590, '🍶', 'CHAPTER 02. 소나무 아래 숨겨진 오아시스, 솔밭집', '- 캠퍼스 뒤편 등산로와 이어진 낭만 가득한 야외 테이블의 시그니처 힐링 스폿', '- 전통 비법 배합 황금률: 막걸리 이(2) 통과 사이다 일(1) 병을 섞어 빚어내는 이통일반');
+                drawGuideCardOnCtx(ctx1, 820, '🗣️', 'CHAPTER 03. 80년을 이끌어 온 영남권 로컬 소통법', '- 수학 수식 2^e 와 e^2 의 높낮이(성조)를 완벽 변별하여 동기 및 교수님과 케미 형성', '- 부울경식 "바뉘바뉘! 당근당근!"의 독보적인 강타 박자감을 마스터하여 인싸 등극하기');
+
+                // 1페이지용 자가진단 수칙
+                const frameY = 1080;
+                ctx1.fillStyle = 'rgba(245, 158, 11, 0.05)';
+                ctx1.strokeStyle = '#d97706';
+                ctx1.lineWidth = 2;
+                ctx1.fillRect(100, frameY, 1000, 240);
+                ctx1.strokeRect(100, frameY, 1000, 240);
+
+                ctx1.fillStyle = '#fbbf24';
+                ctx1.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx1.fillText('🎓 80주년 기념 명예 효원인 자가 적응 수칙', 140, frameY + 60);
+                ctx1.fillStyle = '#cbd5e1';
+                ctx1.font = '22px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx1.fillText('• 셔틀버스 유혹에 흔들리지 않고 화학관/예술관/체육관을 두 발로 종주 완료했는가?', 140, frameY + 115);
+                ctx1.fillText('• 동기들과의 아지트 솔밭집 야외 상 아래에서 시원한 이통일반 한 통을 건배해 보았는가?', 140, frameY + 155);
+                ctx1.fillText('• 경상도 고유의 블루베리 스무디 파동 성조를 아름답게 읊조릴 수 있게 되었는가?', 140, frameY + 195);
+                
+                ctx1.fillStyle = '#94a3b8';
+                ctx1.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx1.fillText('© 1946-2026 부산대학교 효원 낭만 백서 편찬 위원회. (PAGE 1)', 100, 1595);
+
+
+                // --- PAGE 2: 80주년 기념식 및 미래 비전 분석 대용량 지면 ---
+                const canvas2 = document.createElement('canvas');
+                canvas2.width = 1200;
+                canvas2.height = 1697;
+                const ctx2 = canvas2.getContext('2d');
+
+                const grad2 = ctx2.createLinearGradient(0, 0, 0, 1697);
+                grad2.addColorStop(0, '#0f172a');   // 슬레이트 다크
+                grad2.addColorStop(0.6, '#111827'); // 거의 블랙
+                grad2.addColorStop(1, '#020617');   // 네이비 블랙
+                ctx2.fillStyle = grad2;
+                ctx2.fillRect(0, 0, 1200, 1697);
+
+                // 2페이지 타이틀
+                ctx2.fillStyle = '#fbbf24';
+                ctx2.font = 'bold 22px "Poppins", "Noto Sans KR", sans-serif';
+                ctx2.fillText('ESTABLISHED 1946 • 종합국립대학 개교 80주년 미래 비전 스페셜 (PAGE 2/2)', 100, 110);
+
+                ctx2.fillStyle = '#ffffff';
+                ctx2.font = '900 64px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('개교 80주년 기념식 및 미래 비전 분석', 100, 200);
+
+                ctx2.strokeStyle = '#2dd4bf';
+                ctx2.lineWidth = 4;
+                ctx2.beginPath();
+                ctx2.moveTo(100, 240);
+                ctx2.lineTo(280, 240);
+                ctx2.stroke();
+
+                // 대단위 카드 1: 공식 기념식 프로그램 (y: 280, h: 420)
+                const py = 280;
+                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
+                ctx2.strokeStyle = 'rgba(245, 158, 11, 0.3)';
+                ctx2.lineWidth = 2;
+                ctx2.fillRect(100, py, 1000, 420);
+                ctx2.strokeRect(100, py, 1000, 420);
+
+                ctx2.fillStyle = '#fbbf24';
+                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('📅 1. 개교 80주년 공식 기념식 프로그램 로드맵', 140, py + 65);
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('일시: 2026년 5월 | 장소: 부산대학교 넉넉한터, 10.16기념관 및 경암체육관 일대', 140, py + 105);
+
+                const drawSubBox = (ctx, x, y, title, text) => {
+                    ctx.fillStyle = 'rgba(30, 41, 59, 0.6)';
+                    ctx.fillRect(x, y, 290, 240);
+                    ctx.strokeStyle = 'rgba(245, 158, 11, 0.15)';
+                    ctx.strokeRect(x, y, 290, 240);
+
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = 'bold 22px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                    ctx.fillText(title, x + 25, y + 50);
+
+                    // 텍스트 줄바꿈 연산
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.font = '17px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                    const words = text.split(' ');
+                    let line = '';
+                    let currentY = y + 100;
+                    for (let n = 0; n < words.length; n++) {
+                        let testLine = line + words[n] + ' ';
+                        let metrics = ctx.measureText(testLine);
+                        if (metrics.width > 240 && n > 0) {
+                            ctx.fillText(line, x + 25, currentY);
+                            line = words[n] + ' ';
+                            currentY += 30;
+                        } else {
+                            line = testLine;
+                        }
+                    }
+                    ctx.fillText(line, x + 25, currentY);
+                };
+
+                drawSubBox(ctx2, 140, py + 140, 'ST-1. 역사 세리머니', '1946년 한강 이남 최초의 종합 국립대학 설립 선포식을 홀로그램으로 재현하고, 진리·봉사·자유 가치를 계승합니다.');
+                drawSubBox(ctx2, 455, py + 140, 'ST-2. 글로벌 효원 선포', '세계 80개국 명문 대학 총장단 학술 포럼 개최 및 미래 신산업 융합 연구 허브로서의 도약을 대외 공식 선포합니다.');
+                drawSubBox(ctx2, 770, py + 140, 'ST-3. 동문 대화합 축제', '경암체육관 3만 동문 초청 밤하늘 오케스트라 문화제 및 넉넉한터 대동 마당 페스티벌을 성대하게 거행합니다.');
+
+                // 대단위 카드 2: 교육 연구 및 글로벌 전략 (y: 730, h: 360)
+                const ey = 730;
+                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
+                ctx2.strokeStyle = 'rgba(45, 212, 191, 0.3)';
+                ctx2.fillRect(100, ey, 1000, 360);
+                ctx2.strokeRect(100, ey, 1000, 360);
+
+                ctx2.fillStyle = '#2dd4bf';
+                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('🚀 2. 글로벌 교육 및 연구 혁신 전략', 140, ey + 65);
+
+                ctx2.fillStyle = '#ffffff';
+                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('• 글로벌 무경계 융합 학제 구축', 140, ey + 130);
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('AI, 첨단 로봇기구학, 양자 정보 전공을 개설하여 학과 간 장벽을 100% 해소하고 무학과 가치를 실현합니다.', 140, ey + 170);
+
+                ctx2.fillStyle = '#ffffff';
+                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('• 2,000억 원 규모 펀드를 통한 최고 석학 영입', 140, ey + 240);
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('노벨 프로젝트 및 첨단 기술 개발 기조 연구소 육성을 위해 혁신 장학 지원 및 연구 기자재를 대폭 확대합니다.', 140, ey + 280);
+
+                // 대단위 카드 3: 초광역 벨트 및 에코 캠퍼스 (y: 1120, h: 360)
+                const sy = 1120;
+                ctx2.fillStyle = 'rgba(15, 23, 42, 0.9)';
+                ctx2.strokeStyle = 'rgba(45, 212, 191, 0.3)';
+                ctx2.fillRect(100, sy, 1000, 360);
+                ctx2.strokeRect(100, sy, 1000, 360);
+
+                ctx2.fillStyle = '#2dd4bf';
+                ctx2.font = 'bold 30px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('🌐 3. 초광역 산학 벨트 및 에코 친환경 비전', 140, sy + 65);
+
+                ctx2.fillStyle = '#ffffff';
+                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('• 메가 산학 연합 네트워크 벨트 가동', 140, sy + 130);
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('울산·창원 첨단 하드웨어 산단 및 양산 메디컬 단지를 연대하는 부울경 초광역 지산학 생태계를 지휘합니다.', 140, sy + 170);
+
+                ctx2.fillStyle = '#ffffff';
+                ctx2.font = 'bold 24px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('• 2030 탄소 제로 스마트 그린 캠퍼스', 140, sy + 240);
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('금정산의 자연 자산과 IoT 스마트 에너지 네트워크를 활용하여 친환경 저탄소 혁신 대학을 선도합니다.', 140, sy + 280);
+
+                ctx2.fillStyle = '#94a3b8';
+                ctx2.font = '20px "Noto Sans KR", "Malgun Gothic", sans-serif';
+                ctx2.fillText('© 1946-2026 부산대학교 효원 낭만 백서 편찬 위원회. (PAGE 2)', 100, 1595);
+
+                // --- PDF 컴파일러 병합 생성 ---
+                const img1 = canvas1.toDataURL('image/jpeg', 0.95);
+                const img2 = canvas2.toDataURL('image/jpeg', 0.95);
+                
+                const doc = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'px',
+                    format: [595, 842]
+                });
+                
+                // 1페이지 로드 및 생성
+                doc.addImage(img1, 'JPEG', 0, 0, 595, 842);
+                
+                // 2페이지 생성 및 로드
+                doc.addPage();
+                doc.addImage(img2, 'JPEG', 0, 0, 595, 842);
+                
+                doc.save('부산대학교 개교 80주년 기념 가이드북.pdf');
+            } catch (error) {
+                console.error('PDF 다운로드 중 예기치 못한 오류:', error);
+                alert('PDF 생성에 실패하였습니다. 크롬 등 타 브라우저를 확인하시기 바랍니다.');
             }
         }
     </script>
