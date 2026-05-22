@@ -823,14 +823,12 @@
         // ----------------------------------------
         // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수 (고해상도 2페이지 명품 레이아웃)
         // ----------------------------------------
-        // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수
-        // ----------------------------------------
         async function downloadReport() {
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 doc.text("개교 80주년 기념식 분석 보고서", 20, 20);
-                doc.save('개교 80주년 기념식 분석 보고서.pdf');
+                doc.save('PUN80report.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
             }
@@ -841,7 +839,7 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 doc.text("부산대학교 개교 80주년 기념 가이드북", 20, 20);
-                doc.save('부산대학교 개교 80주년 기념 가이드북.pdf');
+                doc.save('PUN80AI.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
             }
@@ -852,7 +850,7 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 doc.text("부산대학교 학내 생활 가이드북", 20, 20);
-                doc.save('부산대학교 학내 생활 가이드북 (10).pdf');
+                doc.save('PUN book.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
             }
