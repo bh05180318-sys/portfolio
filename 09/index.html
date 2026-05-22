@@ -421,7 +421,7 @@
                     </div>
                     <!-- 버튼 그룹 컨테이너 추가 -->
                     <div class="flex flex-col gap-2 self-start md:self-center">
-                        <button onclick="downloadPDF()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap tracking-wider transition duration-150 shadow-md">공식 분석 보고서 연계 📥</button>
+                        <button onclick="downloadReport()" class="bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap tracking-wider transition duration-150 shadow-md">공식 분석 보고서 연계 📥</button>
                         <a href="https://www.youtube.com/watch?v=_IHYDJp7QKM" target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white text-xs font-black px-4 py-1.5 rounded-full whitespace-nowrap tracking-wider transition duration-150 shadow-md text-center">기념식 영상 시청 ▶</a>
                     </div>
                 </div>
@@ -481,7 +481,7 @@
                 <h3 class="text-2xl font-bold mb-2">지금 바로 가이드북 전체 텍스트를 무료로 보시겠습니까?</h3>
                 <p class="text-slate-300 text-sm mb-6">부산대의 참매력을 완벽하게 서술한 로컬 서바이벌 바이블 완판본 제공 중!</p>
                 <div class="flex flex-col items-center gap-4">
-                    <button onclick="downloadPDF()" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
+                    <button onclick="download80thGuide()" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
                         📥 80주년 한정 가이드북 PDF 다운로드
                     </button>
                     <button onclick="downloadLifeGuide()" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
@@ -825,39 +825,36 @@
         // ----------------------------------------
         // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수
         // ----------------------------------------
-        async function downloadPDF() {
+        async function downloadReport() {
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                
-                // 문서 내용 추가
-                doc.setFontSize(18);
                 doc.text("개교 80주년 기념식 분석 보고서", 20, 20);
-                doc.setFontSize(12);
-                doc.text("본 문서는 부산대학교 개교 80주년 기념식의 비전과 주요 내용을 담고 있습니다.", 20, 30);
-                
                 doc.save('개교 80주년 기념식 분석 보고서.pdf');
             } catch (error) {
-                console.error('PDF 다운로드 중 예기치 못한 오류:', error);
-                alert('PDF 생성에 실패하였습니다. 다시 시도해주세요.');
+                console.error('PDF 다운로드 오류:', error);
             }
         }
 
-        // 부산대학교 생활 가이드북 전용 다운로드 함수
+        async function download80thGuide() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text("부산대학교 개교 80주년 기념 가이드북", 20, 20);
+                doc.save('부산대학교 개교 80주년 기념 가이드북.pdf');
+            } catch (error) {
+                console.error('PDF 다운로드 오류:', error);
+            }
+        }
+
         async function downloadLifeGuide() {
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                
-                doc.setFontSize(18);
                 doc.text("부산대학교 학내 생활 가이드북", 20, 20);
-                doc.setFontSize(12);
-                doc.text("부산대학교의 캠퍼스 라이프를 담은 가이드북입니다.", 20, 30);
-                
-                doc.save('부산대학교 학내 생활 가이드북.pdf');
+                doc.save('부산대학교 학내 생활 가이드북 (10).pdf');
             } catch (error) {
-                console.error('PDF 다운로드 중 오류:', error);
-                alert('가이드북 생성에 실패하였습니다. 다시 시도해주세요.');
+                console.error('PDF 다운로드 오류:', error);
             }
         }
     </script>
