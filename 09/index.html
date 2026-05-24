@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>효원 낭만 백서 - 부산대학교 라이프 가이드북 (80주년 스페셜)</title>
+    
+    <!-- SEO 및 소셜 미디어 최적화 (배포용) -->
+    <meta name="description" content="부산대학교 개교 80주년 기념, 효원 낭만 백서. 캠퍼스 라이프 가이드북 및 인터랙티브 체험존을 통해 부산대의 역사와 낭만을 경험하세요.">
+    <meta name="keywords" content="부산대학교, 부산대80주년, 효원낭만백서, 부산대라이프, 전과자, 캠퍼스라이프, 국립부산대학교">
+    <meta property="og:title" content="효원 낭만 백서 - 부산대학교 라이프 가이드북 (80주년 스페셜)">
+    <meta property="og:description" content="1946년부터 2026년까지, 부산대학교의 80년 낭만과 미래 비전을 한눈에 확인하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://placehold.co/1200x630/0b1d3a/white?text=PNU+80th+Anniversary">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.pusan.ac.kr/kor/favicon.ico" type="image/x-icon">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for Korean & English -->
@@ -83,10 +96,10 @@
     <!-- 메인 네비게이션 탭 -->
     <div class="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 flex justify-around md:justify-center md:gap-12 overflow-x-auto">
-            <a href="#climb-game" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">⛰️ 등교 시뮬레이터</a>
-            <a href="#pitch-quiz" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🗣️ 2의 2승 성조 배틀</a>
-            <a href="#mixology" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🍶 이통일반 조제실</a>
-            <a href="#guidebook" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">📖 요약 백서</a>
+            <a href="#climb-game" aria-label="등교 시뮬레이터로 이동" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">⛰️ 등교 시뮬레이터</a>
+            <a href="#pitch-quiz" aria-label="사투리 성조 퀴즈로 이동" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🗣️ 2의 2승 성조 배틀</a>
+            <a href="#mixology" aria-label="이통일반 조제 체험으로 이동" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">🍶 이통일반 조제실</a>
+            <a href="#guidebook" aria-label="요약 백서로 이동" class="py-4 px-2 font-semibold text-slate-600 hover:text-teal-600 border-b-2 border-transparent hover:border-teal-600 transition whitespace-nowrap">📖 요약 백서</a>
         </div>
     </div>
 
@@ -481,10 +494,10 @@
                 <h3 class="text-2xl font-bold mb-2">지금 바로 가이드북 전체 텍스트를 무료로 보시겠습니까?</h3>
                 <p class="text-slate-300 text-sm mb-6">부산대의 참매력을 완벽하게 서술한 로컬 서바이벌 바이블 완판본 제공 중!</p>
                 <div class="flex flex-col items-center gap-4">
-                    <button onclick="download80thGuide()" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
+                    <button onclick="download80thGuide()" aria-label="80주년 한정 가이드북 다운로드" class="bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-900 font-extrabold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
                         📥 80주년 한정 가이드북 PDF 다운로드
                     </button>
-                    <button onclick="downloadLifeGuide()" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
+                    <button onclick="downloadLifeGuide()" aria-label="부산대학교 생활 가이드북 다운로드" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-bold px-6 py-3 rounded-xl transition shadow-lg w-full max-w-xs">
                         📥 부산대학교 생활 가이드북 다운로드
                     </button>
                 </div>
@@ -495,7 +508,7 @@
     <!-- Footer Section -->
     <footer class="bg-slate-950 text-slate-500 text-xs py-12 px-4 text-center">
         <div class="max-w-6xl mx-auto space-y-4">
-            <p>본 가이드북 및 홍보 웹페이지는 ootb STUDIO의 〈전과자〉 부산대 기계공학부 편 및 80주년 기념식 공식 자료를 바탕으로 작성되었습니다.</p>
+            <p>본 페이지는 부산대학교 개교 80주년을 기념하여 제작된 비영리 교육용 가이드 웹사이트입니다.</p>
             <p class="text-slate-700">&copy; 1946-2026 PNU 효원 낭만 백서 편찬 위원회. All Rights Reserved.</p>
         </div>
     </footer>
@@ -822,12 +835,17 @@
 
         // ----------------------------------------
         // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수 (고해상도 2페이지 명품 레이아웃)
-        // ----------------------------------------
         async function downloadReport() {
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text("개교 80주년 기념식 분석 보고서", 20, 20);
+                doc.setFontSize(18);
+                doc.text("PNU 80th Anniversary Analysis Report", 20, 20);
+                doc.setFontSize(12);
+                doc.text("1. Purpose: To celebrate 80 years of PNU history.", 20, 40);
+                doc.text("2. Key Vision: Global AI Research Hub.", 20, 50);
+                doc.text("3. Details: Inheriting the 1946 founding spirit.", 20, 60);
+                doc.text("부산대학교 개교 80주년 기념식 분석 보고서입니다.", 20, 80);
                 doc.save('PUN80report.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
@@ -838,7 +856,14 @@
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text("부산대학교 개교 80주년 기념 가이드북", 20, 20);
+                doc.setFontSize(18);
+                doc.text("PNU 80th Anniversary Special Guide", 20, 20);
+                doc.setFontSize(12);
+                doc.text("Welcome to PNU 80th Anniversary!", 20, 40);
+                doc.text("Content Highlights:", 20, 50);
+                doc.text("- History of PNU (Since 1946)", 20, 60);
+                doc.text("- Campus Life & Romantic Guide", 20, 70);
+                doc.text("- Future 100 years vision", 20, 80);
                 doc.save('PUN80AI.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
@@ -849,7 +874,15 @@
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text("부산대학교 학내 생활 가이드북", 20, 20);
+                doc.setFontSize(18);
+                doc.text("PNU Campus Life Guidebook", 20, 20);
+                doc.setFontSize(12);
+                doc.text("Essential guide for PNU Students.", 20, 40);
+                doc.text("Sections:", 20, 50);
+                doc.text("1. Campus Geography (The famous hills)", 20, 60);
+                doc.text("2. Local Delicacies (I-tong-il-ban)", 20, 70);
+                doc.text("3. Dialect Survival Tips", 20, 80);
+                doc.text("부산대학교 캠퍼스 생활을 위한 상세 가이드북입니다.", 20, 100);
                 doc.save('PUN book.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
