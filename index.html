@@ -319,6 +319,21 @@
                 ],
                 tools: ["ChatGPT", "Canva", "Notion"],
                 category: "실습 및 기획"
+            },
+            { 
+                id: 8, 
+                title: "실습1: 일일박스오피스", 
+                tags: ["API", "Fetch", "JSON", "KOBIS"], 
+                icon: "fa-film", 
+                color: "card-cyan",
+                links: [{ label: "과제물 보기", url: "./04_boxoffice/index.html" }], 
+                description: "영화진흥위원회 오픈 API를 활용하여 일일 박스오피스 순위 데이터를 수신하고 실시간으로 웹 브라우저 상에 비동기로 구성하는 실습을 진행했습니다.",
+                achievements: [
+                    { title: "비동기 API 처리", desc: "Async/Await를 통한 네트워크 요청 및 실시간 데이터 바인딩 적용" },
+                    { title: "동적 렌더링", desc: "JSON 응답 객체를 정제하여 UI 카드 컴포넌트로 화면에 배치" }
+                ],
+                tools: ["JavaScript", "KOBIS API", "Fetch API"],
+                category: "웹 기술 및 프롬프트"
             }
         ];
 
@@ -371,8 +386,8 @@
                         gradientClass = index === 0 
                             ? 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
                             : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
-                    } else if (project.id === 6) {
-                        // Cyan accent for Data Analysis 2
+                    } else if (project.id === 6 || project.id === 8) {
+                        // Cyan accent for Data Analysis 2 and Boxoffice
                         gradientClass = 'from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700';
                     }
                     
