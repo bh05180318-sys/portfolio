@@ -828,27 +828,36 @@
                 } else {
                     evalStars.innerText = "⭐⭐⭐";
                     evalTitle.innerText = "톡 쏘는 음료 감성";
-                    evalDesc.innerText = "사이다 비중이 높아 과하게 달고 탄산이 튑니다. 입문용으로는 괜찮으나, 정밀 기계 설계자 수준의 완벽한 밸런스는 조금 아쉽네요.";
+                    evalDesc.innerText = "사이다 비중이 높아 과하게 달고 탄산이 튊니다. 입문용으로는 괜찮으나, 정밀 기계 설계자 수준의 완벽한 밸런스는 조금 아쉽네요.";
                 }
             }
         }
 
         // ----------------------------------------
-        // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수 (고해상도 2페이지 명품 레이아웃)
+        // 4. 80주년 스페셜 PDF 생성 및 다운로드 함수 (영문 내용 중심의 안정적 구성)
+        // ----------------------------------------
         async function downloadReport() {
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
+                
+                // 영문으로 먼저 제목과 본문을 작성하여 렌더링 오류 방지
                 doc.setFontSize(18);
                 doc.text("PNU 80th Anniversary Analysis Report", 20, 20);
                 doc.setFontSize(12);
-                doc.text("1. Purpose: To celebrate 80 years of PNU history.", 20, 40);
-                doc.text("2. Key Vision: Global AI Research Hub.", 20, 50);
-                doc.text("3. Details: Inheriting the 1946 founding spirit.", 20, 60);
-                doc.text("부산대학교 개교 80주년 기념식 분석 보고서입니다.", 20, 80);
-                doc.save('./PUN80report.pdf');
+                doc.text("Official Analysis of the 80th Anniversary Ceremony", 20, 30);
+                doc.text("1. Event Overview: Celebrating 80 years since 1946.", 20, 45);
+                doc.text("2. Future Vision: Global AI Research Hub (2026).", 20, 55);
+                doc.text("3. Details: Inheriting the founding spirit.", 20, 65);
+                
+                // 한글 텍스트는 영문 데이터 이후 별도 추가 혹은 대체 가능하도록 구성
+                doc.text("PNU 80th Anniversary Ceremony Official Report Summary", 20, 80);
+                
+                // 다운로드 실행
+                doc.save('PUN80report.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
+                alert("PDF 생성 중 오류가 발생했습니다. 브라우저 설정을 확인하거나 잠시 후 다시 시도해 주세요.");
             }
         }
 
@@ -864,9 +873,10 @@
                 doc.text("- History of PNU (Since 1946)", 20, 60);
                 doc.text("- Campus Life & Romantic Guide", 20, 70);
                 doc.text("- Future 100 years vision", 20, 80);
-                doc.save('./PUN80AI.pdf');
+                doc.save('PUN80AI.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
+                alert("PDF 생성 중 오류가 발생했습니다.");
             }
         }
 
@@ -882,10 +892,10 @@
                 doc.text("1. Campus Geography (The famous hills)", 20, 60);
                 doc.text("2. Local Delicacies (I-tong-il-ban)", 20, 70);
                 doc.text("3. Dialect Survival Tips", 20, 80);
-                doc.text("부산대학교 캠퍼스 생활을 위한 상세 가이드북입니다.", 20, 100);
-                doc.save('./PUNbook.pdf');
+                doc.save('PUNbook.pdf');
             } catch (error) {
                 console.error('PDF 다운로드 오류:', error);
+                alert("PDF 생성 중 오류가 발생했습니다.");
             }
         }
     </script>
