@@ -100,7 +100,15 @@
             box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
         }
 
-        .mode-toggle {
+        /* 상단 우측 컨트롤 영역 */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 홈 버튼 및 테마 토글 스타일 */
+        .home-btn, .mode-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             cursor: pointer;
@@ -114,11 +122,13 @@
             font-size: 1.1rem;
             transition: all 0.2s;
             box-shadow: var(--shadow);
+            text-decoration: none;
         }
 
-        .mode-toggle:hover {
+        .home-btn:hover, .mode-toggle:hover {
             transform: scale(1.05);
             border-color: var(--sunflower-main);
+            color: var(--sunflower-dark);
         }
 
         header {
@@ -455,9 +465,15 @@
                 <div class="logo-icon"><i class="fa-solid fa-sun"></i></div>
                 <span>AI MASTERCLASS</span>
             </div>
-            <button id="mode-toggle" class="mode-toggle" title="모드 전환">
-                <i id="mode-icon" class="fa-solid fa-moon"></i>
-            </button>
+            <!-- 우측 제어 영역: 홈 버튼 및 다크모드 버튼 -->
+            <div class="nav-controls">
+                <a href="https://bh05180318-sys.github.io/portfolio/" class="home-btn" title="포트폴리오 홈">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <button id="mode-toggle" class="mode-toggle" title="모드 전환">
+                    <i id="mode-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
