@@ -6,6 +6,7 @@
     <title>AI Literacy Portfolio | 김보현</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -217,12 +218,12 @@
                 icon: "fa-book-open-reader", 
                 color: "card-blue",
                 links: [{ label: "과제물 보기", url: "./02/index.html" }],
-                description: "구글 NotebookLM을 활용해 AI의 정의와 역사, 최신 생성형 AI 트렌드를 체계적으로 정리하고 학습했습니다.",
+                description: "구글 NotebookLM을 활용해 AI의 기원인 기호주의부터 현대의 연결주의, 최신 LLM(대형 언어 모델) 트렌드를 체계적으로 분석하고 소스 아카이빙을 진행하였습니다.",
                 achievements: [
-                    { title: "AI 역사 분석", desc: "기호주의와 연결주의의 발전을 시기별로 정리" },
-                    { title: "NotebookLM 활용", desc: "핵심 인사이트 추출 워크플로우 숙달" }
+                    { title: "AI 역사 및 맥락 분석", desc: "인공지능의 황금기, 겨울기 그리고 딥러닝 혁명까지 시기별 핵심 혁신 요소 규명" },
+                    { title: "NotebookLM 워크플로우", desc: "방대한 소스로부터 지능적으로 노트를 추출하고 질문 답변을 설계하는 AI 협동 학습 체계 습득" }
                 ],
-                tools: ["NotebookLM", "ChatGPT"],
+                tools: ["NotebookLM", "ChatGPT-4o"],
                 category: "기초 이론"
             },
             { 
@@ -232,92 +233,92 @@
                 icon: "fa-magnifying-glass-chart", 
                 color: "card-emerald",
                 links: [{ label: "과제물 보기", url: "./03/index.html" }],
-                description: "공공 데이터를 수집하고 분석하여 사회복지 관점에서 해결이 필요한 지역 사회 문제를 설득력 있는 서사로 정의했습니다.",
+                description: "KOSIS(국가통계포털)에서 공공 복지 데이터를 직접 수집 및 정제하고, 이를 기반으로 현대 지역사회가 직면한 문제점을 수치 기반 스토리라인으로 기획하였습니다.",
                 achievements: [
-                    { title: "문제 정의 역량", desc: "사회 문제를 데이터 기반의 구체적인 문제로 치환" },
-                    { title: "데이터 시각화", desc: "통계 지표를 통해 객관적 입증 및 스토리 구성" }
+                    { title: "데이터 중심 문제 발굴", desc: "정성적인 사회적 불편을 정량적 지표 및 지표간 인과 관계로 명확히 정의" },
+                    { title: "시각 설득 서사 구축", desc: "통계 원천 데이터를 효과적으로 가공하여 수신자가 즉각 이해 가능한 대시보드 스토리 구성" }
                 ],
-                tools: ["KOSIS", "Excel"],
+                tools: ["KOSIS", "MS Excel", "Chart.js"],
                 category: "데이터 분석"
             },
             { 
                 id: 3, 
-                title: "실습1: 웹기술의 이해", 
+                title: "실습1: 웹기술의 이해와 프롬프트 엔지니어링", 
                 tags: ["HTML", "CSS", "Prompt"], 
                 icon: "fa-terminal", 
                 color: "card-purple",
                 links: [{ label: "과제물 보기", url: "./04/index.html" }],
-                description: "효율적인 결과 도출을 위한 프롬프트 구조와 웹 기술 기초를 접목한 실습을 진행하였습니다.",
+                description: "Few-shot 기법, Chain-of-Thought(CoT) 등의 기법을 적용한 체계적인 프롬프팅 구조를 설계하고, 도출된 결과물을 웹 구조 코드(HTML/CSS)로 구현하는 기술적 기초를 연마했습니다.",
                 achievements: [
-                    { title: "프롬프트 설계", desc: "Few-shot, CoT 기법을 활용한 정교한 명령어 생성" },
-                    { title: "웹 기초 역량", desc: "HTML/CSS 실습을 통한 웹 서비스 구조 이해" }
+                    { title: "체계적 프롬프트 모델링", desc: "역할 부여, 제약 조건, 출력 포맷 명시화를 통한 할루시네이션 최소화 설계" },
+                    { title: "프론트엔드 기본 융합", desc: "AI 추천 레이아웃과 디자인 토큰을 활용한 반응형 정적 웹 제작 기초 학습" }
                 ],
-                tools: ["VS Code", "Claude 3"],
+                tools: ["VS Code", "Claude 3.5 Sonnet", "Cursor"],
                 category: "웹 기술 및 프롬프트"
             },
             { 
                 id: 4, 
-                title: "중간고사 대체 과제", 
+                title: "중간고사 대체 과제: 시나리오 비주얼 프로덕션", 
                 tags: ["Midjourney", "DALL-E", "창의력"], 
                 icon: "fa-palette", 
                 color: "card-rose",
                 links: [{ label: "과제물 보기", url: "./05/index.html" }], 
-                description: "AI를 활용하여 일관성 있는 캐릭터와 서사를 담은 이미지를 생성하고 시나리오를 구성했습니다.",
+                description: "생성형 AI 멀티모달 도구를 활용하여 세계관 및 가상 시나리오를 집필하고, 이에 알맞는 일관적인 인물 캐릭터 및 화풍의 이미지를 다양하게 구현했습니다.",
                 achievements: [
-                    { title: "일관성 유지", desc: "동일 캐릭터를 여러 장면에서 유지하는 기법" },
-                    { title: "스타일 제어", desc: "시작적 문법을 통한 정교한 이미지 생성" }
+                    { title: "비주얼 일관성(Consistency) 유지", desc: "동일 캐릭터와 사물 속성을 시드 넘버 및 프롬프트 엔지니어링 기법을 활용해 다채로운 구도로 유지" },
+                    { title: "시네마틱 스타일 제어", desc: "카메라 렌즈, 조명 값, 화각 설정을 명령어로 세밀하게 제어하여 극적 퀄리티 향상" }
                 ],
-                tools: ["Midjourney", "DALL-E 3"],
+                tools: ["Midjourney v6", "DALL-E 3"],
                 category: "멀티모달 실습"
             },
             { 
                 id: 5, 
-                title: "데이터 분석1", 
+                title: "데이터 분석 1단계: Pandas 데이터 핸들링", 
                 tags: ["파이썬", "판다스", "시각화"], 
                 icon: "fa-chart-pie", 
                 color: "card-indigo",
                 links: [
-                    { label: "과제물 보기_1", url: "./06/index.html" },
-                    { label: "과제물 보기_2", url: "./07/index.html" }
+                    { label: "과제물 보기 (A)", url: "./06/index.html" },
+                    { label: "과제물 보기 (B)", url: "./07/index.html" }
                 ], 
-                description: "Python 라이브러리를 활용하여 대규모 데이터셋을 정제하고 기본적인 통계 분석을 수행했습니다.",
+                description: "파이썬 핵심 라이브러리인 Pandas를 이용하여 로우 데이터를 전처리하고 결측치, 이상치를 처리하는 초급 분석 작업을 진행했습니다.",
                 achievements: [
-                    { title: "데이터 정제", desc: "결측치 처리 및 이상치 제거를 통한 데이터 품질 개선" },
-                    { title: "기초 통계 분석", desc: "데이터 분포와 기초적인 통계량 도출" }
+                    { title: "데이터 정제 자동화", desc: "Missing Value 탐색, 대체 알고리즘 및 도메인 맞춤 가공 프로세스 설계" },
+                    { title: "데이터 형태 변환", desc: "Pivot, Groupby 등의 기술을 통한 분석 차원 다양화" }
                 ],
-                tools: ["Python", "Pandas", "Matplotlib"],
+                tools: ["Python", "Jupyter Notebook", "Pandas"],
                 category: "심화 데이터 분석"
             },
             { 
                 id: 6, 
-                title: "데이터 분석2", 
+                title: "데이터 분석 2단계: 다차원 분석 및 예측", 
                 tags: ["머신러닝", "예측모델", "고급시각화"], 
                 icon: "fa-brain", 
-                color: "card-cyan",
+                color: "card-blue",
                 links: [
                     { label: "과제물 보기", url: "./08/index.html" }
                 ], 
-                description: "복합적인 데이터 상관관계를 분석하고 예측 모델의 기초를 설계하여 인사이트를 도출했습니다.",
+                description: "각 수집 변수들 간의 다차원 피어슨 상관관계를 도출하고 Seaborn을 통해 정밀 가시화하며 타깃 데이터 예측 모델을 구축했습니다.",
                 achievements: [
-                    { title: "인사이트 도출", desc: "상관계수 분석을 통한 핵심 변수 간의 관계 규명" },
-                    { title: "고급 시각화", desc: "Seaborn을 활용한 다차원 관계 시각화" }
+                    { title: "정밀 시각화", desc: "히트맵(Heatmap), 페어플롯(Pairplot) 기반의 핵심 변수 도출" },
+                    { title: "상관 변수 파악 및 기여도", desc: "유의미한 독립 변수가 목표 변수에 미치는 수치적 기여도 산출" }
                 ],
-                tools: ["Python", "Scikit-learn", "Seaborn"],
+                tools: ["Python", "Seaborn", "Scikit-learn"],
                 category: "심화 데이터 분석"
             },
             { 
                 id: 7, 
-                title: "실습2: 부산대학교 80주년 학내 생활 가이드북", 
+                title: "실습2: 부산대학교 80주년 학내 가이드북", 
                 tags: ["가이드북", "AI편집", "부산대학교"], 
                 icon: "fa-map-location-dot", 
                 color: "card-amber",
                 links: [{ label: "가이드북 보기", url: "./09/index.html" }], 
-                description: "부산대학교 80주년을 기념하여 학내 구성원들을 위한 편리한 생활 정보를 AI 도구를 활용해 시각화하고 정리한 가이드북입니다.",
+                description: "부산대학교 건학 80주년을 기념해, 교내외 동문과 학생들에게 필요한 지리, 행정, 학술 인프라 정보를 최적의 인포그래픽 편집 스타일로 담아낸 학내 생활 길잡이입니다.",
                 achievements: [
-                    { title: "콘텐츠 기획", desc: "사용자 맞춤형 정보 구조화" },
-                    { title: "AI 디자인", desc: "가독성을 높인 시각 자료 생성" }
+                    { title: "정보 큐레이션 기획", desc: "사용자 친화적인 인터페이스 설계 및 핵심 인프라 접근 정보 선별" },
+                    { title: "디지털 출판 및 통합", desc: "텍스트 생성과 정보 시각화를 결합하여 전문 디지털 리포트 산출" }
                 ],
-                tools: ["ChatGPT", "Canva", "Notion"],
+                tools: ["Canva Pro", "ChatGPT-4o", "Notion ERP"],
                 category: "실습 및 기획"
             },
             { 
@@ -327,13 +328,28 @@
                 icon: "fa-film", 
                 color: "card-cyan",
                 links: [{ label: "과제물 보기", url: "./04_boxoffice/index.html" }], 
-                description: "영화진흥위원회 오픈 API를 활용하여 일일 박스오피스 순위 데이터를 수신하고 실시간으로 웹 브라우저 상에 비동기로 구성하는 실습을 진행했습니다.",
+                description: "영화진흥위원회 오픈 API를 연동하여 실시간 일일 박스오피스 랭킹 데이터를 호출하고, 부드러운 UI와 함께 영화 정보를 브라우저에 실시간 렌더링하는 비동기 자바스크립트 실습을 진행했습니다.",
                 achievements: [
-                    { title: "비동기 API 처리", desc: "Async/Await를 통한 네트워크 요청 및 실시간 데이터 바인딩 적용" },
-                    { title: "동적 렌더링", desc: "JSON 응답 객체를 정제하여 UI 카드 컴포넌트로 화면에 배치" }
+                    { title: "Open API 비동기 통신", desc: "Fetch API 및 Async/Await를 이용한 공공 데이터 요청 처리 및 예외 처리 학습" },
+                    { title: "동적 데이터 바인딩", desc: "수신된 JSON 객체 데이터 기반의 유연한 반응형 HTML 카드 요소 동적 생성" }
                 ],
-                tools: ["JavaScript", "KOBIS API", "Fetch API"],
+                tools: ["JavaScript", "Fetch API", "KOBIS API", "Tailwind CSS"],
                 category: "웹 기술 및 프롬프트"
+            },
+            {
+                id: 9,
+                title: "최종: AI test",
+                tags: ["AI솔루션", "종합기획", "문제해결"],
+                icon: "fa-lightbulb",
+                color: "card-purple",
+                links: [{ label: "과제물 보기", url: "./AI_test/index.html" }],
+                description: "15주간의 AI 기술 및 데이터를 종합 융합하여, 현실 세계의 문제를 발굴하고 인공지능 기법을 통한 최적의 아키텍처 및 해결안을 도출한 종합 성과 과제입니다.",
+                achievements: [
+                    { title: "인공지능 융합 솔루션 설계", desc: "문제를 정량적으로 파악하고 AI Agent 기법을 이용한 시나리오 및 개선안 완성" },
+                    { title: "프로토타입 가시화 성과", desc: "다차원 변수 분석 결과와 UI 디자인 시스템을 통합한 프로토타입 제시" }
+                ],
+                tools: ["ChatGPT-4o", "Claude 3.5", "Figma", "Canva"],
+                category: "실습 및 기획"
             }
         ];
 
@@ -348,6 +364,8 @@
         const authorModalContent = document.getElementById('author-modal-content');
         const openModalBtn = document.getElementById('open-author-modal');
         const closeModalBtn = document.getElementById('close-author-modal');
+
+        let currentActiveId = null;
 
         function toggleModal(show) {
             if (show) {
@@ -387,8 +405,11 @@
                             ? 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
                             : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
                     } else if (project.id === 6 || project.id === 8) {
-                        // Cyan accent for Data Analysis 2 and Boxoffice
+                        // Cyan/Blue gradient for Data Analysis 2 & 일일박스오피스
                         gradientClass = 'from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700';
+                    } else if (project.id === 9) {
+                        // Purple/Indigo gradient for Task 9
+                        gradientClass = 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700';
                     }
                     
                     btn.className = `flex items-center justify-center gap-4 w-full py-5 px-8 bg-gradient-to-r ${gradientClass} text-white rounded-[2rem] font-black text-lg shadow-xl transform hover:scale-[1.01] active:scale-[0.99] transition-all group`;
