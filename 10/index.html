@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>아빠의 금연 성공 프로젝트 | 건강한 내일을 위한 약속</title>
+  <meta name="description" content="조기 흡연의 통계적 심각성과 3차 흡연의 실태를 바탕으로 설계된, 사랑하는 아빠의 건강한 금연 성공을 위한 가족 참여형 인터랙티브 랜딩페이지입니다.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              dark: '#0f172a',
+            },
+            family: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts & FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(34, 197, 94, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.1) 0px, transparent 50%);
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card {
+      background: rgba(20, 30, 55, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34, 197, 94, 0.3);
+      box-shadow: 0 12px 20px -8px rgba(34, 197, 94, 0.2);
+    }
+
+    /* 포스트잇 애니메이션 효과 */
+    .postit {
+      transition: all 0.2s ease;
+    }
+    .postit:hover {
+      transform: rotate(-1deg) translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+  <!-- Custom Alert Notification Overlay (No alert() browser dialog) -->
+  <div id="custom-alert" class="fixed top-5 right-5 z-50 transform translate-x-80 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="glass border-l-4 border-brand-500 text-white px-5 py-4 rounded-lg shadow-2xl flex items-center gap-3">
+      <span id="alert-icon" class="text-brand-500 text-xl"><i class="fas fa-check-circle"></i></span>
+      <div>
+        <h4 class="font-bold text-sm text-slate-200" id="alert-title">알림</h4>
+        <p class="text-xs text-slate-400" id="alert-msg">메시지가 등록되었습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-40 w-full glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl text-family-500 animate-pulse">❤️</span>
+        <a href="#hero" class="text-xl font-black bg-gradient-to-r from-brand-500 to-family-500 bg-clip-text text-transparent tracking-tight">Dad's Care</a>
+      </div>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#stats" class="text-sm font-medium text-slate-300 hover:text-brand-500 transition-colors">중독의 진실</a>
+        <a href="#calculator" class="text-sm font-medium text-slate-300 hover:text-brand-500 transition-colors">금연 시뮬레이터</a>
+        <a href="#support" class="text-sm font-medium text-slate-300 hover:text-brand-500 transition-colors">사랑방 응원판</a>
+        <a href="#danger" class="text-sm font-medium text-slate-300 hover:text-brand-500 transition-colors">3차 흡연의 공포</a>
+        <a href="#promise" class="px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-brand-500 to-brand-600 text-white hover:from-brand-600 hover:to-brand-700 shadow-md shadow-brand-500/10 transition-all hover:scale-105">금연 약속하기</a>
+      </nav>
+
+      <!-- Mobile Nav Toggle button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-400 hover:text-white" aria-label="메뉴 열기">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden md:hidden glass border-b border-white/5 px-4 pt-2 pb-4 space-y-2">
+      <a href="#stats" class="block py-2 text-base font-medium text-slate-300 hover:text-brand-500">중독의 진실</a>
+      <a href="#calculator" class="block py-2 text-base font-medium text-slate-300 hover:text-brand-500">금연 시뮬레이터</a>
+      <a href="#support" class="block py-2 text-base font-medium text-slate-300 hover:text-brand-500">사랑방 응원판</a>
+      <a href="#danger" class="block py-2 text-base font-medium text-slate-300 hover:text-brand-500">3차 흡연의 공포</a>
+      <a href="#promise" class="block py-2.5 text-center rounded-lg text-sm font-bold bg-brand-500 text-white">금연 약속하기</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative overflow-hidden pt-20 pb-16 lg:pt-32 lg:pb-24 flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-white/10 text-xs text-brand-500 font-semibold mb-4">
+            <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-ping"></span>
+            가족과 함께하는 2026 금연 프로젝트
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+            아빠의 <span class="bg-gradient-to-r from-brand-500 to-emerald-400 bg-clip-text text-transparent">금연 성공</span>,<br class="hidden sm:inline">
+            이제 우리가 함께할게요.
+          </h1>
+          <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            "아빠는 왜 담배를 못 끊으실까?" 그동안 아빠의 의지 부족으로만 여겨졌던 금연. <br class="hidden lg:inline">
+            통계 데이터를 통해 아빠의 깊은 흡연 중독 고리를 이해하고, <br class="hidden lg:inline">
+            온 가족이 따뜻한 사랑과 지지로 금연 프로젝트를 이끌어갑니다.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <a href="#calculator" class="px-8 py-4 rounded-xl text-sm font-bold bg-brand-500 hover:bg-brand-600 text-white flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 transition-all hover:translate-y-[-2px]">
+              <i class="fas fa-heartbeat"></i> 건강 수명 계산기
+            </a>
+            <a href="#stats" class="px-8 py-4 rounded-xl text-sm font-bold glass border border-white/10 text-slate-300 hover:bg-white/5 flex items-center justify-center gap-2 transition-all hover:translate-y-[-2px]">
+              통계로 보는 진실 <i class="fas fa-arrow-down"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card Graphic Column -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-md glass border border-white/10 rounded-2xl p-8 relative shadow-2xl">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-family-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="text-center space-y-4">
+              <span class="inline-flex p-4 rounded-full bg-slate-900/50 border border-white/10 text-4xl shadow-inner">👨‍👩‍👧‍👦</span>
+              <h3 class="text-xl font-bold text-white">가족 참여 금연단</h3>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                오늘도 아빠의 소중한 내일을 위해 많은 가족들이 금연을 약속하고 마음을 모으고 있습니다.
+              </p>
+              
+              <!-- Mini live stat widget -->
+              <div class="bg-slate-900/40 rounded-xl p-4 border border-white/5 grid grid-cols-2 gap-4 mt-6">
+                <div>
+                  <div class="text-2xl font-black text-brand-500" id="live-pledge-count">1,248</div>
+                  <div class="text-[10px] text-slate-500 uppercase tracking-wider mt-1">참여한 가족 수</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-black text-family-500" id="live-support-count">8,539</div>
+                  <div class="text-[10px] text-slate-500 uppercase tracking-wider mt-1">등록된 응원 수</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section id="stats" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">통계 데이터로 이해하는 아빠의 흡연</h2>
+        <div class="h-1.5 w-24 bg-brand-500 mx-auto rounded-full"></div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          한국복지패널 데이터를 통해 밝혀진 만성 흡연 고착화의 진실. 아빠의 흡연은 단순한 습관이 아니라, 젊은 날부터 각인된 뿌리 깊은 상관관계의 결과입니다.
+        </p>
+      </div>
+
+      <!-- Stats Numbers Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+          <div class="absolute -right-4 -bottom-4 text-9xl font-black text-white/[0.02] select-none pointer-events-none group-hover:scale-110 transition-transform">01</div>
+          <div class="text-4xl font-black text-family-500 mb-2">0.686</div>
+          <h3 class="text-lg font-bold text-white mb-2">조기 시작과 다량 흡연</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            10대 이하에 흡연을 시작할수록 하루 1~2갑(20~40개비) 이상 피우는 고농도 만성 흡연자가 될 상관성이 매우 높습니다.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+          <div class="absolute -right-4 -bottom-4 text-9xl font-black text-white/[0.02] select-none pointer-events-none group-hover:scale-110 transition-transform">02</div>
+          <div class="text-4xl font-black text-amber-500 mb-2">0.553</div>
+          <h3 class="text-lg font-bold text-white mb-2">낮아지는 금연 가능성</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            어릴 때 시작한 흡연일수록 니코틴 수용체와 뇌의 고착화로 인해 성인이 되어 금연 계획을 세우지 못할 확률이 대폭 늘어납니다.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+          <div class="absolute -right-4 -bottom-4 text-9xl font-black text-white/[0.02] select-none pointer-events-none group-hover:scale-110 transition-transform">03</div>
+          <div class="text-4xl font-black text-brand-500 mb-2">93.3%</div>
+          <h3 class="text-lg font-bold text-white mb-2">금연 비의지층</h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            전체 성인 흡연자의 절대다수가 당장 6개월 이내에 금연할 계획이 없습니다. 아빠에게 강압적 조치보다 '가족의 따뜻한 설득'이 절대적으로 필요한 이유입니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Insight Graphic segment (HTML-based interactive Heatmap replacing PNG) -->
+      <div class="glass-card p-6 sm:p-10 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Interactive Heatmap (100% Client-side responsive element) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-white text-base sm:text-lg flex items-center gap-2">
+              <i class="fas fa-th text-brand-500"></i> 흡연 시작 연령별 만성 흡연 고착 상관관계
+            </h4>
+            <span class="text-xs text-slate-500">한국복지패널 기반 분석</span>
+          </div>
+
+          <!-- CSS Heatmap grid -->
+          <div class="overflow-x-auto pb-2">
+            <div class="min-w-[440px] space-y-3">
+              <!-- Grid Header -->
+              <div class="grid grid-cols-5 text-center text-xs font-semibold text-slate-400">
+                <div></div>
+                <div>흡연량 (갑)</div>
+                <div>니코틴 의존</div>
+                <div>금연 실패율</div>
+                <div>비의지 확률</div>
+              </div>
+
+              <!-- Row 1 -->
+              <div class="grid grid-cols-5 items-center text-center text-xs">
+                <div class="text-left font-bold text-slate-300 pr-2">10대 이전 시작</div>
+                <div class="bg-rose-500/90 text-white py-4 rounded-lg font-bold m-1">0.686</div>
+                <div class="bg-rose-500/80 text-white py-4 rounded-lg font-bold m-1">0.621</div>
+                <div class="bg-rose-500/70 text-white py-4 rounded-lg font-bold m-1">0.590</div>
+                <div class="bg-rose-500/60 text-white py-4 rounded-lg font-bold m-1">0.553</div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="grid grid-cols-5 items-center text-center text-xs">
+                <div class="text-left font-bold text-slate-300 pr-2">20대 초반 시작</div>
+                <div class="bg-orange-500/70 text-white py-4 rounded-lg font-bold m-1">0.452</div>
+                <div class="bg-orange-500/60 text-white py-4 rounded-lg font-bold m-1">0.418</div>
+                <div class="bg-orange-500/50 text-white py-4 rounded-lg font-bold m-1">0.380</div>
+                <div class="bg-orange-500/40 text-white py-4 rounded-lg font-bold m-1">0.320</div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="grid grid-cols-5 items-center text-center text-xs">
+                <div class="text-left font-bold text-slate-300 pr-2">30대 이후 시작</div>
+                <div class="bg-emerald-500/40 text-slate-200 py-4 rounded-lg font-bold m-1">0.204</div>
+                <div class="bg-emerald-500/30 text-slate-200 py-4 rounded-lg font-bold m-1">0.191</div>
+                <div class="bg-emerald-500/20 text-slate-300 py-4 rounded-lg font-bold m-1">0.145</div>
+                <div class="bg-emerald-500/10 text-slate-400 py-4 rounded-lg font-bold m-1">0.088</div>
+              </div>
+
+              <!-- Legend -->
+              <div class="flex items-center justify-end gap-4 pt-2 text-[10px] text-slate-400">
+                <span>상관관계 범례:</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 bg-emerald-500/30 rounded"></span> 낮음</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 bg-orange-500/60 rounded"></span> 보통</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 bg-rose-500/90 rounded"></span> 높음</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insights -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass border border-white/5 rounded-2xl p-6 space-y-4">
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+              <span class="text-xs bg-family-500 text-white px-2 py-0.5 rounded-md">INSIGHT 01</span>
+              어릴 때 시작한 담배의 위험성
+            </h4>
+            <p class="text-sm text-slate-400 leading-relaxed">
+              10대 이하 청소년기에 최초 흡연을 접하게 되면 성인이 되었을 때의 니코틴 의존 강도와 하루 담배 소비량이 수배 이상 급증하는 통계가 증명되었습니다.
+            </p>
+          </div>
+
+          <!-- INSIGHT 02 / Q2 섹션 영역 -->
+          <div class="glass border border-white/5 rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+            <div>
+              <h4 class="text-lg font-bold text-white flex items-center gap-2 mb-2">
+                <span class="text-xs bg-brand-500 text-white px-2 py-0.5 rounded-md">INSIGHT 02</span>
+                가족의 개입이 필요한 시점
+              </h4>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                남성 만성 흡연은 끈질긴 니코틴 결합력에 기인하므로, 단순한 질책보다는 긍정적 보상과 설득 같은 행동 변화 심리학(Nudge) 자극이 효과적입니다.
+              </p>
+            </div>
+            
+            <!-- Q2 섹션 다운로드 버튼 추가 -->
+            <div class="pt-2">
+              <button id="report-download-btn" class="w-full py-3 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white transition-all shadow-md shadow-brand-500/10 flex items-center justify-center gap-2">
+                <i class="fas fa-file-download text-sm"></i> 통계 분석보고서 다운로드 (.docx)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <section id="calculator" class="py-24 bg-slate-900/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">아빠의 금연 건강 수명 시뮬레이터</h2>
+        <div class="h-1.5 w-24 bg-brand-500 mx-auto rounded-full"></div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          아빠가 오늘부터 금연을 시작한다면, 우리 가족에게 어떤 기적 같은 변화가 찾아올까요? 아빠의 하루 흡연 정보를 입력해 보세요.
+        </p>
+      </div>
+
+      <!-- Calculator Main Grid -->
+      <div class="glass-card max-w-5xl mx-auto rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+          
+          <!-- Inputs Column -->
+          <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+            <div class="space-y-6">
+              <!-- Input 1 -->
+              <div class="space-y-2">
+                <label for="smoke-count" class="block text-xs font-bold text-slate-400 uppercase tracking-wider">하루 평균 흡연량 (개비)</label>
+                <div class="relative rounded-xl shadow-sm">
+                  <input type="number" id="smoke-count" value="15" min="1" max="100" class="w-full bg-slate-950/80 border border-white/10 rounded-xl px-4 py-3.5 text-white font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                  <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-500 text-sm">개비</div>
+                </div>
+              </div>
+
+              <!-- Input 2 -->
+              <div class="space-y-2">
+                <label for="pack-price" class="block text-xs font-bold text-slate-400 uppercase tracking-wider">담배 한 갑 가격 (원)</label>
+                <div class="relative rounded-xl shadow-sm">
+                  <input type="number" id="pack-price" value="4500" step="500" min="1000" max="50000" class="w-full bg-slate-950/80 border border-white/10 rounded-xl px-4 py-3.5 text-white font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                  <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-500 text-sm">원</div>
+                </div>
+              </div>
+
+              <!-- Input 3 -->
+              <div class="space-y-2">
+                <label for="smoke-years" class="block text-xs font-bold text-slate-400 uppercase tracking-wider">지금까지 흡연한 기간 (년)</label>
+                <div class="relative rounded-xl shadow-sm">
+                  <input type="number" id="smoke-years" value="20" min="1" max="80" class="w-full bg-slate-950/80 border border-white/10 rounded-xl px-4 py-3.5 text-white font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                  <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-500 text-sm">년</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Health tip box -->
+            <div class="bg-brand-500/10 border border-brand-500/20 rounded-xl p-4 mt-6 text-xs text-slate-300 leading-relaxed">
+              <span class="font-bold text-brand-500">💡 의학 통계 팁:</span> 담배 한 개비는 대략 수명을 <strong>11분</strong> 단축하며, 하루 한 갑(20개비)을 피울 경우 연간 약 55일치의 삶이 사라지는 것과 같습니다.
+            </div>
+          </div>
+
+          <!-- Results Column -->
+          <div class="lg:col-span-7 bg-slate-950/60 rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
+            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6 flex items-center gap-2">
+              <i class="fas fa-chart-line text-brand-500"></i> 금연 1년 시점에 발생하는 눈부신 기적
+            </h4>
+            
+            <div class="space-y-6">
+              <!-- Result Item 1 -->
+              <div class="flex items-center justify-between border-b border-white/5 pb-4">
+                <div class="space-y-1">
+                  <div class="text-xs font-semibold text-slate-400">1년간 아빠가 아끼는 돈</div>
+                  <div class="text-[10px] text-slate-500">금연 저축만으로 선물할 수 있는 가치</div>
+                </div>
+                <div class="text-right">
+                  <span id="saved-money" class="text-2xl sm:text-3xl font-black text-brand-500">0</span>
+                  <span class="text-xs text-slate-400 font-bold ml-1">원</span>
+                </div>
+              </div>
+
+              <!-- Result Item 2 -->
+              <div class="flex items-center justify-between border-b border-white/5 pb-4">
+                <div class="space-y-1">
+                  <div class="text-xs font-semibold text-slate-400">금연으로 되찾는 아빠의 수명</div>
+                  <div class="text-[10px] text-slate-500">심혈관과 허파 세포가 되살아나는 물리적 시간</div>
+                </div>
+                <div class="text-right">
+                  <span id="added-life" class="text-2xl sm:text-3xl font-black text-family-500">0</span>
+                  <span class="text-xs text-slate-400 font-bold ml-1">일</span>
+                </div>
+              </div>
+
+              <!-- Result Item 3 -->
+              <div class="flex items-center justify-between">
+                <div class="space-y-1">
+                  <div class="text-xs font-semibold text-slate-400">가족과 보낼 수 있는 추가 활성 시간</div>
+                  <div class="text-[10px] text-slate-500">소중한 일상 속 웃음소리로 채워질 시간</div>
+                </div>
+                <div class="text-right">
+                  <span id="family-time" class="text-2xl sm:text-3xl font-black text-amber-500">0</span>
+                  <span class="text-xs text-slate-400 font-bold ml-1">시간</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visualization of Gained Time -->
+            <div class="bg-slate-900/50 rounded-xl p-4 mt-8 flex items-center gap-4 border border-white/5">
+              <span class="text-3xl text-amber-500 animate-bounce">🎁</span>
+              <p class="text-xs text-slate-400 leading-relaxed" id="family-time-desc">
+                아빠의 금연은 우리 가족과의 삶을 더 따뜻하고 온전하게 연장하는 가장 가치 있는 선물입니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wall of Support (사랑방 응원판) -->
+  <section id="support" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">아빠를 위한 사랑방 응원 메시지 보드</h2>
+        <div class="h-1.5 w-24 bg-brand-500 mx-auto rounded-full"></div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          그동안 혼자 외롭게 담배와 싸우던 아빠에게 따뜻한 사랑의 메시지를 포스트잇으로 붙여보세요! 가족의 진심이 가장 강력한 금연 치료제입니다.
+        </p>
+      </div>
+
+      <!-- Messages Input & Output Wrapper -->
+      <div class="max-w-5xl mx-auto space-y-10">
+        <!-- Message Form Card -->
+        <div class="glass border border-white/10 rounded-2xl p-6 shadow-xl">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            <div class="md:col-span-5">
+              <input type="text" id="msg-input" placeholder="아빠, 담배 피우지 말고 백세까지 같이 살아요! 사랑해요 ❤️" max="100" class="w-full bg-slate-950/60 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div class="md:col-span-3">
+              <input type="text" id="author-input" placeholder="보내는 이 (예: 딸 지우)" class="w-full bg-slate-950/60 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div class="md:col-span-2">
+              <div class="flex items-center gap-2 justify-around">
+                <span class="text-xs text-slate-400 font-semibold hidden md:inline">색상:</span>
+                <div class="flex items-center gap-1.5">
+                  <button class="w-5 h-5 rounded-full bg-[#fef08a] border-2 border-white ring-2 ring-transparent ring-offset-2 ring-offset-slate-900 color-dot active" data-color="yellow"></button>
+                  <button class="w-5 h-5 rounded-full bg-[#fca5a5] border-2 border-white ring-2 ring-transparent ring-offset-2 ring-offset-slate-900 color-dot" data-color="red"></button>
+                  <button class="w-5 h-5 rounded-full bg-[#86efac] border-2 border-white ring-2 ring-transparent ring-offset-2 ring-offset-slate-900 color-dot" data-color="green"></button>
+                  <button class="w-5 h-5 rounded-full bg-[#93c5fd] border-2 border-white ring-2 ring-transparent ring-offset-2 ring-offset-slate-900 color-dot" data-color="blue"></button>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <button id="send-msg-btn" class="w-full py-3 px-4 rounded-xl text-sm font-bold bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg shadow-brand-500/10 flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane"></i> 응원 붙이기
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post-it Message Board Grid -->
+        <div id="messages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[250px] relative">
+          <!-- Dynamically loaded messages with absolute & rotate styling -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [추가] 간접흡연 & 3차 흡연의 위험성 섹션 -->
+  <section id="danger" class="py-24 bg-slate-950/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">간접흡연의 위험성, 우리 가족 모두의 건강을 위해</h2>
+        <div class="h-1.5 w-24 bg-family-500 mx-auto rounded-full"></div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          담배 연기가 사라진 실내, 과연 안전할까요? 보이지 않는 암살자로 지목된 '3차 흡연(Third-hand Smoke)'의 충격적인 진실과 의학적 실태를 공개합니다.
+        </p>
+        <!-- 뉴스 보기 이동 버튼 -->
+        <div class="pt-4">
+          <a href="https://kormedi.com/2775589/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 transition-all shadow-lg hover:scale-105">
+            <i class="fas fa-newspaper text-family-500"></i> 뉴스 보기 <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Core Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
+        <!-- Left: Interactive Reservoir Analyzer -->
+        <div class="lg:col-span-7 glass border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <span class="p-1.5 bg-family-500/20 text-family-500 rounded-lg text-sm">🧪 실감형 도구</span>
+                우리 집 실내 '유해물질 저장고' 분석기
+              </h3>
+              <span class="text-[10px] text-slate-500">가구 아이콘을 탭해 보세요</span>
+            </div>
+            <p class="text-xs text-slate-400">
+              담배 연기의 니코틴 유해성분은 실내의 미세한 틈에 흡착되어 장기간 방출됩니다. 아래 가구 및 소재들을 선택하여 잔류 위험을 분석해 보세요.
+            </p>
+
+            <!-- Virtual Living Room Grid Map -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+              <button class="reservoir-btn p-4 rounded-xl border border-white/5 bg-slate-900/40 text-left hover:border-family-500/40 transition-all group active" data-target="sofa">
+                <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🛋️</div>
+                <div class="text-xs font-bold text-slate-200">패브릭 소파</div>
+                <div class="text-[10px] text-slate-500 mt-1">다공성 섬유</div>
+              </button>
+              <button class="reservoir-btn p-4 rounded-xl border border-white/5 bg-slate-900/40 text-left hover:border-family-500/40 transition-all group" data-target="wallpaper">
+                <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🧱</div>
+                <div class="text-xs font-bold text-slate-200">실내 벽지</div>
+                <div class="text-[10px] text-slate-500 mt-1">실시간 재방출</div>
+              </button>
+              <button class="reservoir-btn p-4 rounded-xl border border-white/5 bg-slate-900/40 text-left hover:border-family-500/40 transition-all group" data-target="curtain">
+                <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">カーテン</div>
+                <div class="text-xs font-bold text-slate-200">커튼 / 패브릭</div>
+                <div class="text-[10px] text-slate-500 mt-1">냄새 밀착 가구</div>
+              </button>
+              <button class="reservoir-btn p-4 rounded-xl border border-white/5 bg-slate-900/40 text-left hover:border-family-500/40 transition-all group" data-target="clothes">
+                <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">👕</div>
+                <div class="text-xs font-bold text-slate-200">아이 옷 / 피부</div>
+                <div class="text-[10px] text-slate-500 mt-1">피부 접촉 흡착</div>
+              </button>
+            </div>
+
+            <!-- Dynamic Result Card -->
+            <div id="reservoir-result" class="bg-slate-950/80 rounded-xl p-5 border border-family-500/20 space-y-3 min-h-[140px] flex flex-col justify-center">
+              <!-- Dynamically populated via JS -->
+              <h4 class="text-sm font-bold text-family-500" id="res-title">🛋️ 패브릭 소파의 위험성</h4>
+              <p class="text-xs text-slate-300 leading-relaxed" id="res-desc">
+                양모 카펫이나 천 소파처럼 눈에 보이지 않는 미세한 구멍이 많은 '다공성 소재'는 담배 유해물질을 빨아들인 뒤 수 시간에서 수일에 걸쳐 서서히 방출하는 위험한 '저장고(Reservoir)' 역할을 합니다.
+              </p>
+              <div class="text-[10px] text-slate-500 flex items-center gap-1.5" id="res-badge">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> 오염 지속력: 매우 강함 (수주 간 유지)
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-900/30 rounded-xl p-4 mt-6 border border-white/5 flex items-center gap-3">
+            <span class="text-xl">⚠️</span>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              <strong>의학 정보:</strong> 냄새가 난다는 것은 유해한 화학물질이 공기 중으로 계속 방출되어 비흡연자의 호흡기 세포를 자극하고 있다는 가장 명확한 유독 신호입니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Scientifically Backed Insights -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+          <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-4">
+            <div class="text-xs font-bold text-family-500">중국과학원 대기물리연구소 최신 연구</div>
+            <h3 class="text-lg font-bold text-white leading-snug">
+              연기가 사라진 뒤에도<br>2차 변형되어 늘어나는 독성
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              연구에 따르면 실내 표면에 배어 있는 니코틴 관련 유해 화학물질은 시간이 지남에 따라 실내 공기 중의 질소 성분과 반응하여 한층 더 해롭고 독성이 강한 <strong>발암물질(니트로사민 등)</strong>로 변형 및 재생산됩니다.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-4">
+            <div class="text-xs font-bold text-amber-500">환기만으로는 해결 불가능한 이유</div>
+            <h3 class="text-lg font-bold text-white leading-snug">
+              환기는 일시적인 농도 저하일 뿐입니다
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              단순히 문을 열어 환기하는 것은 공기 중에 떠도는 물질을 일시적으로 희석시킬 뿐입니다. 소파, 벽지, 매트리스 내부 깊숙이 각인된 오염원 자체가 남아있어 문을 닫으면 다시 유해 물질 방출이 재개됩니다.
+            </p>
+          </div>
+
+          <div class="glass p-6 rounded-2xl border border-family-500/20 bg-family-500/5 space-y-3">
+            <h4 class="text-xs font-bold text-family-500 flex items-center gap-1">
+              <i class="fas fa-exclamation-triangle"></i> 근본적인 해결책은 금연뿐입니다
+            </h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              오염된 벽지, 카펫, 커튼, 매트리스를 통째로 교체하는 일은 막대한 비용과 한계가 따릅니다. 따라서 우리 가족, 특히 면역력이 약한 <strong>아이들과 반려동물</strong>을 구하는 유일한 길은 아빠의 <strong>'실내 완전 금연'</strong>입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promise Generator -->
+  <section id="promise" class="py-24 bg-slate-900/40 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">아빠의 평생 금연 서약서 발급</h2>
+        <div class="h-1.5 w-24 bg-brand-500 mx-auto rounded-full"></div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          가족의 마음에 보답하는 아빠의 다짐을 공식 서약서로 남기세요. 마우스나 손가락으로 전용 서명란에 직접 서명하여 완성하고 실천해 갑니다.
+        </p>
+      </div>
+
+      <!-- Pledge Generator Container -->
+      <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Pledge Preview Output -->
+          <div class="lg:col-span-7 bg-white text-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl relative border-8 border-amber-900/10" id="promise-certificate">
+            <!-- Frame/Accents -->
+            <div class="absolute inset-2 border-2 border-dashed border-amber-900/20 rounded-lg pointer-events-none"></div>
+            
+            <div class="relative space-y-6 text-center z-10 pt-4">
+              <span class="text-3xl">📜</span>
+              <h3 class="text-2xl font-black text-amber-950 tracking-wider">금 연 서 약 서</h3>
+              
+              <p id="promise-content" class="text-sm sm:text-base text-slate-700 leading-loose font-medium text-left px-2">
+                나 <span id="cert-father" class="font-extrabold text-brand-600 border-b-2 border-brand-500/30 px-1 text-lg">홍길동</span> 은(는) 사랑하는 나의 소중한 가족 <span id="cert-family" class="font-extrabold text-family-500 border-b-2 border-family-500/30 px-1 text-lg">예쁜 아내와 사랑스런 자녀들</span> 을(를) 위해 2026년 6월 19일부터 영원히 흡연을 멈추고 온 가족의 평화와 사랑 가득한 미래를 가꾸어 갈 것을 엄숙히 선언하며 약속합니다.
+              </p>
+            </div>
+
+            <div class="relative z-10 mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 px-2 pt-4 border-t border-amber-900/10">
+              <div class="text-xs text-slate-500 text-left">
+                <span class="block text-amber-950 font-bold" id="cert-date">2026년 6월 19일</span>
+                <span>가족 수호 금연 연대 증명</span>
+              </div>
+              
+              <!-- Draw Signature Output Frame -->
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500">서명:</span>
+                <div class="w-24 h-12 bg-amber-50/50 rounded border border-amber-900/15 relative overflow-hidden flex items-center justify-center">
+                  <img id="signature-img" class="max-w-full max-h-full object-contain hidden" alt="Signature">
+                  <span id="no-signature-text" class="text-[10px] text-slate-400">서명 대기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pledge Creator Inputs / Custom Signature Pad -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">아빠 성명</label>
+                <input type="text" id="input-father" placeholder="예: 홍길동" class="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+
+              <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">사랑하는 가족 이름</label>
+                <input type="text" id="input-family" placeholder="예: 엄마와 소중한 아이들" class="w-full bg-slate-950/60 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+              </div>
+
+              <!-- Canvas Signature Board -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">아빠의 자필 서명란</label>
+                  <button type="button" id="clear-sig-btn" class="text-[11px] text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                    <i class="fas fa-redo"></i> 서명 지우기
+                  </button>
+                </div>
+                <!-- Drawing Canvas Container -->
+                <div class="bg-slate-950 border border-white/10 rounded-xl overflow-hidden relative" style="height: 120px;">
+                  <canvas id="sig-canvas" class="w-full h-full cursor-crosshair block bg-slate-950"></canvas>
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none text-[10px] text-slate-600" id="canvas-placeholder">
+                    마우스 혹은 화면 터치로 직접 서명해 주세요
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-3 pt-4">
+              <button id="gen-promise-btn" class="w-full py-4 rounded-xl text-sm font-bold bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2">
+                <i class="fas fa-file-signature"></i> 서약서 실시간 발급 및 완성
+              </button>
+              <button id="share-promise-btn" class="w-full py-3 rounded-xl text-xs font-bold glass border border-white/10 text-slate-300 hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-copy"></i> 서약서 링크 가족들에게 공유하기
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creator Profile Section -->
+  <section id="creator" class="py-16 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="glass border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+        <!-- Ambient decorative blur glows -->
+        <div class="absolute -top-12 -left-12 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-family-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+          <!-- Left Avatar / Graphic -->
+          <div class="flex-shrink-0">
+            <div class="relative">
+              <!-- Animated outer pulse glow -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-family-500 rounded-full blur-md opacity-40 animate-pulse"></div>
+              <!-- Avatar Base -->
+              <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-2 border-white/20 flex items-center justify-center text-4xl shadow-inner select-none col-span-1">
+                👩‍🎓
+              </div>
+              <span class="absolute bottom-0 right-0 bg-family-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md">STUDENT</span>
+            </div>
+          </div>
+
+          <!-- Right Content -->
+          <div class="space-y-4 text-center md:text-left flex-grow">
+            <div class="space-y-1">
+              <span class="text-xs font-bold text-brand-500 tracking-widest uppercase">PRODUCER INFO</span>
+              <h3 class="text-xl sm:text-2xl font-black text-white">부산대학교 사회복지학과 3학년 김보현</h3>
+              <p class="text-xs text-slate-400">아빠를 너무 사랑해서 오래오래 함께 하고 싶은 딸</p>
+            </div>
+            <p class="text-sm text-slate-300 leading-relaxed font-light">
+              안녕하세요! 저는 부산대학교 사회복지학과 3학년에 재학 중인 <strong>김보현</strong>입니다. 
+              하나뿐인 외동딸로서 소중한 우리 아빠의 건강과 하루하루를 곁에서 지켜보며 항상 걱정하는 마음이 참 컸습니다. 
+              어떻게 하면 아빠가 힘겹고 쓸쓸하게 담배와 싸우지 않고, 온 가족의 웃음소리 속에서 금연을 행복하게 실천해 나갈 수 있을까 고민했습니다. 
+              마침 대학에서 수강하게 된 **AI 리터러시** 수업을 통해 배운 유용한 디지털 활용 역량을 십분 발휘하여, 저의 정성 가득한 걱정과 정서 지원 솔루션을 결합한 이 뜻깊은 금연 솔루션 페이지를 제작하게 되었습니다. 
+              저와 아빠, 그리고 우리 가족의 소중한 내일을 이어가는 따뜻한 시작이 되기를 바랍니다.
+            </p>
+            
+            <!-- Creator Interaction Links -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+              <button id="ai-report-btn" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-brand-500 to-emerald-600 hover:from-brand-600 hover:to-emerald-700 text-white transition-all shadow-md shadow-brand-500/10 flex items-center gap-1.5">
+                <i class="fas fa-file-word text-sm"></i> 제작상세내용 (.docx)
+              </button>
+              <span class="text-[11px] text-slate-500">| 아빠의 백세 내일을 가꾸는 외동딸의 사랑 고백</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass border-t border-white/5 pt-16 pb-12 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-white/5">
+        <div class="md:col-span-8 space-y-4 text-center md:text-left">
+          <div class="text-lg font-black text-white tracking-tight flex items-center justify-center md:justify-start gap-2">
+            <span class="text-brand-500">Dad's Quit Smoking Project</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-2xl">
+            본 프로젝트는 만성 흡연 고착화에 따른 한국복지패널 수년 간의 종단 연구 데이터를 바탕으로 기획 및 제작되었습니다. 
+            아빠의 금연은 의지만으로 이뤄지기 매우 어렵습니다. 적극적인 사랑의 넛지와 가족 단위의 환경 통제가 담배로부터 아빠를 영원히 구해낼 수 있습니다.
+          </p>
+        </div>
+        <div class="md:col-span-4 flex justify-center md:justify-end gap-4 text-slate-400 text-sm">
+          <a href="#" class="hover:text-brand-500 transition-colors"><i class="fab fa-github"></i></a>
+          <a href="#" class="hover:text-brand-500 transition-colors"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-brand-500 transition-colors"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 text-[11px] text-slate-600">
+        <p>&copy; 2026 한국복지패널 데이터 기반 가족 건강 기획. All rights reserved.</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:underline">개인정보처리방침</a>
+          <a href="#" class="hover:underline">이용약관</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      
+      /* ==========================================================================
+         1. Global Alert Toast
+         ========================================================================== */
+      function showAlert(title, message, isSuccess = true) {
+        const alertBox = document.getElementById("custom-alert");
+        const alertTitle = document.getElementById("alert-title");
+        const alertMsg = document.getElementById("alert-msg");
+        const alertIcon = document.getElementById("alert-icon");
+        
+        alertTitle.textContent = title;
+        alertMsg.textContent = message;
+        
+        if (isSuccess) {
+          alertIcon.innerHTML = `<i class="fas fa-check-circle text-brand-500"></i>`;
+          alertBox.querySelector('div').className = "glass border-l-4 border-brand-500 text-white px-5 py-4 rounded-lg shadow-2xl flex items-center gap-3";
+        } else {
+          alertIcon.innerHTML = `<i class="fas fa-exclamation-circle text-family-500"></i>`;
+          alertBox.querySelector('div').className = "glass border-l-4 border-family-500 text-white px-5 py-4 rounded-lg shadow-2xl flex items-center gap-3";
+        }
+
+        alertBox.classList.remove("translate-x-80", "opacity-0");
+        alertBox.classList.add("translate-x-0", "opacity-100");
+        
+        setTimeout(() => {
+          alertBox.classList.remove("translate-x-0", "opacity-100");
+          alertBox.classList.add("translate-x-80", "opacity-0");
+        }, 3000);
+      }
+
+      /* ==========================================================================
+         2. Navigation & Mobile Menu Trigger
+         ========================================================================== */
+      const mobileBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      mobileBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu on click links
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      /* ==========================================================================
+         3. Dynamic Health/Lifespan Simulator (금연 시뮬레이터)
+         ========================================================================== */
+      const smokeCountInput = document.getElementById("smoke-count");
+      const packPriceInput = document.getElementById("pack-price");
+      const smokeYearsInput = document.getElementById("smoke-years");
+
+      const savedMoneyEl = document.getElementById("saved-money");
+      const addedLifeEl = document.getElementById("added-life");
+      const familyTimeEl = document.getElementById("family-time");
+      const familyTimeDesc = document.getElementById("family-time-desc");
+
+      function updateCalculator() {
+        const count = parseFloat(smokeCountInput.value) || 0;
+        const price = parseFloat(packPriceInput.value) || 0;
+        const years = parseFloat(smokeYearsInput.value) || 0;
+
+        // 1. Saved Money (Money saved per year)
+        // 1 pack = 20 cigarettes
+        const dailyCost = (count / 20) * price;
+        const yearlySavings = dailyCost * 365;
+
+        // 2. Added Life (1 cigarette = 11 minutes lost)
+        // Lifespan added in 1 year of quitting
+        const yearlyMinutesGained = count * 11 * 365;
+        const daysGained = (yearlyMinutesGained / (24 * 60)); // minutes converted to days
+
+        // 3. Family quality interaction time
+        // Let's assume an active communicative interaction with family is typically 4 hours per day.
+        // We calculate additional active interaction hours saved in a year
+        const interactionHoursGained = Math.round(daysGained * 8);
+
+        // Format Output
+        savedMoneyEl.textContent = Math.round(yearlySavings).toLocaleString();
+        addedLifeEl.textContent = daysGained.toFixed(1);
+        familyTimeEl.textContent = interactionHoursGained.toLocaleString();
+
+        // Custom dynamically generated text based on calculation scale
+        if (count >= 20) {
+          familyTimeDesc.textContent = `아빠가 매일 한 갑 넘게 태우셨던 연기를 멈추면, 1년 안에 약 ${daysGained.toFixed(0)}일간의 생명이 복구되어 온전히 가족 곁에 함께 머무실 수 있습니다.`;
+        } else {
+          familyTimeDesc.textContent = `비교적 가벼운 흡연량이지만, 이 금연으로 아빠는 매년 약 ${Math.round(yearlySavings).toLocaleString()}원의 불필요한 세금을 정기 저축으로 바꿔 사랑하는 아내와의 노후 휴가 기금으로 쓸 수 있습니다!`;
+        }
+      }
+
+      // Add Real-Time Listeners
+      [smokeCountInput, packPriceInput, smokeYearsInput].forEach(inp => {
+        inp.addEventListener("input", updateCalculator);
+      });
+      // Run on load
+      updateCalculator();
+
+      /* ==========================================================================
+         4. Interactive Message Post-it Board (사랑방 응원판)
+         ========================================================================== */
+      const msgInput = document.getElementById("msg-input");
+      const authorInput = document.getElementById("author-input");
+      const sendBtn = document.getElementById("send-msg-btn");
+      const msgContainer = document.getElementById("messages-container");
+      const colorDots = document.querySelectorAll(".color-dot");
+      let selectedColor = "yellow"; // default postit color
+
+      // Pre-filled mock warm messages
+      const initialMessages = [
+        { msg: "아빠! 담배 냄새 대신 아빠와 행복한 추억을 쌓으며 일상을 보내고 싶어요. 언제나 사랑해요! 🌸", author: "사랑스러운 딸, 보현", color: "yellow", rot: -2 },
+        { msg: "여보, 건강하게 우리 늙어갈 수 있도록 이번엔 용기 내줘요. 내가 옆에서 도와줄게요.", author: "나의 건강만을 걱정하는 아내", color: "green", rot: 1 },
+        { msg: "김서방, 이제는 담배 끊겠지? 그 담배 뭐가 좋다고 그렇게 피웠노! 금연하길 바라네", author: "애정어린 잔소리를 담은 장모님", color: "blue", rot: -1 },
+        { msg: "대진아, 이제는 스스로 건강 챙겨야한다. 나도 담배 끊어보니, 참 좋더라. 이제는 담배 냄새도 안 좋게 느껴져. 너도 이 ", author: "장남 걱정하는 아버지", color: "red", rot: 3 }
+      ];
+
+      // Define color styles
+      const colorStyles = {
+        yellow: "bg-[#fef08a] text-amber-900 border-amber-300/40",
+        red: "bg-[#fca5a5] text-rose-950 border-rose-300/40",
+        green: "bg-[#86efac] text-emerald-950 border-emerald-300/40",
+        blue: "bg-[#93c5fd] text-blue-950 border-blue-300/40"
+      };
+
+      // Select Color Dot logic
+      colorDots.forEach(dot => {
+        dot.addEventListener("click", (e) => {
+          colorDots.forEach(d => {
+            d.classList.remove("active", "ring-emerald-500", "ring-2");
+            d.style.borderColor = "white";
+          });
+          e.target.classList.add("active", "ring-emerald-500", "ring-2");
+          selectedColor = e.target.getAttribute("data-color");
+        });
+      });
+
+      // Render all cards
+      function renderMessages() {
+        msgContainer.innerHTML = "";
+        initialMessages.forEach((item, index) => {
+          const card = document.createElement("div");
+          const bgStyle = colorStyles[item.color] || colorStyles.yellow;
+          card.className = `postit ${bgStyle} p-6 rounded-lg shadow-md border flex flex-col justify-between min-h-[160px] relative transform`;
+          card.style.transform = `rotate(${item.rot}deg)`;
+          
+          card.innerHTML = `
+            <div>
+              <p class="text-xs font-semibold leading-relaxed mb-4">${item.msg}</p>
+            </div>
+            <div class="flex justify-between items-end border-t border-black/5 pt-2">
+              <span class="text-[10px] font-extrabold opacity-70">- ${item.author}</span>
+              <button class="delete-msg-btn text-[10px] hover:text-red-600 transition-colors opacity-40 hover:opacity-100" data-index="${index}" aria-label="메시지 삭제">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          `;
+          msgContainer.appendChild(card);
+        });
+
+        // Add event listeners for dynamic delete
+        document.querySelectorAll(".delete-msg-btn").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const idx = parseInt(e.currentTarget.getAttribute("data-index"));
+            initialMessages.splice(idx, 1);
+            renderMessages();
+            showAlert("응원 삭제", "메시지가 보드에서 안전하게 철거되었습니다.", false);
+            // Decrease mock live counter
+            const liveSupport = document.getElementById("live-support-count");
+            liveSupport.textContent = (parseInt(liveSupport.textContent.replace(/,/g, '')) - 1).toLocaleString();
+          });
+        });
+      }
+
+      // Action to Post a message
+      sendBtn.addEventListener("click", () => {
+        const text = msgInput.value.trim();
+        const author = authorInput.value.trim();
+
+        if (!text) {
+          showAlert("입력 요망", "아빠를 위한 응원의 메시지를 채워주세요!", false);
+          return;
+        }
+        if (!author) {
+          showAlert("입력 요망", "보내는 사람의 이름을 적어주세요!", false);
+          return;
+        }
+
+        const randomRotation = Math.floor(Math.random() * 7) - 3; // random rot between -3 and +3 deg
+        initialMessages.unshift({
+          msg: text,
+          author: author,
+          color: selectedColor,
+          rot: randomRotation
+        });
+
+        renderMessages();
+        msgInput.value = "";
+        authorInput.value = "";
+        
+        showAlert("응원 성공", "아빠 사랑방 응원 보드에 전송되었습니다! ❤️");
+        
+        // Increase mock live counter
+        const liveSupport = document.getElementById("live-support-count");
+        liveSupport.textContent = (parseInt(liveSupport.textContent.replace(/,/g, '')) + 1).toLocaleString();
+      });
+
+      renderMessages();
+
+      /* ==========================================================================
+         4-2. Interactive 3rd Hand Smoke Analyzer (3차 흡연 분석기 도구)
+         ========================================================================== */
+      const resButtons = document.querySelectorAll(".reservoir-btn");
+      const resTitle = document.getElementById("res-title");
+      const resDesc = document.getElementById("res-desc");
+      const resBadge = document.getElementById("res-badge");
+
+      const reservoirData = {
+        sofa: {
+          title: "🛋️ 패브릭 소파의 위험성",
+          desc: "양모 카펫이나 천 소파처럼 눈에 보이지 않는 미세한 구멍이 많은 '다공성 소재'는 담배 유해물질을 빨아들인 뒤 수 시간에서 수일에 걸쳐 서서히 방출하는 위험한 '저장고(Reservoir)' 역할을 합니다.",
+          badge: "<span class='w-1.5 h-1.5 rounded-full bg-red-500'></span> 오염 지속력: 매우 강함 (수주 간 유지)"
+        },
+        wallpaper: {
+          title: "🧱 실내 벽지의 위험성",
+          desc: "실내 벽면에 흡착된 니코틴 관련 화학물질들은 시간이 지날수록 공기 중에 떠도는 질소 성분과 결합하여 한층 더 유독하고 해로운 '발암성 유해 화합물(니트로사민 등)'로 실시간 변형되어 재방출될 우려가 높습니다.",
+          badge: "<span class='w-1.5 h-1.5 rounded-full bg-red-500'></span> 화학물질 변형 및 잔존 위험률: 극도로 높음"
+        },
+        curtain: {
+          title: "カーテン 커튼 / 패브릭 소재의 위험성",
+          desc: "커튼과 가구에 밴 퀴퀴하고 역겨운 담배 냄새는 단순히 후각적 불쾌감을 주는 것을 넘어, 3차 흡연 유해 물질들이 공기 중으로 끊임없이 기화하여 방출되고 있다는 확실한 물리적 신호입니다.",
+          badge: "<span class='w-1.5 h-1.5 rounded-full bg-amber-500'></span> 후각적 유해 물질 인지 강도: 높음"
+        },
+        clothes: {
+          title: "👕 아기 옷 / 머리카락 및 피부 접촉 위험",
+          desc: "아빠의 옷과 피부에 달라붙은 보이지 않는 독성 미세입자들은 아빠가 퇴근 후 아이를 안아주거나 가볍게 쓰다듬는 스킨십 과정에서 아이의 피부나 호흡기 및 손을 통해 아주 쉽고 빠르게 흡입됩니다.",
+          badge: "<span class='w-1.5 h-1.5 rounded-full bg-red-500'></span> 아기 및 영유아 취약성: 치명적"
+        }
+      };
+
+      resButtons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          resButtons.forEach(b => {
+            b.classList.remove("border-family-500/40", "bg-family-500/10");
+            b.classList.add("border-white/5", "bg-slate-900/40");
+          });
+          const target = e.currentTarget.getAttribute("data-target");
+          e.currentTarget.classList.remove("border-white/5", "bg-slate-900/40");
+          e.currentTarget.classList.add("border-family-500/40", "bg-family-500/10");
+
+          const info = reservoirData[target];
+          if (info) {
+            resTitle.textContent = info.title;
+            resDesc.textContent = info.desc;
+            resBadge.innerHTML = info.badge;
+          }
+        });
+      });
+
+      /* ==========================================================================
+         5. Drawing Canvas Signature Pad (서명 기능 구현)
+         ========================================================================== */
+      const canvas = document.getElementById("sig-canvas");
+      const ctx = canvas.getContext("2d");
+      const clearBtn = document.getElementById("clear-sig-btn");
+      const placeholder = document.getElementById("canvas-placeholder");
+      const sigImg = document.getElementById("signature-img");
+      const noSigText = document.getElementById("no-signature-text");
+      
+      let drawing = false;
+
+      // Adjust Canvas size on load
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.strokeStyle = "#0f172a"; // Deep signature color
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+      }
+      
+      // Initialize Canvas
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      // Mouse Events for Drawing
+      canvas.addEventListener("mousedown", (e) => {
+        drawing = true;
+        placeholder.style.display = "none";
+        const coords = getMousePos(e);
+        ctx.beginPath();
+        ctx.moveTo(coords.x, coords.y);
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+        const coords = getMousePos(e);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+      });
+
+      canvas.addEventListener("mouseup", () => {
+        drawing = false;
+        saveSignatureToCertificate();
+      });
+
+      // Touch Events for Mobile Drawing
+      canvas.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        drawing = true;
+        placeholder.style.display = "none";
+        const touch = e.touches[0];
+        const coords = getTouchPos(touch);
+        ctx.beginPath();
+        ctx.moveTo(coords.x, coords.y);
+      }, { passive: false });
+
+      canvas.addEventListener("touchmove", (e) => {
+        e.preventDefault();
+        if (!drawing) return;
+        const touch = e.touches[0];
+        const coords = getTouchPos(touch);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+      }, { passive: false });
+
+      canvas.addEventListener("touchend", () => {
+        drawing = false;
+        saveSignatureToCertificate();
+      });
+
+      // Helper position calculators
+      function getMousePos(mouseEvent) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: mouseEvent.clientX - rect.left,
+          y: mouseEvent.clientY - rect.top
+        };
+      }
+
+      function getTouchPos(touchInstance) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: touchInstance.clientX - rect.left,
+          y: touchInstance.clientY - rect.top
+        };
+      }
+
+      // Clear Signature Board
+      clearBtn.addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        placeholder.style.display = "flex";
+        sigImg.src = "";
+        sigImg.classList.add("hidden");
+        noSigText.classList.remove("hidden");
+      });
+
+      // Render the drawn signature directly in the preview certificate
+      function saveSignatureToCertificate() {
+        const dataURL = canvas.toDataURL("image/png");
+        sigImg.src = dataURL;
+        sigImg.classList.remove("hidden");
+        noSigText.classList.add("hidden");
+      }
+
+      /* ==========================================================================
+         6. Real-Time Pledge Generator Controls (금연 서약서 동적 연동)
+         ========================================================================== */
+      const fatherInput = document.getElementById("input-father");
+      const familyInput = document.getElementById("input-family");
+      
+      const certFather = document.getElementById("cert-father");
+      const certFamily = document.getElementById("cert-family");
+      const certDate = document.getElementById("cert-date");
+
+      // Present actual day nicely
+      const today = new Date();
+      const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+      certDate.textContent = formattedDate;
+
+      // Listeners for real-time update
+      fatherInput.addEventListener("input", (e) => {
+        certFather.textContent = e.target.value.trim() || "[아빠 성명]";
+      });
+
+      familyInput.addEventListener("input", (e) => {
+        certFamily.textContent = e.target.value.trim() || "[가족 이름]";
+      });
+
+      // Submit Pledge Button
+      const genBtn = document.getElementById("gen-promise-btn");
+      genBtn.addEventListener("click", () => {
+        const fatherName = fatherInput.value.trim();
+        const familyName = familyInput.value.trim();
+
+        if (!fatherName) {
+          showAlert("서명 오류", "아빠의 성함을 기재해 주세요.", false);
+          return;
+        }
+        if (!familyName) {
+          showAlert("서명 오류", "지켜주는 우리 가족들의 이름을 적어주세요.", false);
+          return;
+        }
+        
+        // Add active glowing visual feedback to certificate
+        const certBox = document.getElementById("promise-certificate");
+        certBox.classList.add("ring-4", "ring-brand-500", "scale-102", "transition-all");
+        setTimeout(() => {
+          certBox.classList.remove("ring-4", "ring-brand-500", "scale-102");
+        }, 1500);
+
+        showAlert("서약서 발급 성공", "세상에 단 하나뿐인 평생 약속, 서약서가 발급되었습니다. 꼭 거실 벽에 보관하세요! ✨");
+        
+        // Increse mock live counter
+        const livePledge = document.getElementById("live-pledge-count");
+        livePledge.textContent = (parseInt(livePledge.textContent.replace(/,/g, '')) + 1).toLocaleString();
+      });
+
+      // Clipboard Share Mock
+      const shareBtn = document.getElementById("share-promise-btn");
+      shareBtn.addEventListener("click", () => {
+        // Fallback-friendly copy using document.execCommand
+        const dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+
+        showAlert("공유 링크 복사 완료", "가족 단체 채팅방에 복사한 링크를 공유해보세요!");
+      });
+
+      /* ==========================================================================
+         7-2. AI 리터러시 제작 상세 보고서 다운로드 (.docx 생성 및 배출)
+         ========================================================================== */
+      const aiReportBtn = document.getElementById("ai-report-btn");
+      
+      function downloadAiReportDocx() {
+        showAlert("보고서 생성 중", "AI_report.docx 문서를 준비 중입니다.");
+
+        // Word 호환 HTML 기반 XML 템플릿 생성
+        const docxContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+            <meta charset="utf-8">
+            <title>AI 리터러시를 통한 가족 정서 금연 프로젝트 제작 상세 보고서</title>
+            <style>
+                body {
+                    font-family: 'Malgun Gothic', 'Arial', sans-serif;
+                    line-height: 1.6;
+                    color: #333333;
+                }
+                h1 {
+                    color: #1e293b;
+                    font-size: 20pt;
+                    text-align: center;
+                    margin-top: 20pt;
+                    margin-bottom: 10pt;
+                    font-weight: bold;
+                }
+                h2 {
+                    color: #22c55e;
+                    font-size: 15pt;
+                    border-bottom: 2px solid #e2e8f0;
+                    padding-bottom: 5px;
+                    margin-top: 25pt;
+                    margin-bottom: 12pt;
+                }
+                h3 {
+                    color: #1e293b;
+                    font-size: 12pt;
+                    margin-top: 15pt;
+                    margin-bottom: 6pt;
+                }
+                p {
+                    font-size: 10pt;
+                    margin-bottom: 10pt;
+                    text-align: justify;
+                }
+                .highlight-box {
+                    background-color: #f0fdf4;
+                    border-left: 4px solid #22c55e;
+                    padding: 12px;
+                    margin: 15pt 0;
+                }
+                .author-box {
+                    text-align: right;
+                    font-size: 10.5pt;
+                    color: #475569;
+                    margin-bottom: 30pt;
+                }
+                .footer {
+                    font-size: 9pt;
+                    color: #64748b;
+                    text-align: center;
+                    margin-top: 40pt;
+                    border-top: 1px solid #e2e8f0;
+                    padding-top: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>[제작 상세 보고서]<br>AI 리터러시를 활용한 가족 참여형 정서적 금연 솔루션</h1>
+            <div class="author-box">
+                부산대학교 사회복지학과 3학년 김보현<br>
+                (아빠를 걱정하는 외동딸의 마음을 담아)
+            </div>
+
+            <div class="highlight-box">
+                <strong>[기획 요약]</strong><br>
+                본 프로젝트는 대학 'AI 리터러시' 교과과정을 통해 성공적으로 기획 및 개발된 디지털 헬스 케어 실증 모델입니다. 
+                흡연 중독 문제를 단순 행정 조치나 고립된 참을성에 두지 않고, 가족 단위의 정서적 교감(Social Support)과 결합하여 행동 심리를 제어하도록 설계하였습니다.
+            </div>
+
+            <h2>1. 기획 배경 및 정서적 동기</h2>
+            <p>세상에 단 하나뿐인 소중한 아빠와 더 오랫동안 즐거운 추억을 나누고 행복하게 살고 싶다는 외동딸의 지극한 걱정에서 모든 기획이 출범하였습니다. 사회복지학적 임상 관점에서 볼 때, 일방적인 금연의 강요나 처벌은 저항을 초래하지만, 따뜻한 가족 자원의 지지와 칭찬 등 '넛지(Nudge) 이론'을 적용할 때 행동 양식의 변화율이 극대화된다는 통계를 디지털 제품에 고스란히 담아냈습니다.</p>
+
+            <h2>2. 기술적 구현과 AI 리터러시 수업의 의의</h2>
+            <p><strong>가. 전공 융합형 AI 리터러시:</strong> 평소 코딩을 어렵게 생각하던 사회복지 전공자였으나, 대학의 'AI 리터러시' 정규 과정을 거쳐 생성형 AI 모델과의 정교한 프롬프트 엔지니어링 및 조율을 학습하였습니다. 이를 바탕으로 사용자가 요구하는 고급 자바스크립트 알고리즘과 인터랙티브 미디어를 원활하게 배출해내는 훌륭한 'AI 파트너십 제작 역량'을 증명해냈습니다.</p>
+            <p><strong>나. 세부 디지털 장치 개발:</strong> 실시간 수치 저축 및 기대 생명일을 분석해 주는 '건강 수명 계산기', 물리적 서명을 직관적으로 기록해 내는 '서명 캔버스 모듈', 가족의 마음을 감동시키는 포스트잇 벽면 응원판 등 복잡한 인터랙션을 성공적으로 조화시켰습니다.</p>
+
+            <h2>3. 사회적 가치 및 기여 방안</h2>
+            <p>가장 강력한 사회복지 자원인 '가족 관계망'을 활성화하여 보건 취약 상태인 만성 흡연 가정의 생활 습관을 스스로 환기하게 만드는 디지털 복지 솔루션의 새 대안을 제시합니다. 사랑하는 아빠의 폐활량과 행복 수명을 되찾아주는 딸의 온정이 이 혁신 모델을 이끄는 가장 따뜻한 가치입니다.</p>
+
+            <div class="footer">
+                본 기획 리포트는 부산대학교 AI 리터러시 전공 교과 성과 및 아빠를 걱정하는 딸의 고백으로 작성되었습니다.<br>
+                <strong>작성자: 부산대학교 사회복지학과 김보현</strong>
+            </div>
+        </body>
+        </html>
+        `;
+
+        // Blob 형태로 .docx 포맷 호환 XML 데이터 바인딩하여 브라우저에서 배출
+        const blob = new Blob(['\ufeff' + docxContent], {
+          type: 'application/msword;charset=utf-8'
+        });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'AI_report.docx';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => {
+          showAlert("다운로드 완료", "AI_report.docx가 성공적으로 다운로드되었습니다.");
+        }, 1000);
+      }
+
+      aiReportBtn.addEventListener("click", downloadAiReportDocx);
+
+      /* ==========================================================================
+         7. Q2 Section 통계 보고서 다운로드 (.docx 생성 및 배출)
+         ========================================================================== */
+      const reportDownloadBtn = document.getElementById("report-download-btn");
+      
+      function generateAndDownloadDocx() {
+        showAlert("보고서 생성 중", "NO_smoke_report.docx 문서를 준비 중입니다.");
+
+        // Word와 호환성이 최상인 HTML 기반 XML 템플릿 생성
+        const docxContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+            <meta charset="utf-8">
+            <title>통계 데이터로 이해하는 아빠의 흡연 분석보고서</title>
+            <style>
+                body {
+                    font-family: 'Malgun Gothic', 'Arial', sans-serif;
+                    line-height: 1.6;
+                    color: #333333;
+                }
+                h1 {
+                    color: #1e293b;
+                    font-size: 22pt;
+                    text-align: center;
+                    margin-top: 20pt;
+                    margin-bottom: 10pt;
+                    font-weight: bold;
+                }
+                h2 {
+                    color: #16a34a;
+                    font-size: 16pt;
+                    border-bottom: 2px solid #e2e8f0;
+                    padding-bottom: 5px;
+                    margin-top: 25pt;
+                    margin-bottom: 12pt;
+                }
+                h3 {
+                    color: #1e293b;
+                    font-size: 13pt;
+                    margin-top: 15pt;
+                    margin-bottom: 6pt;
+                }
+                p {
+                    font-size: 10.5pt;
+                    margin-bottom: 10pt;
+                    text-align: justify;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15pt;
+                    margin-bottom: 15pt;
+                }
+                th, td {
+                    border: 1px solid #cbd5e1;
+                    padding: 8px;
+                    font-size: 10pt;
+                    text-align: center;
+                }
+                th {
+                    background-color: #f1f5f9;
+                    font-weight: bold;
+                    color: #1e293b;
+                }
+                .highlight-box {
+                    background-color: #f0fdf4;
+                    border-left: 4px solid #22c55e;
+                    padding: 12px;
+                    margin: 15pt 0;
+                }
+                .footer {
+                    font-size: 9pt;
+                    color: #64748b;
+                    text-align: center;
+                    margin-top: 40pt;
+                    border-top: 1px solid #e2e8f0;
+                    padding-top: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>[분석 보고서]<br>통계 데이터로 이해하는 아빠의 흡연</h1>
+            <p style="text-align: center; color: #64748b; font-size: 11pt; margin-bottom: 30pt;">
+                - 한국복지패널 데이터를 통해 밝혀진 만성 흡연 고착화의 진실 -
+            </p>
+
+            <div class="highlight-box">
+                <strong>[핵심 요지]</strong><br>
+                아빠의 흡연은 단순한 의지 박약이나 버릇이 아닙니다. 복지패널 분석 통계에 따르면 이는 청소년/사회초년기에 형성된 생리학적 뇌의 신경 고착화와 밀접한 관련이 있어 가구 단위의 정서적 설득 및 가족의 넛지(Nudge) 지지가 필수적으로 수반되어야 합니다.
+            </div>
+
+            <h2>1. 조사 개요 및 학술적 배경</h2>
+            <p>본 통계 분석 보고서는 보건복지부와 한국보건사회연구원의 한국복지패널(KOWEPS) 종단 데이터를 정성적으로 역추적 분석한 결과를 토대로 합니다. 특히 흡연 시작 연령과 성인기 도달 이후의 일평균 흡연량, 니코틴 의존도 간의 다중 연계 패턴을 집중 조명하였습니다.</p>
+
+            <h2>2. 시작 연령별 만성 고착 상관성 요약 표</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>최초 흡연 시기</th>
+                        <th>평균 흡연량 (하루)</th>
+                        <th>니코틴 의존 강도</th>
+                        <th>6개월 내 금연 비의지율</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10대 이하 (조기 흡연)</td>
+                        <td>1.5갑 ~ 2갑 이상</td>
+                        <td>0.686 (매우 높음)</td>
+                        <td>93.3%</td>
+                    </tr>
+                    <tr>
+                        <td>20대 초반 (사회진입기)</td>
+                        <td>1갑 전후</td>
+                        <td>0.452 (보통)</td>
+                        <td>74.1%</td>
+                    </tr>
+                    <tr>
+                        <td>30대 이후 (중장년층)</td>
+                        <td>0.5갑 이하</td>
+                        <td>0.204 (낮음)</td>
+                        <td>42.8%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. 주요 통계적 결론 (Insights)</h2>
+            <h3>가. 조기 낙인 효과 (Early Imprinting)</h3>
+            <p>10대 이하 청소년기에 최초 흡연을 접하게 될수록 성인이 되었을 때 만성 흡연자로 고착화될 확률이 수배 증가합니다. 이는 니코틴 수용체와 전두엽 발달 고리의 각인 작용으로 증명되며, 단순한 개인의 의지력 문제로 해결하는 것이 불가능에 가까움을 반증합니다.</p>
+
+            <h3>나. 행동 변화를 이끌기 위한 '가족 넛지'의 필연성</h3>
+            <p>전체 만성 흡연 집단 중 약 93.3%는 단기(6개월 이내) 금연 계획이 없는 '금연 비의지층'에 속합니다. 이들에게 강압적인 충격 요법을 사용하는 것보다는, 매일 건강 수명을 시각화하고 가족들이 작성한 포스트잇 등의 사랑 중심 지지를 지속 제공하는 밀착 개입형 가구 넛지가 훨씬 높은 행동 교정 효과를 자아냅니다.</p>
+
+            <div class="footer">
+                본 문서는 한국복지패널 원자료를 활용하여 아빠의 건강 증진을 위해 시뮬레이션한 가이드 리포트입니다.<br>
+                <strong>발행처: 가족 수호 금연 연대 통계분석센터</strong>
+            </div>
+        </body>
+        </html>
+        `;
+
+        // Blob 형태로 .docx 포맷 호환 XML 데이터 바인딩하여 브라우저에서 배출
+        const blob = new Blob(['\ufeff' + docxContent], {
+          type: 'application/msword;charset=utf-8'
+        });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'NO_smoke_report.docx';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => {
+          showAlert("다운로드 완료", "NO_smoke_report.docx가 성공적으로 다운로드되었습니다.");
+        }, 1000);
+      }
+
+      reportDownloadBtn.addEventListener("click", generateAndDownloadDocx);
+
+    });
+  </script>
+</body>
+</html>
